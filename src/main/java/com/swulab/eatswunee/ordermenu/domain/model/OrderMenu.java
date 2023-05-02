@@ -1,4 +1,4 @@
-package com.swulab.eatswunee.ordermenu;
+package com.swulab.eatswunee.ordermenu.domain.model;
 
 import com.swulab.eatswunee.menu.domain.model.Menu;
 import com.swulab.eatswunee.order.domain.model.Order;
