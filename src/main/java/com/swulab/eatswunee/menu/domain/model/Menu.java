@@ -2,7 +2,6 @@ package com.swulab.eatswunee.menu.domain.model;
 
 import com.swulab.eatswunee.restaurant.domain.model.Restaurant;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
 public class Menu {
