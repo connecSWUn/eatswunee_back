@@ -12,15 +12,17 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "order_menu")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class OrderMenuJpaEntity {
 
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long orderId;
+  private Long orderMenuId;
 
   private int orderNum;
 
@@ -32,10 +34,10 @@ public class OrderMenuJpaEntity {
   private UserJpaEntity userJpaEntity;
 
   @Builder
-  public OrderMenuJpaEntity(Long orderId, int orderNum,
+  public OrderMenuJpaEntity(Long orderMenuId, int orderNum,
       OrderStatus orderStatus,
       UserJpaEntity userJpaEntity) {
-    this.orderId = orderId;
+    this.orderMenuId = orderMenuId;
     this.orderNum = orderNum;
     this.orderStatus = orderStatus;
     this.userJpaEntity = userJpaEntity;
