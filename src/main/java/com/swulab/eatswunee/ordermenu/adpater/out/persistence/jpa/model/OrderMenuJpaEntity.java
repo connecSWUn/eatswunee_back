@@ -1,9 +1,8 @@
 package com.swulab.eatswunee.ordermenu.adpater.out.persistence.jpa.model;
 
-import com.swulab.eatswunee.order.domain.model.OrderStatus;
-import com.swulab.eatswunee.user.adapter.out.persistence.jpa.model.UserJpaEntity;
+import com.swulab.eatswunee.menu.adapter.out.persistence.jpa.model.MenuJpaEntity;
+import com.swulab.eatswunee.order.adapter.out.persistence.jpa.model.OrderJpaEntity;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,22 +23,26 @@ public class OrderMenuJpaEntity {
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long orderMenuId;
 
-  private int orderNum;
+  private int menuCnt;
 
-  @Enumerated
-  private OrderStatus orderStatus;
+  private Integer orderPrice;
 
   @ManyToOne
-  @JoinColumn(name = "user_Id")
-  private UserJpaEntity userJpaEntity;
+  @JoinColumn(name = "menu_id")
+  private MenuJpaEntity menuJpaEntity;
+
+  @ManyToOne
+  @JoinColumn(name = "order_id")
+  private OrderJpaEntity orderJpaEntity;
 
   @Builder
-  public OrderMenuJpaEntity(Long orderMenuId, int orderNum,
-      OrderStatus orderStatus,
-      UserJpaEntity userJpaEntity) {
+  public OrderMenuJpaEntity(Long orderMenuId, int menuCnt, Integer orderPrice,
+      MenuJpaEntity menuJpaEntity,
+      OrderJpaEntity orderJpaEntity) {
     this.orderMenuId = orderMenuId;
-    this.orderNum = orderNum;
-    this.orderStatus = orderStatus;
-    this.userJpaEntity = userJpaEntity;
+    this.menuCnt = menuCnt;
+    this.orderPrice = orderPrice;
+    this.menuJpaEntity = menuJpaEntity;
+    this.orderJpaEntity = orderJpaEntity;
   }
 }
