@@ -10,11 +10,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "seller")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class SellerJpaEntity {
 
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -13,6 +13,7 @@ import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
@@ -20,6 +21,7 @@ import org.hibernate.annotations.CreationTimestamp;
 @Entity
 @Table(name = "chat_message")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class ChatMessageJpaEntity {
 
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,11 +47,13 @@ public class ChatMessageJpaEntity {
 
   @Builder
   public ChatMessageJpaEntity(Long chatMessageId, String message, Boolean isRead,
+      LocalDateTime createdAt,
       UserJpaEntity userJpaEntity,
       ChatRoomJpaEntity chatRoomJpaEntity) {
     this.chatMessageId = chatMessageId;
     this.message = message;
     this.isRead = isRead;
+    this.createdAt = createdAt;
     this.userJpaEntity = userJpaEntity;
     this.chatRoomJpaEntity = chatRoomJpaEntity;
   }

@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -21,6 +22,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Entity
 @Table(name = "recruit")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class RecruitJpaEntity {
 
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,11 +51,14 @@ public class RecruitJpaEntity {
 
   @Builder
   public RecruitJpaEntity(Long recruitId, String title, String content,
+      LocalDateTime createdAt, LocalDateTime editedAt,
       RecruitStatus status, String restaurant, LocalDate days,
       UserJpaEntity userJpaEntity) {
     this.recruitId = recruitId;
     this.title = title;
     this.content = content;
+    this.createdAt = createdAt;
+    this.editedAt = editedAt;
     this.status = status;
     this.restaurant = restaurant;
     this.days = days;

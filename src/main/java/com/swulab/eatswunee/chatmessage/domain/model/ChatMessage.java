@@ -3,6 +3,7 @@ package com.swulab.eatswunee.chatmessage.domain.model;
 import com.swulab.eatswunee.chatroom.domain.model.ChatRoom;
 import com.swulab.eatswunee.user.domain.model.User;
 import java.time.LocalDateTime;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
@@ -17,5 +18,15 @@ public class ChatMessage {
   private User user;
   private ChatRoom chatRoom;
 
-
+  @Builder
+  public ChatMessage(Long chatMessageId, String message, Boolean isRead,
+      LocalDateTime createdAt, User user,
+      ChatRoom chatRoom) {
+    this.chatMessageId = chatMessageId;
+    this.message = message;
+    this.isRead = isRead;
+    this.createdAt = createdAt;
+    this.user = user;
+    this.chatRoom = chatRoom;
+  }
 }

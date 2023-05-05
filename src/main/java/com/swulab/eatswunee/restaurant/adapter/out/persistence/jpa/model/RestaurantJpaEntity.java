@@ -7,11 +7,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "restaurant")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class RestaurantJpaEntity {
 
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

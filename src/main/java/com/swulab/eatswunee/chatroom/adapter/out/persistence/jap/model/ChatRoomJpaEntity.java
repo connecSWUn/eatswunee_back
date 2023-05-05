@@ -13,12 +13,14 @@ import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "chat_room")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class ChatRoomJpaEntity {
 
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,10 +38,11 @@ public class ChatRoomJpaEntity {
   private RecruitJpaEntity recruitJpaEntity;
 
   @Builder
-  public ChatRoomJpaEntity(Long chatRoomId,
+  public ChatRoomJpaEntity(Long chatRoomId, LocalDateTime createdAt,
       UserJpaEntity userJpaEntity,
       RecruitJpaEntity recruitJpaEntity) {
     this.chatRoomId = chatRoomId;
+    this.createdAt = createdAt;
     this.userJpaEntity = userJpaEntity;
     this.recruitJpaEntity = recruitJpaEntity;
   }

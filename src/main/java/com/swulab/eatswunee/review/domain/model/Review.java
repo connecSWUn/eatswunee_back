@@ -3,6 +3,7 @@ package com.swulab.eatswunee.review.domain.model;
 import com.swulab.eatswunee.menu.domain.model.Menu;
 import com.swulab.eatswunee.user.domain.model.User;
 import java.time.LocalDateTime;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
@@ -18,4 +19,17 @@ public class Review {
   private User user;
   private Menu menu;
 
+  @Builder
+  public Review(Long reviewId, int score, String title, String content,
+      LocalDateTime createdAt, LocalDateTime editAt, User user,
+      Menu menu) {
+    this.reviewId = reviewId;
+    this.score = score;
+    this.title = title;
+    this.content = content;
+    this.createdAt = createdAt;
+    this.editAt = editAt;
+    this.user = user;
+    this.menu = menu;
+  }
 }
