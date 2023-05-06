@@ -2,6 +2,8 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.0.5'
 	id 'io.spring.dependency-management' version '1.1.0'
+
+	id "org.asciidoctor.jvm.convert" version "3.3.2" // asciidoctor 플러그인을 적용한다.
 }
 
 group = 'com.swulab'
@@ -12,6 +14,9 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+
+	asciidoctorExt
+
 }
 
 repositories {
@@ -26,6 +31,24 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Spring REST Docs
+	asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+}
+
+ext {
+	snippetsDir = file('build/generated-snippets')
+}
+
+test {
+	outputs.dir snippetsDir
+}
+
+asciidoctor {
+	inputs.dir snippetsDir
+	configurations 'asciidoctorExt'
+	dependsOn test
 }
 
 tasks.named('test') {
