@@ -31,8 +31,7 @@ public class ChatMessageJpaEntity {
 
   @Column(nullable = false)
   @ColumnDefault("false")
-  @Builder.Default
-  private Boolean isRead = false;
+  private Boolean isRead;
 
   @CreationTimestamp
   private LocalDateTime createdAt;
