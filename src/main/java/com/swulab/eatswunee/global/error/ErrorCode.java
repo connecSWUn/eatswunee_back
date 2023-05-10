@@ -2,8 +2,8 @@ package com.swulab.eatswunee.global.error;
 
 
 public enum ErrorCode {
-  INVALID_INPUT_VALUE("유효성 검증 실패",400, -400, ""),
-  INTERNAL_SERVER_ERROR("유효성 검증 실패",500, -500, "");
+  INVALID_INPUT_VALUE("유효성 검증 실패",400, -400, "올바르지 않은 형식의 값입니다."),
+  INTERNAL_SERVER_ERROR("서버 에러",500, -500, "서버 에러");
 
 //  private final String type;
 //  private final String instance;
