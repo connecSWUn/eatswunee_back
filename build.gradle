@@ -4,6 +4,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.0'
 
 	id "org.asciidoctor.jvm.convert" version "3.3.2" // asciidoctor 플러그인을 적용한다.
+	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10" // querydsl 플러그인 gradlew시 삭제
 }
 
 group = 'com.swulab'
@@ -36,14 +37,22 @@ dependencies {
 	asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 
+	//queryDsl
+	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+	annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
 ext {
 	snippetsDir = file('build/generated-snippets')
+	querydslDir = file('build/generated/querydsl')
 }
 
+//Spring REST Docs
 test {
 	outputs.dir snippetsDir
 }
@@ -69,6 +78,26 @@ build {
 	dependsOn copyDocument
 }
 
+// QueryDsl
+querydsl {
+	jpa = true
+	querydslSourcesDir = querydslDir
+}
+
+sourceSets {
+	main.java.srcDir querydslDir
+}
+
+compileQuerydsl{
+	options.annotationProcessorPath = configurations.querydsl
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+	querydsl.extendsFrom compileClasspath
+}
 
 
 tasks.named('test') {
