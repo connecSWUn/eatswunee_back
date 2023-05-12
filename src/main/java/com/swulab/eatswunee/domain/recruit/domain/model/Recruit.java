@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
+import org.springframework.cglib.core.Local;
 
 @Getter
 public class Recruit {
@@ -17,14 +18,15 @@ public class Recruit {
   private LocalDateTime editedAt;
   private RecruitStatus status;
   private String restaurant;
-  private LocalDate days;
+  private LocalDateTime startTime;
+  private LocalDateTime endTime;
 
   private User user;
 
   @Builder
   public Recruit(Long recruitId, String title, String content, LocalDateTime createdAt,
-      LocalDateTime editedAt, RecruitStatus status, String restaurant, LocalDate days,
-      User user) {
+      LocalDateTime editedAt, RecruitStatus status, String restaurant,
+      LocalDateTime startTime, LocalDateTime endTime, User user) {
     this.recruitId = recruitId;
     this.title = title;
     this.content = content;
@@ -32,7 +34,8 @@ public class Recruit {
     this.editedAt = editedAt;
     this.status = status;
     this.restaurant = restaurant;
-    this.days = days;
+    this.startTime = startTime;
+    this.endTime = endTime;
     this.user = user;
   }
 }

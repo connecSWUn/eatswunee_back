@@ -43,7 +43,9 @@ public class RecruitJpaEntity {
 
   private String restaurant;
 
-  private LocalDate days;
+  private LocalDateTime startTime;
+
+  private LocalDateTime endTime;
 
   @ManyToOne
   @JoinColumn(name = "user_id")
@@ -52,7 +54,8 @@ public class RecruitJpaEntity {
   @Builder
   public RecruitJpaEntity(Long recruitId, String title, String content,
       LocalDateTime createdAt, LocalDateTime editedAt,
-      RecruitStatus status, String restaurant, LocalDate days,
+      RecruitStatus status, String restaurant,
+      LocalDateTime startTime, LocalDateTime endTime,
       UserJpaEntity userJpaEntity) {
     this.recruitId = recruitId;
     this.title = title;
@@ -61,7 +64,8 @@ public class RecruitJpaEntity {
     this.editedAt = editedAt;
     this.status = status;
     this.restaurant = restaurant;
-    this.days = days;
+    this.startTime = startTime;
+    this.endTime = endTime;
     this.userJpaEntity = userJpaEntity;
   }
 }
