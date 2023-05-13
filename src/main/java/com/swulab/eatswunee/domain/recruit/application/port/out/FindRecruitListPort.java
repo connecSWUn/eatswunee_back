@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface FindRecruitListPort {
 
-  List<Recruit> findRecruitList();
+  List<Recruit> findRecruitList(String category);
 }

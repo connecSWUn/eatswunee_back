@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class RecruitPersistenceAdapterPort implements FindRecruitListPort {
+public class RecruitPersistenceAdapter implements FindRecruitListPort {
 
   private final RecruitQueryRepository recruitQueryRepository;
 
 
   @Override
-  public List<Recruit> findRecruitList() {
-    return recruitQueryRepository.findRecruitList();
+  public List<Recruit> findRecruitList(String category) {
+    return recruitQueryRepository.findRecruitList(category);
   }
 }
