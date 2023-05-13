@@ -31,6 +31,7 @@ public class RecruitQueryRepository {
             recruitJpaEntity.endTime))
         .from(recruitJpaEntity)
         .where(eqRestaurant(category))
+        .orderBy(recruitJpaEntity.createdAt.asc())
         .fetch();
   }
 
