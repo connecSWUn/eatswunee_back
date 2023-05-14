@@ -19,7 +19,8 @@ public class RecruitMapper {
         .editedAt(recruitJpaEntity.getEditedAt())
         .status(recruitJpaEntity.getStatus())
         .restaurant(recruitJpaEntity.getRestaurant())
-        .days(recruitJpaEntity.getDays())
+        .startTime(recruitJpaEntity.getStartTime())
+        .endTime(recruitJpaEntity.getEndTime())
         .user(userMapper.mapToDomainEntity(recruitJpaEntity.getUserJpaEntity()))
         .build();
   }
@@ -33,7 +34,8 @@ public class RecruitMapper {
         .editedAt(recruit.getEditedAt())
         .status(recruit.getStatus())
         .restaurant(recruit.getRestaurant())
-        .days(recruit.getDays())
+        .startTime(recruit.getStartTime())
+        .endTime(recruit.getEndTime())
         .userJpaEntity(userMapper.mapToJpaEntity(recruit.getUser()))
         .build();
   }

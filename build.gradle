@@ -4,6 +4,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.0'
 
 	id "org.asciidoctor.jvm.convert" version "3.3.2" // asciidoctor 플러그인을 적용한다.
+	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10" // querydsl 플러그인 gradlew시 삭제
 }
 
 group = 'com.swulab'
@@ -35,12 +36,29 @@ dependencies {
 	// Spring REST Docs
 	asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
+	//queryDsl
+	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+	annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+
+	// MonkeyUtils
+	testImplementation 'com.navercorp.fixturemonkey:fixture-monkey-starter:0.5.2'
+
+
+	// https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310
+	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.15.0'
 }
 
 ext {
 	snippetsDir = file('build/generated-snippets')
 }
 
+//Spring REST Docs
 test {
 	outputs.dir snippetsDir
 }
@@ -50,6 +68,45 @@ asciidoctor {
 	configurations 'asciidoctorExt'
 	dependsOn test
 }
+
+asciidoctor.doFirst {
+	delete file('/src/main/resources/static/docs')
+}
+
+task copyDocument(type: Copy) {
+	dependsOn asciidoctor
+
+	from file("build/docs/asciidoc/")
+	into file("src/main/resources/static/docs")
+}
+
+build {
+	dependsOn copyDocument
+}
+
+// QueryDsl
+
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+	jpa = true
+	querydslSourcesDir = querydslDir
+}
+
+sourceSets {
+	main.java.srcDir querydslDir
+}
+
+configurations {
+	querydsl.extendsFrom compileClasspath
+}
+
+compileQuerydsl{
+	options.annotationProcessorPath = configurations.querydsl
+}
+
+
+
 
 tasks.named('test') {
 	useJUnitPlatform()
