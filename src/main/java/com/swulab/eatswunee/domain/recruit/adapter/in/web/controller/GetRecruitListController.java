@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/recruit")
+@RestController
 @RequiredArgsConstructor
 public class GetRecruitListController {
 
@@ -22,6 +22,7 @@ public class GetRecruitListController {
   @GetMapping("/recruit/list/{category}")
   public ResponseEntity GetRecruitList(@PathVariable String category) {
     List<RecruitListDto> recruitList = getRecruitListUseCase.getRecruitList(new RecruitListCommand(category));
+
     return ResponseEntity.ok(SuccessResponse.create200SuccessResponse(new RecruitListResponse(category, "", recruitList)));
   }
 
