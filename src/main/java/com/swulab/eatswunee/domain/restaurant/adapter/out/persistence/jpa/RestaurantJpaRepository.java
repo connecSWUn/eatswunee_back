@@ -1,10 +1,9 @@
 package com.swulab.eatswunee.domain.restaurant.adapter.out.persistence.jpa;
 
+import com.swulab.eatswunee.domain.restaurant.adapter.out.persistence.jpa.model.RestaurantJpaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface RestaurantJpaRepository extends JpaRepository<RestaurantJpaRepository, Long> {
+public interface RestaurantJpaRepository extends JpaRepository<RestaurantJpaEntity, Long> {
 
   boolean existsByName(String name);
 
