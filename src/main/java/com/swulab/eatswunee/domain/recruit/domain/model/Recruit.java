@@ -38,4 +38,16 @@ public class Recruit {
     this.endTime = endTime;
     this.user = user;
   }
+
+  public Recruit(Long recruitId, String title, LocalDateTime createdAt,
+      RecruitStatus status, String restaurant,
+      LocalDateTime startTime, LocalDateTime endTime) {
+    this.recruitId = recruitId;
+    this.title = title;
+    this.createdAt = createdAt;
+    this.status = status;
+    this.restaurant = restaurant;
+    this.startTime = startTime;
+    this.endTime = endTime;
+  }
 }

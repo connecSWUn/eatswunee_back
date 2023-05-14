@@ -23,8 +23,8 @@ public class RecruitQueryRepository {
     return queryFactory
         .select(Projections.constructor(Recruit.class,
             recruitJpaEntity.recruitId,
-            recruitJpaEntity.createdAt,
             recruitJpaEntity.title,
+            recruitJpaEntity.createdAt,
             recruitJpaEntity.status,
             recruitJpaEntity.restaurant,
             recruitJpaEntity.startTime,
