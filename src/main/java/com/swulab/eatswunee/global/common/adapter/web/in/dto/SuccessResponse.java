@@ -1,5 +1,6 @@
 package com.swulab.eatswunee.global.common.adapter.web.in.dto;
 
+import java.util.ArrayList;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ public class SuccessResponse<T> {
   private String title;
   private String detail;
   private T data;
-  private String[] links;
+  private ArrayList<String> links;
 
   public static SuccessResponse create201SuccessResponse() {
     return new SuccessResponse(201, "Success", SUCCESS_MESSAGE, null); // null 주의

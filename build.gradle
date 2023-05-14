@@ -45,11 +45,17 @@ dependencies {
 
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
+
+	// MonkeyUtils
+	testImplementation 'com.navercorp.fixturemonkey:fixture-monkey-starter:0.5.2'
+
+
+	// https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310
+	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.15.0'
 }
 
 ext {
 	snippetsDir = file('build/generated-snippets')
-	querydslDir = file('build/generated/querydsl')
 }
 
 //Spring REST Docs
@@ -79,6 +85,9 @@ build {
 }
 
 // QueryDsl
+
+def querydslDir = "$buildDir/generated/querydsl"
+
 querydsl {
 	jpa = true
 	querydslSourcesDir = querydslDir
@@ -88,16 +97,15 @@ sourceSets {
 	main.java.srcDir querydslDir
 }
 
+configurations {
+	querydsl.extendsFrom compileClasspath
+}
+
 compileQuerydsl{
 	options.annotationProcessorPath = configurations.querydsl
 }
 
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-	querydsl.extendsFrom compileClasspath
-}
+
 
 
 tasks.named('test') {
