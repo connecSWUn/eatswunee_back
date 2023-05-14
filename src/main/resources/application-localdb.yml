@@ -1,5 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/eatswunee
+    url: jdbc:mysql://ec2-43-201-201-163.ap-northeast-2.compute.amazonaws.com:3306/eatswunee
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
+    password: 1234
