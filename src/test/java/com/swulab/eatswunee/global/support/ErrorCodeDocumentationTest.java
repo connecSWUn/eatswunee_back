@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
@@ -26,15 +27,19 @@ import org.springframework.web.context.WebApplicationContext;
 public class ErrorCodeDocumentationTest {
 
 
+  @Autowired
+  private WebApplicationContext context;
+
   private MockMvc mockMvc;
 
+
   @BeforeEach
-  public void setUp(WebApplicationContext webApplicationContext,
-      RestDocumentationContextProvider restDocumentation) {
-    this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
+  public void setUp(RestDocumentationContextProvider restDocumentation) {
+    this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
         .apply(documentationConfiguration(restDocumentation))
         .build();
   }
+
 
   @Test
   @DisplayName("ErrorCode 문서화")
