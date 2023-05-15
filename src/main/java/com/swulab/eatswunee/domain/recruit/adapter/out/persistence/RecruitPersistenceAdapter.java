@@ -1,6 +1,8 @@
 package com.swulab.eatswunee.domain.recruit.adapter.out.persistence;
 
 import com.swulab.eatswunee.domain.recruit.adapter.out.persistence.jpa.model.RecruitJpaEntity;
+import com.swulab.eatswunee.domain.recruit.application.port.out.DeleteRecruitPort;
+import com.swulab.eatswunee.domain.recruit.application.port.out.ExistRecruitPort;
 import com.swulab.eatswunee.domain.recruit.application.port.out.FindRecruitContentPort;
 import com.swulab.eatswunee.domain.recruit.application.port.out.FindRecruitListPort;
 import com.swulab.eatswunee.domain.recruit.application.port.out.SaveRecruitPort;
@@ -13,7 +15,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Component
 public class RecruitPersistenceAdapter implements FindRecruitListPort, FindRecruitContentPort,
-    SaveRecruitPort {
+    SaveRecruitPort, DeleteRecruitPort, ExistRecruitPort {
 
   private final RecruitQueryRepository recruitQueryRepository;
   private final RecruitJpaRepository recruitJpaRepository;
@@ -35,5 +37,15 @@ public class RecruitPersistenceAdapter implements FindRecruitListPort, FindRecru
   public Long saveRecruit(Recruit recruit) {
     RecruitJpaEntity recruitJpaEntity = recruitMapper.mapToJpaEntity(recruit);
     return recruitJpaRepository.saveAndFlush(recruitJpaEntity).getRecruitId();
+  }
+
+  @Override
+  public void deleteRecruit(Long recruitId) {
+    recruitJpaRepository.deleteById(recruitId);
+  }
+
+  @Override
+  public Boolean existRecruit(Long recruitId) {
+    return recruitJpaRepository.existsById(recruitId);
   }
 }
