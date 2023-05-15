@@ -1,11 +1,9 @@
 package com.swulab.eatswunee.domain.recruit.domain.model;
 
 import com.swulab.eatswunee.domain.user.domain.model.User;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
-import org.springframework.cglib.core.Local;
 
 @Getter
 public class Recruit {
@@ -39,15 +37,4 @@ public class Recruit {
     this.user = user;
   }
 
-  public Recruit(Long recruitId, String title, LocalDateTime createdAt,
-      RecruitStatus status, String restaurant,
-      LocalDateTime startTime, LocalDateTime endTime) {
-    this.recruitId = recruitId;
-    this.title = title;
-    this.createdAt = createdAt;
-    this.status = status;
-    this.restaurant = restaurant;
-    this.startTime = startTime;
-    this.endTime = endTime;
-  }
 }
