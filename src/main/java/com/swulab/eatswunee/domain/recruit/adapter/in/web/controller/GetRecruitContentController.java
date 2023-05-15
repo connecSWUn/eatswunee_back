@@ -17,9 +17,9 @@ public class GetRecruitContentController {
 
   private final GetRecruitContentUseCase getRecruitContentUseCase;
 
-  @GetMapping("/recruit/{id}")
-  public ResponseEntity getRecruitContent(@PathVariable Long postId) {
-    Recruit recruit = getRecruitContentUseCase.getRecruitContent(postId);
+  @GetMapping("/recruit/{postId}")
+  public ResponseEntity getRecruitContent(@PathVariable String postId) {
+    Recruit recruit = getRecruitContentUseCase.getRecruitContent(Long.parseLong(postId));
 
     return ResponseEntity.ok(
         SuccessResponse.create200SuccessResponse(new RecruitContentResponse(recruit)));
