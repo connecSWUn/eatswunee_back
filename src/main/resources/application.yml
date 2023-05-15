@@ -1,6 +1,12 @@
 spring:
   profiles:
+    active: local
     group:
       local:
         - localdb
-    active: local
+      dev:
+        - devdb
+
+
+
+
