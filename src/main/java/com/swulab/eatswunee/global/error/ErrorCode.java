@@ -9,7 +9,11 @@ public enum ErrorCode {
   RESTAURANT_NOT_FOUND("존재하지 않는 식당", 404, -404, "주어진 식당이 존재하지 않습니다."),
 
   // 모집글
-  RECRUIT_NOT_FOUND("존재하지 않는 게시글", 404, -404, "주어진 게시글이 존재하지 않습니다.");
+  RECRUIT_NOT_FOUND("존재하지 않는 게시글", 404, -404, "주어진 게시글이 존재하지 않습니다."),
+
+  // 사용자
+  USER_NOT_FOUND("존재하지 않는 사용자", 404, -404, "주어진 사용자가 존재하지 않습니다.");
+
 
 //  private final String type;
 //  private final String instance;
