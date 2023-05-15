@@ -4,8 +4,10 @@ import com.swulab.eatswunee.domain.recruit.domain.model.Recruit;
 import com.swulab.eatswunee.domain.recruit.adapter.out.persistence.jpa.model.RecruitJpaEntity;
 import com.swulab.eatswunee.domain.user.adapter.out.persistence.UserMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
+@Component
 public class RecruitMapper {
 
   private final UserMapper userMapper;

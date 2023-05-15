@@ -2,7 +2,9 @@ package com.swulab.eatswunee.domain.user.adapter.out.persistence;
 
 import com.swulab.eatswunee.domain.user.domain.model.User;
 import com.swulab.eatswunee.domain.user.adapter.out.persistence.jpa.model.UserJpaEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserMapper {
 
   public User mapToDomainEntity(UserJpaEntity userJpaEntity) {
