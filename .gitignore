@@ -35,7 +35,10 @@ out/
 
 ### VS Code ###
 .vscode/
-src/main/resources/**.yaml
-!src/main/resources/applicatioin.yaml
+src/main/resources/application-devdb.yml
+src/main/resources/application-localdb.yml
+
+src/main/resources/import.sql
+
 
 .jqwik-database
