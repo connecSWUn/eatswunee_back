@@ -21,6 +21,10 @@ public class SuccessResponse<T> {
     return new SuccessResponse(201, "Success", SUCCESS_MESSAGE, null); // null 주의
   }
 
+  public static <T> SuccessResponse create201SuccessResponse(T data) {
+    return new SuccessResponse(201, "Success", SUCCESS_MESSAGE, data); // null 주의
+  }
+
   public static <T> SuccessResponse create200SuccessResponse(T data) {
     return new SuccessResponse(200, "Success", SUCCESS_MESSAGE, data);
   }
@@ -31,6 +35,7 @@ public class SuccessResponse<T> {
     this.title = title;
     this.detail = detail;
     this.data = data;
+    this.links = new ArrayList<>();
   }
 
 }

@@ -19,10 +19,7 @@ public class AddRecruitController {
   @PostMapping("/recruit/save")
   public ResponseEntity addRecruitContent(@RequestBody AddRecruitRequest request) {
     Long postId = addRecruitUseCase.addRecruit(request.toCommand());
-    System.out.println(postId);
-
-
-    return ResponseEntity.ok(SuccessResponse.create200SuccessResponse(new AddRecruitResponse(postId)));
+    return ResponseEntity.ok(SuccessResponse.create201SuccessResponse(new AddRecruitResponse(postId)));
   }
 
 }
