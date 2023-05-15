@@ -42,9 +42,9 @@ public class RecruitQueryRepository {
 
   public Optional<RecruitJpaEntity> findRecruitContent(Long recruitId){
     return Optional.ofNullable(queryFactory
-        .selectFrom(QRecruitJpaEntity.recruitJpaEntity)
-        .leftJoin(QRecruitJpaEntity.recruitJpaEntity.userJpaEntity, userJpaEntity)
-        .where(QRecruitJpaEntity.recruitJpaEntity.recruitId.eq(recruitId))
+        .selectFrom(recruitJpaEntity)
+        .leftJoin(recruitJpaEntity.userJpaEntity, userJpaEntity)
+        .where(eqRecruitId(recruitId))
         .fetchOne());
   }
 
@@ -52,6 +52,11 @@ public class RecruitQueryRepository {
   private BooleanExpression eqRestaurant(String restaurant) {
     log.info("restaurant name: {}", restaurant);
     return restaurant != null ? recruitJpaEntity.restaurant.eq(restaurant) : null;
+  }
+
+  private BooleanExpression eqRecruitId(Long recruitId) {
+    log.info("recruit id: {}", recruitId);
+    return recruitId != null ? recruitJpaEntity.recruitId.eq(recruitId) : null;
   }
 
 }
