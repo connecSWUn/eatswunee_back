@@ -1,0 +1,3 @@
+[submodule "swulab-config"]
+	path = swulab-config
+	url = git@github.com:connecSWUn/eatswunee-config.git
