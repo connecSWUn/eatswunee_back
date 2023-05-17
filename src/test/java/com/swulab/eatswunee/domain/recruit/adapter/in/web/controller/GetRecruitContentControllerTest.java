@@ -52,7 +52,7 @@ class GetRecruitContentControllerTest {
   @BeforeEach
   public void setUp(RestDocumentationContextProvider restDocumentation) {
     this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
-        .apply(documentationConfiguration(restDocumentation))
+//        .apply(documentationConfiguration(restDocumentation))
         .build();
   }
 

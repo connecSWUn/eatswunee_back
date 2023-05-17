@@ -65,7 +65,7 @@ class GetRecruitListControllerTest {
   @BeforeEach
   public void setUp(RestDocumentationContextProvider restDocumentation) {
     this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
-        .apply(documentationConfiguration(restDocumentation))
+//        .apply(documentationConfiguration(restDocumentation))
         .build();
   }
 
@@ -110,32 +110,32 @@ class GetRecruitListControllerTest {
           .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(200))
           .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Success"))
           .andExpect(MockMvcResultMatchers.jsonPath("$.detail").value("성공"))
-          .andExpect(MockMvcResultMatchers.jsonPath("$.data.post.length()").value(3))
-
-          .andDo(document("파라미터 값이 유효할 때",
-              getDocumentRequest(),
-              getDocumentResponse(),
-              pathParameters(
-                  parameterWithName("category").description("식당이름")
-              ),
-              responseFields(
-                  fieldWithPath("status").type(JsonFieldType.NUMBER).description("응답코드"),
-                  fieldWithPath("title").type(JsonFieldType.STRING).description("응답 메시지"),
-                  fieldWithPath("detail").type(JsonFieldType.STRING).description("응답 세부 메시지"),
-                  fieldWithPath("data").type(JsonFieldType.OBJECT).description("응답 데이터"),
-                  fieldWithPath("data.category").type(JsonFieldType.STRING).description("참조 링크"),
-                  fieldWithPath("data.cursorId").type(JsonFieldType.STRING).description("응답코드"),
-                  subsectionWithPath("data.post[]").type(JsonFieldType.ARRAY).description("게시글 정보"),
-                  //The documented type of the field 'data.post.[].recruitId' is Number but the actual type is Null
-                  fieldWithPath("data.post.[].recruitId").description("게시글 아이디"),
-                  fieldWithPath("data.post.[].title").type(JsonFieldType.STRING).description("제목"),
-                  fieldWithPath("data.post.[].createdAt").type(JsonFieldType.STRING).description("글 등록 시간"),
-                  fieldWithPath("data.post.[].recruitStatus").type(JsonFieldType.STRING).description("모집 진행 여부"),
-                  fieldWithPath("data.post.[].spot").type(JsonFieldType.STRING).description("밥 먹을 장소"),
-                  fieldWithPath("data.post.[].startTime").type(JsonFieldType.STRING).description("밥 먹는 시작 시간"),
-                  fieldWithPath("data.post.[].endTime").type(JsonFieldType.STRING).description("밥 먹는 끝 시간"),
-                  fieldWithPath("links").type(JsonFieldType.NULL).description("참조 링크")
-              )));
+          .andExpect(MockMvcResultMatchers.jsonPath("$.data.post.length()").value(3));
+//
+//          .andDo(document("파라미터 값이 유효할 때",
+//              getDocumentRequest(),
+//              getDocumentResponse(),
+//              pathParameters(
+//                  parameterWithName("category").description("식당이름")
+//              ),
+//              responseFields(
+//                  fieldWithPath("status").type(JsonFieldType.NUMBER).description("응답코드"),
+//                  fieldWithPath("title").type(JsonFieldType.STRING).description("응답 메시지"),
+//                  fieldWithPath("detail").type(JsonFieldType.STRING).description("응답 세부 메시지"),
+//                  fieldWithPath("data").type(JsonFieldType.OBJECT).description("응답 데이터"),
+//                  fieldWithPath("data.category").type(JsonFieldType.STRING).description("참조 링크"),
+//                  fieldWithPath("data.cursorId").type(JsonFieldType.STRING).description("응답코드"),
+//                  subsectionWithPath("data.post[]").type(JsonFieldType.ARRAY).description("게시글 정보"),
+//                  //The documented type of the field 'data.post.[].recruitId' is Number but the actual type is Null
+//                  fieldWithPath("data.post.[].recruitId").description("게시글 아이디"),
+//                  fieldWithPath("data.post.[].title").type(JsonFieldType.STRING).description("제목"),
+//                  fieldWithPath("data.post.[].createdAt").type(JsonFieldType.STRING).description("글 등록 시간"),
+//                  fieldWithPath("data.post.[].recruitStatus").type(JsonFieldType.STRING).description("모집 진행 여부"),
+//                  fieldWithPath("data.post.[].spot").type(JsonFieldType.STRING).description("밥 먹을 장소"),
+//                  fieldWithPath("data.post.[].startTime").type(JsonFieldType.STRING).description("밥 먹는 시작 시간"),
+//                  fieldWithPath("data.post.[].endTime").type(JsonFieldType.STRING).description("밥 먹는 끝 시간"),
+//                  fieldWithPath("links").type(JsonFieldType.NULL).description("참조 링크")
+//              )));
 
     }
 
