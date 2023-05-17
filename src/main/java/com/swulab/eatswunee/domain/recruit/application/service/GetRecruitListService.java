@@ -9,10 +9,12 @@ import com.swulab.eatswunee.domain.restaurant.exception.RestaurantNotFoundExcept
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class GetRecruitListService implements GetRecruitListUseCase {
 
   private final FindRecruitListPort findRecruitListPort;
@@ -28,6 +30,7 @@ public class GetRecruitListService implements GetRecruitListUseCase {
     }
 
     if (existRestaurantPort.existRestaurant(command.getRestaurantCategory()))
+
       return findRecruitListPort.findRecruitList(command.getRestaurantCategory())
           .stream().map(RecruitListDto::new).collect(Collectors.toList());
     else

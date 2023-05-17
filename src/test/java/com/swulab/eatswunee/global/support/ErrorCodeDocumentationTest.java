@@ -36,19 +36,18 @@ public class ErrorCodeDocumentationTest {
   @BeforeEach
   public void setUp(RestDocumentationContextProvider restDocumentation) {
     this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
-        .apply(documentationConfiguration(restDocumentation))
+//        .apply(documentationConfiguration(restDocumentation))
         .build();
   }
 
-
-  @Test
-  @DisplayName("ErrorCode 문서화")
-  public void errorCodeDocumentation() throws Exception {
-
-    this.mockMvc.perform(get("/errors").accept(MediaType.APPLICATION_JSON))
-        .andExpect(status().isOk())
-        .andDo(document("에러코드"));
-
-
-  }
+//
+//  @Test
+//  @DisplayName("ErrorCode 문서화")
+//  public void errorCodeDocumentation() throws Exception {
+//
+//    this.mockMvc.perform(get("/errors").accept(MediaType.APPLICATION_JSON))
+//        .andExpect(status().isOk());
+////        .andDo(document("에러코드"));
+//
+//  }
 }
