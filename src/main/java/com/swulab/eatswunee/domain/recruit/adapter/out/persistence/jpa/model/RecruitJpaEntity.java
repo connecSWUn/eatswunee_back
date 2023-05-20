@@ -3,6 +3,7 @@ package com.swulab.eatswunee.domain.recruit.adapter.out.persistence.jpa.model;
 import com.swulab.eatswunee.domain.recruit.domain.model.RecruitStatus;
 import com.swulab.eatswunee.domain.user.adapter.out.persistence.jpa.model.UserJpaEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,7 +38,7 @@ public class RecruitJpaEntity {
   @UpdateTimestamp
   private LocalDateTime editedAt;
 
-  @Enumerated
+  @Enumerated(EnumType.STRING)
   private RecruitStatus status;
 
   private String restaurant;

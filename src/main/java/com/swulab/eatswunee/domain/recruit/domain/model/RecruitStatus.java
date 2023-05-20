@@ -1,6 +1,6 @@
 package com.swulab.eatswunee.domain.recruit.domain.model;
 
 public enum RecruitStatus {
-  ONGOING, COMPLETED
+  ONGOING, CONNECTING, COMPLETED
 
 }

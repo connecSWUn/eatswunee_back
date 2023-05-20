@@ -50,4 +50,12 @@ public class Recruit {
     this.endTime = endTime;
   }
 
+  private void setStatus(RecruitStatus status) {
+    this.status = status;
+  }
+
+  public void changeRecruitStatus(RecruitStatus status) {
+    setStatus(status);
+  }
+
 }

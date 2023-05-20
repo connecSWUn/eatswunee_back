@@ -5,17 +5,20 @@ import com.swulab.eatswunee.domain.recruit.application.port.out.DeleteRecruitPor
 import com.swulab.eatswunee.domain.recruit.application.port.out.ExistRecruitPort;
 import com.swulab.eatswunee.domain.recruit.application.port.out.FindRecruitContentPort;
 import com.swulab.eatswunee.domain.recruit.application.port.out.FindRecruitListPort;
+import com.swulab.eatswunee.domain.recruit.application.port.out.FindRecruitPort;
 import com.swulab.eatswunee.domain.recruit.application.port.out.SaveRecruitPort;
 import com.swulab.eatswunee.domain.recruit.domain.model.Recruit;
 import com.swulab.eatswunee.domain.recruit.exception.RecruitNotFoundException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
+@Slf4j
 public class RecruitPersistenceAdapter implements FindRecruitListPort, FindRecruitContentPort,
-    SaveRecruitPort, DeleteRecruitPort, ExistRecruitPort {
+    SaveRecruitPort, DeleteRecruitPort, ExistRecruitPort, FindRecruitPort {
 
   private final RecruitQueryRepository recruitQueryRepository;
   private final RecruitJpaRepository recruitJpaRepository;
@@ -47,5 +50,12 @@ public class RecruitPersistenceAdapter implements FindRecruitListPort, FindRecru
   @Override
   public Boolean existRecruit(Long recruitId) {
     return recruitJpaRepository.existsById(recruitId);
+  }
+
+  public Recruit findRecruit(Long recruitId) {
+    RecruitJpaEntity recruitJpaEntity = recruitJpaRepository.findById(recruitId)
+        .orElseThrow(() -> new RecruitNotFoundException("아이디가 " + recruitId + "인 게시글이 존재하지 않습니다."));
+
+    return recruitMapper.mapToDomainEntity(recruitJpaEntity);
   }
 }
