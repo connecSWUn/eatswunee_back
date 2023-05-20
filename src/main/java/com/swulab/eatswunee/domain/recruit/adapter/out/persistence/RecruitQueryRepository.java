@@ -48,6 +48,23 @@ public class RecruitQueryRepository {
         .fetchOne());
   }
 
+  public List<Recruit> findRecruitListByUserId(Long userId) {
+
+    return queryFactory
+        .select(Projections.constructor(Recruit.class,
+            recruitJpaEntity.recruitId,
+            recruitJpaEntity.title,
+            recruitJpaEntity.createdAt,
+            recruitJpaEntity.status,
+            recruitJpaEntity.restaurant,
+            recruitJpaEntity.startTime,
+            recruitJpaEntity.endTime))
+        .from(recruitJpaEntity)
+        .where(recruitJpaEntity.userJpaEntity.userId.eq(userId))
+        .orderBy(recruitJpaEntity.createdAt.asc())
+        .fetch();
+  }
+
 
   private BooleanExpression eqRestaurant(String restaurant) {
     log.info("restaurant name: {}", restaurant);
