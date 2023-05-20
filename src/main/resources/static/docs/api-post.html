@@ -548,42 +548,42 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top"><p class="tableblock">응답코드</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.post[]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.postCommand[]</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">게시글 정보</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.post.[].recruitId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.postCommand.[].recruitId</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">게시글 아이디</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.post.[].title</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.postCommand.[].title</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">제목</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.post.[].createdAt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.postCommand.[].createdAt</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">글 등록 시간</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.post.[].recruitStatus</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.postCommand.[].recruitStatus</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">모집 진행 여부</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.post.[].spot</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.postCommand.[].spot</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">밥 먹을 장소</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.post.[].startTime</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.postCommand.[].startTime</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">밥 먹는 시작 시간</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.post.[].endTime</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.postCommand.[].endTime</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">밥 먹는 끝 시간</p></td>
 </tr>
@@ -632,7 +632,7 @@ Content-Length: 976
   "data" : {
     "category" : "ALL",
     "cursorId" : "",
-    "post" : [ {
+    "postCommand" : [ {
       "recruitId" : 1,
       "title" : "제목1",
       "createdAt" : "2023-05-15T03:17:26.834563",

@@ -6,6 +6,7 @@ import com.swulab.eatswunee.domain.recruit.application.port.out.ExistRecruitPort
 import com.swulab.eatswunee.domain.recruit.application.port.out.FindRecruitContentPort;
 import com.swulab.eatswunee.domain.recruit.application.port.out.FindRecruitListPort;
 import com.swulab.eatswunee.domain.recruit.application.port.out.FindRecruitPort;
+import com.swulab.eatswunee.domain.recruit.application.port.out.FindRecruitsPortByUserIdPort;
 import com.swulab.eatswunee.domain.recruit.application.port.out.SaveRecruitPort;
 import com.swulab.eatswunee.domain.recruit.domain.model.Recruit;
 import com.swulab.eatswunee.domain.recruit.exception.RecruitNotFoundException;
@@ -18,7 +19,8 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class RecruitPersistenceAdapter implements FindRecruitListPort, FindRecruitContentPort,
-    SaveRecruitPort, DeleteRecruitPort, ExistRecruitPort, FindRecruitPort {
+    SaveRecruitPort, DeleteRecruitPort, ExistRecruitPort, FindRecruitPort,
+    FindRecruitsPortByUserIdPort {
 
   private final RecruitQueryRepository recruitQueryRepository;
   private final RecruitJpaRepository recruitJpaRepository;
@@ -57,5 +59,10 @@ public class RecruitPersistenceAdapter implements FindRecruitListPort, FindRecru
         .orElseThrow(() -> new RecruitNotFoundException("아이디가 " + recruitId + "인 게시글이 존재하지 않습니다."));
 
     return recruitMapper.mapToDomainEntity(recruitJpaEntity);
+  }
+
+  @Override
+  public List<Recruit> findRecruitsPortByUserId(Long userId) {
+    return recruitQueryRepository.findRecruitListByUserId(userId);
   }
 }
