@@ -14,6 +14,6 @@ public class RestaurantPersistenceAdapter implements ExistRestaurantPort {
 
   @Override
   public boolean existRestaurant(String name) {
-    return restaurantJpaRepository.existsByName(name);
+    return restaurantJpaRepository.existsByRestaurantSpot(name);
   }
 }
