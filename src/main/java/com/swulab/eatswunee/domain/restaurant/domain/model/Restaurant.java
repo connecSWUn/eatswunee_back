@@ -8,10 +8,13 @@ public class Restaurant {
 
   private Long restaurantId;
   private String name;
+  private RestaurantSpot restaurantSpot;
 
   @Builder
-  public Restaurant(Long restaurantId, String name) {
+  public Restaurant(Long restaurantId, String name,
+      RestaurantSpot restaurantSpot) {
     this.restaurantId = restaurantId;
     this.name = name;
+    this.restaurantSpot = restaurantSpot;
   }
 }

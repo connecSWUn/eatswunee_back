@@ -1,5 +1,6 @@
 package com.swulab.eatswunee.domain.restaurant.adapter.out.persistence.jpa.model;
 
+import com.swulab.eatswunee.domain.restaurant.domain.model.RestaurantSpot;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,9 +22,13 @@ public class RestaurantJpaEntity {
 
   private String name;
 
+  private RestaurantSpot restaurantSpot;
+
   @Builder
-  public RestaurantJpaEntity(Long restaurantId, String name) {
+  public RestaurantJpaEntity(Long restaurantId, String name,
+      RestaurantSpot restaurantSpot) {
     this.restaurantId = restaurantId;
     this.name = name;
+    this.restaurantSpot = restaurantSpot;
   }
 }
