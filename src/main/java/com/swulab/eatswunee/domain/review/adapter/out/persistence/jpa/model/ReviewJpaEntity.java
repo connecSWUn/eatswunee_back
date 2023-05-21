@@ -36,7 +36,7 @@ public class ReviewJpaEntity {
   private LocalDateTime createdAt;
 
   @UpdateTimestamp
-  private LocalDateTime editAt;
+  private LocalDateTime editedAt;
 
   @ManyToOne
   @JoinColumn(name = "user_id")
@@ -48,7 +48,7 @@ public class ReviewJpaEntity {
 
   @Builder
   public ReviewJpaEntity(Long reviewId, int score, String title, String content,
-      LocalDateTime createdAt, LocalDateTime editAt,
+      LocalDateTime createdAt, LocalDateTime editedAt,
       UserJpaEntity userJpaEntity,
       MenuJpaEntity menuJpaEntity) {
     this.reviewId = reviewId;
@@ -56,7 +56,7 @@ public class ReviewJpaEntity {
     this.title = title;
     this.content = content;
     this.createdAt = createdAt;
-    this.editAt = editAt;
+    this.editedAt = editedAt;
     this.userJpaEntity = userJpaEntity;
     this.menuJpaEntity = menuJpaEntity;
   }
