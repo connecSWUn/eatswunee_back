@@ -2,6 +2,7 @@ package com.swulab.eatswunee.domain.menu.adapter.out.persistence.jpa.model;
 
 import com.swulab.eatswunee.domain.restaurant.adapter.out.persistence.jpa.model.RestaurantJpaEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,20 +29,20 @@ public class MenuJpaEntity {
 
   private String imageUrl;
 
-  private int avgScore;
+//  private int avgScore;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "restaurant_id")
   private RestaurantJpaEntity restaurantJpaEntity;
 
   @Builder
-  public MenuJpaEntity(Long menuId, String name, int price, String imageUrl, int avgScore,
+  public MenuJpaEntity(Long menuId, String name, int price, String imageUrl,
       RestaurantJpaEntity restaurantJpaEntity) {
     this.menuId = menuId;
     this.name = name;
     this.price = price;
     this.imageUrl = imageUrl;
-    this.avgScore = avgScore;
+//    this.avgScore = avgScore;
     this.restaurantJpaEntity = restaurantJpaEntity;
   }
 }

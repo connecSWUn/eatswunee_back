@@ -1,6 +1,9 @@
 package com.swulab.eatswunee.domain.restaurant.adapter.out.persistence.jpa.model;
 
+import com.swulab.eatswunee.domain.restaurant.domain.model.RestaurantSpot;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,9 +24,14 @@ public class RestaurantJpaEntity {
 
   private String name;
 
+  @Enumerated(EnumType.STRING)
+  private RestaurantSpot restaurantSpot;
+
   @Builder
-  public RestaurantJpaEntity(Long restaurantId, String name) {
+  public RestaurantJpaEntity(Long restaurantId, String name,
+      RestaurantSpot restaurantSpot) {
     this.restaurantId = restaurantId;
     this.name = name;
+    this.restaurantSpot = restaurantSpot;
   }
 }

@@ -14,21 +14,23 @@ public class Review {
   private String title;
   private String content;
   private LocalDateTime createdAt;
-  private LocalDateTime editAt;
+  private LocalDateTime editedAt;
+  private String reviewImg;
 
   private User user;
   private Menu menu;
 
   @Builder
   public Review(Long reviewId, int score, String title, String content,
-      LocalDateTime createdAt, LocalDateTime editAt, User user,
-      Menu menu) {
+      LocalDateTime createdAt, LocalDateTime editedAt, String reviewImg,
+      User user, Menu menu) {
     this.reviewId = reviewId;
     this.score = score;
     this.title = title;
     this.content = content;
     this.createdAt = createdAt;
-    this.editAt = editAt;
+    this.editedAt = editedAt;
+    this.reviewImg = reviewImg;
     this.user = user;
     this.menu = menu;
   }
