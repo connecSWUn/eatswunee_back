@@ -12,7 +12,10 @@ public enum ErrorCode {
   RECRUIT_NOT_FOUND("존재하지 않는 게시글", 404, -404, "주어진 게시글이 존재하지 않습니다."),
 
   // 사용자
-  USER_NOT_FOUND("존재하지 않는 사용자", 404, -404, "주어진 사용자가 존재하지 않습니다.");
+  USER_NOT_FOUND("존재하지 않는 사용자", 404, -404, "주어진 사용자가 존재하지 않습니다."),
+
+  // 메뉴
+  MENU_NOT_FOUND("존재하지 않는 메뉴", 404, -404, "주어진 메뉴가 존재하지 않습니다.");
 
 
 //  private final String type;
