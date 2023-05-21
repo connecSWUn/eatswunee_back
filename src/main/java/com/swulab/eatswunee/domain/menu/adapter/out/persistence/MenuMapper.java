@@ -4,7 +4,9 @@ import com.swulab.eatswunee.domain.menu.adapter.out.persistence.jpa.model.MenuJp
 import com.swulab.eatswunee.domain.menu.domain.model.Menu;
 import com.swulab.eatswunee.domain.restaurant.adapter.out.persistence.RestaurantMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@Component
 @RequiredArgsConstructor
 public class MenuMapper {
 
@@ -16,7 +18,7 @@ public class MenuMapper {
         .name(menuJpaEntity.getName())
         .price(menuJpaEntity.getPrice())
         .imageUrl(menuJpaEntity.getImageUrl())
-        .avgScore(menuJpaEntity.getAvgScore())
+//        .avgScore(menuJpaEntity.getAvgScore())
         .restaurant(restaurantMapper.mapToDomainEntity(menuJpaEntity.getRestaurantJpaEntity()))
         .build();
   }
@@ -27,7 +29,7 @@ public class MenuMapper {
         .name(menu.getName())
         .price(menu.getPrice())
         .imageUrl(menu.getImageUrl())
-        .avgScore(menu.getAvgScore())
+//        .avgScore(menu.getAvgScore())
         .restaurantJpaEntity(restaurantMapper.mapToJpaEntity(menu.getRestaurant()))
         .build();
   }
