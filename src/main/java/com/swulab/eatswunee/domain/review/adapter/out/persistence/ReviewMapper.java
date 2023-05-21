@@ -20,6 +20,7 @@ public class ReviewMapper {
         .content(reviewJpaEntity.getContent())
         .createdAt(reviewJpaEntity.getCreatedAt())
         .editedAt(reviewJpaEntity.getEditedAt())
+        .reviewImg(reviewJpaEntity.getReviewImg())
         .user(userMapper.mapToDomainEntity(reviewJpaEntity.getUserJpaEntity()))
         .menu(menuMapper.mapToDomainEntity(reviewJpaEntity.getMenuJpaEntity()))
         .build();
@@ -33,6 +34,7 @@ public class ReviewMapper {
         .content(review.getContent())
         .createdAt(review.getCreatedAt())
         .editedAt(review.getEditedAt())
+        .reviewImg(review.getReviewImg())
         .userJpaEntity(userMapper.mapToJpaEntity(review.getUser()))
         .menuJpaEntity(menuMapper.mapToJpaEntity(review.getMenu()))
         .build();
