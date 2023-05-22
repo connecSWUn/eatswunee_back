@@ -2,11 +2,15 @@ package com.swulab.eatswunee.domain.review.adapter.out.persistence;
 
 import com.swulab.eatswunee.domain.menu.adapter.out.persistence.MenuMapper;
 import com.swulab.eatswunee.domain.review.adapter.out.persistence.jpa.model.ReviewJpaEntity;
+import com.swulab.eatswunee.domain.review.application.port.out.command.ReviewAndUserCommand;
 import com.swulab.eatswunee.domain.review.domain.model.Review;
 import com.swulab.eatswunee.domain.user.adapter.out.persistence.UserMapper;
+import com.swulab.eatswunee.domain.user.domain.model.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
+@Component
 public class ReviewMapper {
 
   private final UserMapper userMapper;
@@ -40,5 +44,15 @@ public class ReviewMapper {
         .build();
   }
 
-
+  public Review mapToDomainEntity(ReviewAndUserCommand command) {
+    return Review.builder()
+        .reviewId(command.getReviewId())
+        .score(command.getScore())
+        .content(command.getContent())
+        .createdAt(command.getCreatedAt())
+        .editedAt(command.getEditedAt())
+        .reviewImg(command.getReviewImg())
+        .user(User.builder().userId(command.getUserId()).name(command.getName()).profileUrl(command.getProfileUrl()).build())
+        .build();
+  }
 }
