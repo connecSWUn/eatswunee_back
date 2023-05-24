@@ -1,17 +1,8 @@
 package com.swulab.eatswunee.domain.recruit.adapter.in.web.controller;
 
-import static com.swulab.eatswunee.global.Utils.ApiDocumentUtils.getDocumentRequest;
-import static com.swulab.eatswunee.global.Utils.ApiDocumentUtils.getDocumentResponse;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
-import static org.springframework.restdocs.payload.PayloadDocumentation.subsectionWithPath;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,9 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import org.springframework.restdocs.RestDocumentationContextProvider;
-import org.springframework.restdocs.RestDocumentationExtension;
-import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -46,13 +34,14 @@ import org.springframework.web.context.WebApplicationContext;
 @DisplayName("GetRecruitListController 테스트")
 @DisplayNameGeneration(ReplaceUnderscores.class)
 @WebMvcTest(GetRecruitListController.class)
-@ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
+@ExtendWith({SpringExtension.class})
 @Import({ObjectMapper.class, ObjectMapperConfig.class})
 class GetRecruitListControllerTest {
 
   @Autowired
   private WebApplicationContext context;
 
+  @Autowired
   private MockMvc mockMvc;
 
   @Autowired
@@ -62,12 +51,12 @@ class GetRecruitListControllerTest {
   @MockBean
   private GetRecruitListUseCase getRecruitListUseCase;
 
-  @BeforeEach
-  public void setUp(RestDocumentationContextProvider restDocumentation) {
-    this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
-//        .apply(documentationConfiguration(restDocumentation))
-        .build();
-  }
+//  @BeforeEach
+//  public void setUp(RestDocumentationContextProvider restDocumentation) {
+//    this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
+////        .apply(documentationConfiguration(restDocumentation))
+//        .build();
+//  }
 
 
   private List<RecruitListDto> createRecruitListDtos() {

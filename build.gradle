@@ -3,7 +3,7 @@ plugins {
 	id 'org.springframework.boot' version '3.0.5'
 	id 'io.spring.dependency-management' version '1.1.0'
 
-	id "org.asciidoctor.jvm.convert" version "3.3.2" // asciidoctor 플러그인을 적용한다.
+//	id "org.asciidoctor.jvm.convert" version "3.3.2" // asciidoctor 플러그인을 적용한다.
 //	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10" // querydsl 플러그인 gradlew시 삭제
 }
 
@@ -33,9 +33,9 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	// Spring REST Docs
-	asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
-	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+//	// Spring REST Docs
+//	asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+//	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 
 	//queryDsl
 	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
@@ -58,31 +58,31 @@ ext {
 	snippetsDir = file('build/generated-snippets')
 }
 
-//Spring REST Docs
-test {
-	outputs.dir snippetsDir
-}
-
-asciidoctor {
-	inputs.dir snippetsDir
-	configurations 'asciidoctorExt'
-	dependsOn test
-}
-
-asciidoctor.doFirst {
-	delete file('/src/main/resources/static/docs')
-}
-
-task copyDocument(type: Copy) {
-	dependsOn asciidoctor
-
-	from file("build/docs/asciidoc/")
-	into file("src/main/resources/static/docs")
-}
-
-build {
-	dependsOn copyDocument
-}
+////Spring REST Docs
+//test {
+//	outputs.dir snippetsDir
+//}
+//
+//asciidoctor {
+//	inputs.dir snippetsDir
+//	configurations 'asciidoctorExt'
+//	dependsOn test
+//}
+//
+//asciidoctor.doFirst {
+//	delete file('/src/main/resources/static/docs')
+//}
+//
+//task copyDocument(type: Copy) {
+//	dependsOn asciidoctor
+//
+//	from file("build/docs/asciidoc/")
+//	into file("src/main/resources/static/docs")
+//}
+//
+//build {
+//	dependsOn copyDocument
+//}
 
 // QueryDsl
 
