@@ -6,6 +6,8 @@ spring:
         - localdb
       dev:
         - devdb
+  pid:
+    file: /home/ubuntu/swulab/eatswunee/eatswunee.pid
 
 
 
