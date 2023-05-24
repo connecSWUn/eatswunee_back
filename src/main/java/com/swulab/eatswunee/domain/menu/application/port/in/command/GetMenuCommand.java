@@ -1,5 +1,6 @@
 package com.swulab.eatswunee.domain.menu.application.port.in.command;
 
+import com.swulab.eatswunee.domain.menu.application.port.out.command.FindMenuListCommand;
 import com.swulab.eatswunee.domain.menu.domain.model.Menu;
 import java.util.List;
 import lombok.AccessLevel;
