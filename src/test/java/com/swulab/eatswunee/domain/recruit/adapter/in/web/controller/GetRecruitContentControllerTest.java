@@ -2,8 +2,7 @@ package com.swulab.eatswunee.domain.recruit.adapter.in.web.controller;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,47 +13,41 @@ import com.swulab.eatswunee.domain.recruit.exception.RecruitNotFoundException;
 import com.swulab.eatswunee.domain.user.domain.model.User;
 import com.swulab.eatswunee.global.config.ObjectMapperConfig;
 import java.time.LocalDateTime;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import org.springframework.restdocs.RestDocumentationContextProvider;
-import org.springframework.restdocs.RestDocumentationExtension;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 @DisplayName("GetRecruitContentControllerTest 테스트")
 @DisplayNameGeneration(ReplaceUnderscores.class)
 @WebMvcTest(GetRecruitContentController.class)
-@ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
 @Import({ObjectMapper.class, ObjectMapperConfig.class})
 class GetRecruitContentControllerTest {
 
   @Autowired
   private WebApplicationContext context;
 
+  @Autowired
   private MockMvc mockMvc;
 
 
   @MockBean
   private GetRecruitContentUseCase getRecruitListUseCase;
-
-  @BeforeEach
-  public void setUp(RestDocumentationContextProvider restDocumentation) {
-    this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
-//        .apply(documentationConfiguration(restDocumentation))
-        .build();
-  }
+//
+//  @BeforeEach
+//  public void setUp(RestDocumentationContextProvider restDocumentation) {
+//    this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
+////        .apply(documentationConfiguration(restDocumentation))
+//        .build();
+//  }
 
 
   private Recruit createRecruit() {
