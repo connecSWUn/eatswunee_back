@@ -31,7 +31,7 @@ public class MenuQueryRepository {
         .from(menuJpaEntity)
         .where(
             eqRestaurantId(restaurantId),
-            likeKeyword(keyword)
+            containsKeyword(keyword)
         )
         .fetch();
   }
@@ -44,9 +44,9 @@ public class MenuQueryRepository {
       return restaurantId != null ? menuJpaEntity.restaurantJpaEntity.restaurantId.eq(restaurantId) : null;
   }
 
-  private BooleanExpression likeKeyword(String keyword) {
+  private BooleanExpression containsKeyword(String keyword) {
     log.info("[MenuQueryRepository] keyword : {}", keyword);
-    return keyword != null ? menuJpaEntity.name.like(keyword) : null;
+    return keyword != null ? menuJpaEntity.name.contains(keyword) : null;
   }
 
 
