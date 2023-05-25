@@ -11,6 +11,7 @@ import com.swulab.eatswunee.domain.recruit.application.port.in.RecruitListDto;
 import com.swulab.eatswunee.domain.recruit.application.port.in.command.RecruitListCommand;
 import com.swulab.eatswunee.domain.recruit.domain.model.RecruitStatus;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -61,15 +62,15 @@ class GetRecruitListControllerTest {
     List<RecruitListDto> recruitListDtos = new ArrayList<>();
 
     RecruitListDto recruitListDto1 = new RecruitListDto(1L, "제목1", LocalDateTime.now(),
-        RecruitStatus.ONGOING, "구시아", LocalDateTime.now(), LocalDateTime.now());
+        RecruitStatus.ONGOING, "구시아", LocalTime.now(), LocalTime.now());
 
     RecruitListDto recruitListDto2 = new RecruitListDto(2L, "제목2",
         LocalDateTime.now().minusDays(1L),
-        RecruitStatus.ONGOING, "퀴즈노스", LocalDateTime.now().minusHours(1), LocalDateTime.now());
+        RecruitStatus.ONGOING, "퀴즈노스", LocalTime.now().minusHours(1), LocalTime.now());
 
     RecruitListDto recruitListDto3 = new RecruitListDto(3L, "제목3", LocalDateTime.now(),
-        RecruitStatus.ONGOING, "학생식당", LocalDateTime.now().plusDays(2),
-        LocalDateTime.now().plusHours(2));
+        RecruitStatus.ONGOING, "학생식당", LocalTime.now(),
+        LocalTime.now().plusHours(2));
 
     recruitListDtos.add(recruitListDto1);
     recruitListDtos.add(recruitListDto2);

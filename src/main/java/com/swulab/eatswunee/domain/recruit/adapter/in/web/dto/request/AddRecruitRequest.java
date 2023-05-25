@@ -4,6 +4,7 @@ import com.swulab.eatswunee.domain.recruit.application.port.in.command.AddRecrui
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -46,7 +47,7 @@ public class AddRecruitRequest {
 
       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
       return new AddRecruitCommand(title, spot,
-          LocalDateTime.parse(start_time, formatter), LocalDateTime.parse(end_time, formatter),
+          LocalTime.parse(start_time, formatter), LocalTime.parse(end_time, formatter),
           content, writer_id);
   }
 

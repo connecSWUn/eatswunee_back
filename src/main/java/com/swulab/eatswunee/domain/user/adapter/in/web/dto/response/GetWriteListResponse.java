@@ -4,6 +4,7 @@ import com.swulab.eatswunee.domain.recruit.domain.model.RecruitStatus;
 import com.swulab.eatswunee.domain.user.application.port.out.command.WriteListCommand;
 import com.swulab.eatswunee.domain.user.application.port.out.command.WriteListCommand.PostCommand;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -32,8 +33,8 @@ public class GetWriteListResponse {
 
     private Long postId;
     private String postTitle;
-    private LocalDateTime postStartTime;
-    private LocalDateTime postEndTime;
+    private LocalTime postStartTime;
+    private LocalTime postEndTime;
     private LocalDateTime postCreatedAt;
     private RecruitStatus postRecruitStatus;
 

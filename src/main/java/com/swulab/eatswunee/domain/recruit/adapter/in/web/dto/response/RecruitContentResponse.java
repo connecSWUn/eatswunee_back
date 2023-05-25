@@ -4,6 +4,7 @@ import com.swulab.eatswunee.domain.recruit.domain.model.Recruit;
 import com.swulab.eatswunee.domain.recruit.domain.model.RecruitStatus;
 import com.swulab.eatswunee.domain.user.domain.model.User;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,8 +21,8 @@ public class RecruitContentResponse {
   private String title;
 
   private String spot;
-  private LocalDateTime start_time;
-  private LocalDateTime end_time;
+  private LocalTime start_time;
+  private LocalTime end_time;
   private RecruitStatus recruit_status;
   private String content;
 

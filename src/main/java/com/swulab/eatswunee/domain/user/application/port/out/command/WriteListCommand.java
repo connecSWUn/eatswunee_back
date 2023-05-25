@@ -3,6 +3,7 @@ package com.swulab.eatswunee.domain.user.application.port.out.command;
 import com.swulab.eatswunee.domain.recruit.domain.model.Recruit;
 import com.swulab.eatswunee.domain.recruit.domain.model.RecruitStatus;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -33,8 +34,8 @@ public class WriteListCommand {
 
     private Long postId;
     private String postTitle;
-    private LocalDateTime postStartTime;
-    private LocalDateTime postEndTime;
+    private LocalTime postStartTime;
+    private LocalTime postEndTime;
     private LocalDateTime postCreatedAt;
     private RecruitStatus postRecruitStatus;
 
