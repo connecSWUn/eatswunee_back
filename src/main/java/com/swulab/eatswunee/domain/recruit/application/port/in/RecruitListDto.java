@@ -5,6 +5,7 @@ import com.swulab.eatswunee.domain.recruit.domain.model.RecruitStatus;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,8 +24,8 @@ public class RecruitListDto {
   private LocalDateTime createdAt;
   private RecruitStatus status;
   private String spot;
-  private LocalDateTime startTime;
-  private LocalDateTime endTime;
+  private LocalTime startTime;
+  private LocalTime endTime;
 
   public RecruitListDto(Recruit recruit) {
     this.recruitId = recruit.getRecruitId();
@@ -37,7 +38,7 @@ public class RecruitListDto {
   }
 
   public RecruitListDto(Long recruitId, String title, LocalDateTime createdAt,
-      RecruitStatus status, String spot, LocalDateTime startTime, LocalDateTime endTime) {
+      RecruitStatus status, String spot, LocalTime startTime, LocalTime endTime) {
     this.recruitId = recruitId;
     this.title = title;
     this.createdAt = createdAt;

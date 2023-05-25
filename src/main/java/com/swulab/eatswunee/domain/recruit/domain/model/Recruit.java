@@ -1,8 +1,8 @@
 package com.swulab.eatswunee.domain.recruit.domain.model;
 
-import com.querydsl.core.types.Projections;
 import com.swulab.eatswunee.domain.user.domain.model.User;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -17,15 +17,15 @@ public class Recruit {
   private LocalDateTime editedAt;
   private RecruitStatus status;
   private String restaurant;
-  private LocalDateTime startTime;
-  private LocalDateTime endTime;
+  private LocalTime startTime;
+  private LocalTime endTime;
 
   private User user;
 
   @Builder
   public Recruit(Long recruitId, String title, String content, LocalDateTime createdAt,
       LocalDateTime editedAt, RecruitStatus status, String restaurant,
-      LocalDateTime startTime, LocalDateTime endTime, User user) {
+      LocalTime startTime, LocalTime endTime, User user) {
     this.recruitId = recruitId;
     this.title = title;
     this.content = content;
@@ -40,7 +40,7 @@ public class Recruit {
 
   public Recruit(Long recruitId, String title, LocalDateTime createdAt,
       RecruitStatus status, String restaurant,
-      LocalDateTime startTime, LocalDateTime endTime) {
+      LocalTime startTime, LocalTime endTime) {
     this.recruitId = recruitId;
     this.title = title;
     this.createdAt = createdAt;

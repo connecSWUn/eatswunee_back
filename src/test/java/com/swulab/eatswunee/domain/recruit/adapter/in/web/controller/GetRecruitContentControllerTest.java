@@ -11,7 +11,6 @@ import com.swulab.eatswunee.domain.recruit.domain.model.Recruit;
 import com.swulab.eatswunee.domain.recruit.domain.model.RecruitStatus;
 import com.swulab.eatswunee.domain.recruit.exception.RecruitNotFoundException;
 import com.swulab.eatswunee.domain.user.domain.model.User;
-import com.swulab.eatswunee.global.config.ObjectMapperConfig;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -29,7 +28,7 @@ import org.springframework.web.context.WebApplicationContext;
 @DisplayName("GetRecruitContentControllerTest 테스트")
 @DisplayNameGeneration(ReplaceUnderscores.class)
 @WebMvcTest(GetRecruitContentController.class)
-@Import({ObjectMapper.class, ObjectMapperConfig.class})
+@Import({ObjectMapper.class})
 class GetRecruitContentControllerTest {
 
   @Autowired

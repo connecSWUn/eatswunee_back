@@ -4,6 +4,7 @@ import com.swulab.eatswunee.domain.recruit.application.port.in.RecruitListDto;
 import com.swulab.eatswunee.domain.recruit.domain.model.RecruitStatus;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AccessLevel;
@@ -36,8 +37,8 @@ public class RecruitListResponse {
     private LocalDateTime createdAt;
     private RecruitStatus recruitStatus;
     private String spot;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
     public Post(RecruitListDto recruit) {
       this.recruitId = recruit.getRecruitId();
