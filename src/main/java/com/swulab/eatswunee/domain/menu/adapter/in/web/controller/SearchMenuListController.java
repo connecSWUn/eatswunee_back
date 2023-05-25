@@ -16,7 +16,7 @@ public class SearchMenuListController {
 
   private final SearchMenuListUseCase searchMenuListUseCase;
 
-  @GetMapping("/gusia/{restaurantId}/search/{keyword}")
+  @GetMapping("/gusia/search/{restaurantId}/{keyword}")
   public ResponseEntity searchMenuList(@PathVariable Long restaurantId, @PathVariable String keyword) {
 
     GetMenuListCommand command = searchMenuListUseCase.searchMenuList(restaurantId, keyword);
