@@ -3,9 +3,7 @@ package com.swulab.eatswunee.domain.recruit.adapter.in.web.dto.request;
 import com.swulab.eatswunee.domain.recruit.application.port.in.command.AddRecruitCommand;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,9 +18,9 @@ public class AddRecruitRequest {
 
   private String spot;
 
-  private String start_time;
+  private LocalTime start_time;
 
-  private String end_time;
+  private LocalTime end_time;
 
   @NotNull
   @NotEmpty
@@ -33,8 +31,8 @@ public class AddRecruitRequest {
   private Long writer_id;
 
 
-  public AddRecruitRequest(String title, String spot, String start_time,
-      String end_time, String content, Long writer_id) {
+  public AddRecruitRequest(String title, String spot, LocalTime start_time,
+      LocalTime end_time, String content, Long writer_id) {
     this.title = title;
     this.spot = spot;
     this.start_time = start_time;
@@ -44,11 +42,7 @@ public class AddRecruitRequest {
   }
 
   public AddRecruitCommand toCommand() {
-
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
-      return new AddRecruitCommand(title, spot,
-          LocalTime.parse(start_time, formatter), LocalTime.parse(end_time, formatter),
-          content, writer_id);
+      return new AddRecruitCommand(title, spot, start_time, end_time, content, writer_id);
   }
 
 }
