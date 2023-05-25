@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,9 +44,9 @@ public class RecruitJpaEntity {
 
   private String restaurant;
 
-  private LocalDateTime startTime;
+  private LocalTime startTime;
 
-  private LocalDateTime endTime;
+  private LocalTime endTime;
 
   @ManyToOne
   @JoinColumn(name = "user_id")
@@ -55,7 +56,7 @@ public class RecruitJpaEntity {
   public RecruitJpaEntity(Long recruitId, String title, String content,
       LocalDateTime createdAt, LocalDateTime editedAt,
       RecruitStatus status, String restaurant,
-      LocalDateTime startTime, LocalDateTime endTime,
+      LocalTime startTime, LocalTime endTime,
       UserJpaEntity userJpaEntity) {
     this.recruitId = recruitId;
     this.title = title;
