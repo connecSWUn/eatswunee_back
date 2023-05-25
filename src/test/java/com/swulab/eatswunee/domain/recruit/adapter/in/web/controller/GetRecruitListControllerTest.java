@@ -10,11 +10,9 @@ import com.swulab.eatswunee.domain.recruit.application.port.in.GetRecruitListUse
 import com.swulab.eatswunee.domain.recruit.application.port.in.RecruitListDto;
 import com.swulab.eatswunee.domain.recruit.application.port.in.command.RecruitListCommand;
 import com.swulab.eatswunee.domain.recruit.domain.model.RecruitStatus;
-import com.swulab.eatswunee.global.config.ObjectMapperConfig;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores;
@@ -28,14 +26,13 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 @DisplayName("GetRecruitListController 테스트")
 @DisplayNameGeneration(ReplaceUnderscores.class)
 @WebMvcTest(GetRecruitListController.class)
 @ExtendWith({SpringExtension.class})
-@Import({ObjectMapper.class, ObjectMapperConfig.class})
+@Import({ObjectMapper.class})
 class GetRecruitListControllerTest {
 
   @Autowired
