@@ -19,7 +19,7 @@ public class MenuQueryRepository {
   private final JPAQueryFactory jpaQueryFactory;
 
 
-  public List<FindMenuListCommand> findMenuList(Long restaurantId) {
+  public List<FindMenuListCommand> findMenuList(Long restaurantId, String keyword) {
     return jpaQueryFactory
         .select(Projections.constructor(FindMenuListCommand.class,
             menuJpaEntity.menuId,
@@ -27,9 +27,12 @@ public class MenuQueryRepository {
             menuJpaEntity.imageUrl.as("menuImg"),
             menuJpaEntity.name.as("menuName"),
             menuJpaEntity.price.as("menuPrice")
-            ))
+        ))
         .from(menuJpaEntity)
-        .where(eqRestaurantId(restaurantId))
+        .where(
+            eqRestaurantId(restaurantId),
+            containsKeyword(keyword)
+        )
         .fetch();
   }
 
@@ -39,6 +42,11 @@ public class MenuQueryRepository {
      return null;
     }else
       return restaurantId != null ? menuJpaEntity.restaurantJpaEntity.restaurantId.eq(restaurantId) : null;
+  }
+
+  private BooleanExpression containsKeyword(String keyword) {
+    log.info("[MenuQueryRepository] keyword : {}", keyword);
+    return keyword != null ? menuJpaEntity.name.contains(keyword) : null;
   }
 
 

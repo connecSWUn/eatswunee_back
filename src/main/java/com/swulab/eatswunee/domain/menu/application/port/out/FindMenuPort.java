@@ -10,4 +10,6 @@ public interface FindMenuPort {
 
   List<FindMenuListCommand> findMenuListByRestaurantId(Long restaurantId);
 
+  List<FindMenuListCommand> findMenuListByRestaurantIdAndKeyword(Long restaurantId, String keyword);
+
 }

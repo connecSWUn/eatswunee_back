@@ -30,6 +30,12 @@ public class MenuPersistenceAdapter implements FindMenuPort {
   @Override
   public List<FindMenuListCommand> findMenuListByRestaurantId(Long restaurantId) {
 
-    return menuQueryRepository.findMenuList(restaurantId);
+    return menuQueryRepository.findMenuList(restaurantId, null);
+  }
+
+  @Override
+  public List<FindMenuListCommand> findMenuListByRestaurantIdAndKeyword(Long restaurantId,
+      String keyword) {
+    return menuQueryRepository.findMenuList(restaurantId, keyword);
   }
 }
