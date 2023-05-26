@@ -5,8 +5,10 @@ import com.swulab.eatswunee.domain.order.adapter.out.persistence.OrderMapper;
 import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.model.OrderMenuJpaEntity;
 import com.swulab.eatswunee.domain.ordermenu.domain.model.OrderMenu;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
+@Component
 public class OrderMenuMapper {
 
 

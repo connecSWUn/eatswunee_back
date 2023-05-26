@@ -8,8 +8,10 @@ import com.swulab.eatswunee.domain.ordermenu.domain.model.OrderMenu;
 import com.swulab.eatswunee.domain.user.adapter.out.persistence.UserMapper;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @AllArgsConstructor
+@Component
 public class OrderMapper {
 
   private final UserMapper userMapper;
