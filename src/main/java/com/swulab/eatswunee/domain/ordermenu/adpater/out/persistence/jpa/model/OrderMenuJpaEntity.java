@@ -25,7 +25,7 @@ public class OrderMenuJpaEntity {
 
   private int menuCnt;
 
-  private Integer orderPrice;
+//  private Integer orderPrice;
 
   @ManyToOne
   @JoinColumn(name = "menu_id")
@@ -41,7 +41,7 @@ public class OrderMenuJpaEntity {
       OrderJpaEntity orderJpaEntity) {
     this.orderMenuId = orderMenuId;
     this.menuCnt = menuCnt;
-    this.orderPrice = orderPrice;
+//    this.orderPrice = orderPrice;
     this.menuJpaEntity = menuJpaEntity;
     this.orderJpaEntity = orderJpaEntity;
   }

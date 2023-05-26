@@ -10,7 +10,7 @@ public class OrderMenu {
 
   private Long orderMenuId;
   private int menuCnt;
-  private Integer orderPrice; // 주문 가격
+//  private Integer orderPrice; // 주문 가격
 
   private Menu menu;
   private Order order;
@@ -20,7 +20,7 @@ public class OrderMenu {
       Menu menu, Order order) {
     this.orderMenuId = orderMenuId;
     this.menuCnt = menuCnt;
-    this.orderPrice = orderPrice;
+//    this.orderPrice = orderPrice;
     this.menu = menu;
     this.order = order;
   }
