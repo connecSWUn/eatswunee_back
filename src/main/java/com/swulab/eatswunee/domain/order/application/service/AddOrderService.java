@@ -12,6 +12,7 @@ import com.swulab.eatswunee.domain.user.application.port.out.FindUserPort;
 import com.swulab.eatswunee.domain.user.domain.model.User;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -48,6 +49,8 @@ public class AddOrderService implements AddOrderUseCase {
                   .build();
             }
         ).toList();
+
+    order.updateOrderMenus(orderMenus);
 
     return saveOrderPort.saveOrder(order);
   }

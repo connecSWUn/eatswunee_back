@@ -3,8 +3,8 @@ package com.swulab.eatswunee.domain.order.adapter.out.persistence.jpa.model;
 import com.swulab.eatswunee.domain.order.domain.model.OrderStatus;
 import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.model.OrderMenuJpaEntity;
 import com.swulab.eatswunee.domain.user.adapter.out.persistence.jpa.model.UserJpaEntity;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -31,15 +32,15 @@ public class OrderJpaEntity {
 
   private int orderNum;
 
-  @Enumerated
+  @Enumerated(EnumType.STRING)
   private OrderStatus orderStatus;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id")
   private UserJpaEntity userJpaEntity;
 
-  @OneToMany(mappedBy = "orderMenuId", cascade = CascadeType.ALL)
-  private List<OrderMenuJpaEntity> orderMenuJpaEntities;
+  @OneToMany(mappedBy = "orderJpaEntity")
+  private List<OrderMenuJpaEntity> orderMenuJpaEntities = new ArrayList<>();
 
   @Builder
   public OrderJpaEntity(Long orderId, int orderNum,
