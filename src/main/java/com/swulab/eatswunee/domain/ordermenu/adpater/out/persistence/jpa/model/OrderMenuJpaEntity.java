@@ -45,4 +45,10 @@ public class OrderMenuJpaEntity {
     this.menuJpaEntity = menuJpaEntity;
     this.orderJpaEntity = orderJpaEntity;
   }
+
+  //TODO: 삭제
+  public void setOrderJpaEntity(OrderJpaEntity orderJpaEntity) {
+    this.orderJpaEntity = orderJpaEntity;
+    orderJpaEntity.getOrderMenuJpaEntities().add(this);
+  }
 }

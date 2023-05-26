@@ -1,7 +1,7 @@
 package com.swulab.eatswunee.domain.order.adapter.out.persistence;
 
-import com.swulab.eatswunee.domain.order.domain.model.Order;
 import com.swulab.eatswunee.domain.order.adapter.out.persistence.jpa.model.OrderJpaEntity;
+import com.swulab.eatswunee.domain.order.domain.model.Order;
 import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.OrderMenuMapper;
 import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.model.OrderMenuJpaEntity;
 import com.swulab.eatswunee.domain.ordermenu.domain.model.OrderMenu;
@@ -21,7 +21,7 @@ public class OrderMapper {
         .orderNum(orderJpaEntity.getOrderNum())
         .orderStatus(orderJpaEntity.getOrderStatus())
         .user(userMapper.mapToDomainEntity(orderJpaEntity.getUserJpaEntity()))
-        .orderMenus(mapToDomains(orderJpaEntity.getOrderMenuJpaEntity()))
+        .orderMenus(mapToDomains(orderJpaEntity.getOrderMenuJpaEntities()))
         .build();
   }
 
@@ -31,7 +31,7 @@ public class OrderMapper {
         .orderNum(order.getOrderNum())
         .orderStatus(order.getOrderStatus())
         .userJpaEntity(userMapper.mapToJpaEntity(order.getUser()))
-        .orderMenuJpaEntity(mapToEntities(order.getOrderMenus()))
+        .orderMenuJpaEntities(mapToEntities(order.getOrderMenus()))
         .build();
   }
 

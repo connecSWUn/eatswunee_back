@@ -37,18 +37,18 @@ public class OrderJpaEntity {
   @JoinColumn(name = "user_id")
   private UserJpaEntity userJpaEntity;
 
-  @OneToMany
-  private List<OrderMenuJpaEntity> orderMenuJpaEntity;
+  @OneToMany(mappedBy = "orderMenuId")
+  private List<OrderMenuJpaEntity> orderMenuJpaEntities;
 
   @Builder
   public OrderJpaEntity(Long orderId, int orderNum,
       OrderStatus orderStatus,
       UserJpaEntity userJpaEntity,
-      List<OrderMenuJpaEntity> orderMenuJpaEntity) {
+      List<OrderMenuJpaEntity> orderMenuJpaEntities) {
     this.orderId = orderId;
     this.orderNum = orderNum;
     this.orderStatus = orderStatus;
     this.userJpaEntity = userJpaEntity;
-    this.orderMenuJpaEntity = orderMenuJpaEntity;
+    this.orderMenuJpaEntities = orderMenuJpaEntities;
   }
 }
