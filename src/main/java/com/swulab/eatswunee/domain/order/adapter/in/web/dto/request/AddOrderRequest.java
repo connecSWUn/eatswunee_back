@@ -19,7 +19,7 @@ public class AddOrderRequest {
 
   @Getter
   @NoArgsConstructor(access = AccessLevel.PROTECTED)
-  private class OrderMenuRequest {
+  private static class OrderMenuRequest {
 
     private Long menuId;
     private int menuCnt;
