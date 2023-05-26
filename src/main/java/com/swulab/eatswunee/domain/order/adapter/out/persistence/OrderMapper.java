@@ -2,11 +2,7 @@ package com.swulab.eatswunee.domain.order.adapter.out.persistence;
 
 import com.swulab.eatswunee.domain.order.adapter.out.persistence.jpa.model.OrderJpaEntity;
 import com.swulab.eatswunee.domain.order.domain.model.Order;
-import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.OrderMenuMapper;
-import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.model.OrderMenuJpaEntity;
-import com.swulab.eatswunee.domain.ordermenu.domain.model.OrderMenu;
 import com.swulab.eatswunee.domain.user.adapter.out.persistence.UserMapper;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +11,6 @@ import org.springframework.stereotype.Component;
 public class OrderMapper {
 
   private final UserMapper userMapper;
-  private final OrderMenuMapper orderMenuMapper;
 
   public Order mapToDomainEntity(OrderJpaEntity orderJpaEntity) {
     return Order.builder()
@@ -23,7 +18,6 @@ public class OrderMapper {
         .orderNum(orderJpaEntity.getOrderNum())
         .orderStatus(orderJpaEntity.getOrderStatus())
         .user(userMapper.mapToDomainEntity(orderJpaEntity.getUserJpaEntity()))
-        .orderMenus(mapToDomains(orderJpaEntity.getOrderMenuJpaEntities()))
         .build();
   }
 
@@ -33,17 +27,7 @@ public class OrderMapper {
         .orderNum(order.getOrderNum())
         .orderStatus(order.getOrderStatus())
         .userJpaEntity(userMapper.mapToJpaEntity(order.getUser()))
-        .orderMenuJpaEntities(mapToEntities(order.getOrderMenus()))
         .build();
   }
-
-  private List<OrderMenu> mapToDomains(List<OrderMenuJpaEntity> jpaEntities) {
-    return jpaEntities.stream().map(orderMenuMapper::mapToDomainEntity).toList();
-  }
-
-  private List<OrderMenuJpaEntity> mapToEntities(List<OrderMenu> domains) {
-    return domains.stream().map(orderMenuMapper::mapToJpaEntity).toList();
-  }
-
 
 }
