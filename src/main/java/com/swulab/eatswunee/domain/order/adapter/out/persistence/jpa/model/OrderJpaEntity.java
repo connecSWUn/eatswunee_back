@@ -3,6 +3,7 @@ package com.swulab.eatswunee.domain.order.adapter.out.persistence.jpa.model;
 import com.swulab.eatswunee.domain.order.domain.model.OrderStatus;
 import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.model.OrderMenuJpaEntity;
 import com.swulab.eatswunee.domain.user.adapter.out.persistence.jpa.model.UserJpaEntity;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
@@ -37,7 +38,7 @@ public class OrderJpaEntity {
   @JoinColumn(name = "user_id")
   private UserJpaEntity userJpaEntity;
 
-  @OneToMany(mappedBy = "orderMenuId")
+  @OneToMany(mappedBy = "orderMenuId", cascade = CascadeType.ALL)
   private List<OrderMenuJpaEntity> orderMenuJpaEntities;
 
   @Builder
