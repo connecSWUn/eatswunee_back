@@ -31,10 +31,10 @@ public class GetRecruitListService implements GetRecruitListUseCase {
 
     if (existRestaurantPort.existRestaurant(command.getRestaurantCategory()))
 
-      return findRecruitListPort.findRecruitList(command.getRestaurantCategory())
+      return findRecruitListPort.findRecruitList(command.getRestaurantCategory().name())
           .stream().map(RecruitListDto::new).collect(Collectors.toList());
     else
-      throw new RestaurantNotFoundException(command.getRestaurantCategory());
+      throw new RestaurantNotFoundException(command.getRestaurantCategory().name());
   }
 
 }

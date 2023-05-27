@@ -2,6 +2,7 @@ package com.swulab.eatswunee.domain.recruit.adapter.in.web.dto.response;
 
 import com.swulab.eatswunee.domain.recruit.application.port.in.RecruitListDto;
 import com.swulab.eatswunee.domain.recruit.domain.model.RecruitStatus;
+import com.swulab.eatswunee.domain.restaurant.domain.model.RestaurantSpot;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -15,13 +16,13 @@ import lombok.NoArgsConstructor;
 @Getter
 public class RecruitListResponse {
 
-  private String category;
+  private RestaurantSpot category;
 
   private String cursorId;
 
   private List<Post> post;
 
-  public RecruitListResponse(String category, String cursorId, List<RecruitListDto> recruitList) {
+  public RecruitListResponse(RestaurantSpot category, String cursorId, List<RecruitListDto> recruitList) {
     this.category = category;
     this.cursorId = cursorId;
     this.post = recruitList.stream().map(Post::new).collect(Collectors.toList());

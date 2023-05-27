@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RestaurantJpaRepository extends JpaRepository<RestaurantJpaEntity, Long> {
 
-  boolean existsByRestaurantSpot(String spot);
+  boolean existsByRestaurantSpot(RestaurantSpot spot);
 
   List<Restaurant> findAllByRestaurantSpot(RestaurantSpot spot);
 
