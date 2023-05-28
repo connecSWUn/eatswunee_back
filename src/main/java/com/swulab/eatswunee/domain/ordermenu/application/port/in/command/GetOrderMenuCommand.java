@@ -18,9 +18,6 @@ public class GetOrderMenuCommand {
 
   public GetOrderMenuCommand(int orderNum, LocalDateTime orderCreatedAt,
       List<OrderMenuCommand> orderCommandList) {
-    System.out.println(orderNum);
-    System.out.println(orderCreatedAt);
-    System.out.println(orderCommandList.size());
 
     this.orderNum = orderNum;
     this.orderCreatedAt = orderCreatedAt;
