@@ -4,6 +4,7 @@ import com.swulab.eatswunee.domain.menu.adapter.in.web.controller.dto.response.G
 import com.swulab.eatswunee.domain.menu.application.port.in.GetMenuReviewListUseCase;
 import com.swulab.eatswunee.domain.menu.application.port.in.command.GetMenuReviewListCommand;
 import com.swulab.eatswunee.global.common.adapter.web.in.dto.SuccessResponse;
+import com.swulab.eatswunee.global.common.applicatioin.port.in.GetImageUrlUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +16,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class GetMenuReviewListController {
 
   private final GetMenuReviewListUseCase getMenuReviewListUseCase;
+  private final GetImageUrlUseCase getImageUrlUseCase;
 
   @GetMapping("/menu/reviews/{menuId}")
   public ResponseEntity getMenuReviewList(@PathVariable Long menuId) {
 
     GetMenuReviewListCommand command = getMenuReviewListUseCase.getMenuReviewList(menuId);
+
+    command.getReviews()
+        .forEach(review -> review.mapImageToUrl(getImageUrlUseCase.getImageUrl("review_image/"+ review.getReviewImg())));
+
+    command.mapImageToUrl(getImageUrlUseCase.getImageUrl("menu_image/" + command.getMenuImg()));
+
+    command.getReviews()
+        .forEach(review -> review.getUser().mapImageToUrl(getImageUrlUseCase.getImageUrl("user_profile/"+review.getUser().getProfileUrl())));
 
     GetMenuReviewListResponse response = new GetMenuReviewListResponse(command);
 

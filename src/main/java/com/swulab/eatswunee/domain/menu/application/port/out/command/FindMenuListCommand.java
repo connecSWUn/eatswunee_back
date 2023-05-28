@@ -27,4 +27,8 @@ public class FindMenuListCommand {
   public void setMenuRating(Double menuRating) {
     this.menuRating = menuRating;
   }
+
+  public void mapNameToUrl(String url) {
+    this.menuImg = url;
+  }
 }
