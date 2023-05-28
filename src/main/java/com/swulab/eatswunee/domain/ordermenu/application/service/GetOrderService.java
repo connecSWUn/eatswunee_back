@@ -23,17 +23,24 @@ public class GetOrderService implements GetOrderUseCase {
   public GetOrderMenuCommand getOrder(Long orderId) {
 
     Order order = findOrderPort.findOrder(orderId);
+    List<OrderMenuCommand> orderMenuCommands = createOrderMenuCommands(orderId);
 
+    return new GetOrderMenuCommand(order.getOrderNum(), order.getOrderCreatedAt(), orderMenuCommands);
+  }
+
+  /**
+   * orderId를 사용해 OrderMenuCommand 리스트를 생성하는 함수
+   * @param orderId 주문 아이디
+   * @return List<OrderMenuCommand>
+   */
+  private List<OrderMenuCommand> createOrderMenuCommands(Long orderId) {
     List<FindRestaurantOrderMenuCommand> findRestaurantOrderMenuCommands = findOrderMenuPort.getOrderPort(orderId);
-
-    List<OrderMenuCommand> orderMenuCommands = findRestaurantOrderMenuCommands.stream().map(
+    return findRestaurantOrderMenuCommands.stream().map(
         command -> {
           List<MenuCommand> menuCommands = command.getMenus().stream().map(MenuCommand::new)
               .toList();
           return new OrderMenuCommand(command.getRestaurantName(), menuCommands);
         }
     ).toList();
-
-    return new GetOrderMenuCommand(order.getOrderNum(), order.getOrderCreatedAt(), orderMenuCommands);
   }
 }
