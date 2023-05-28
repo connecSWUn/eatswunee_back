@@ -3,6 +3,7 @@ package com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.model;
 import com.swulab.eatswunee.domain.menu.adapter.out.persistence.jpa.model.MenuJpaEntity;
 import com.swulab.eatswunee.domain.order.adapter.out.persistence.jpa.model.OrderJpaEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,13 +26,13 @@ public class OrderMenuJpaEntity {
 
   private int menuCnt;
 
-  private Integer orderPrice;
+//  private Integer orderPrice;
 
   @ManyToOne
   @JoinColumn(name = "menu_id")
   private MenuJpaEntity menuJpaEntity;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "order_id")
   private OrderJpaEntity orderJpaEntity;
 
@@ -41,8 +42,13 @@ public class OrderMenuJpaEntity {
       OrderJpaEntity orderJpaEntity) {
     this.orderMenuId = orderMenuId;
     this.menuCnt = menuCnt;
-    this.orderPrice = orderPrice;
+//    this.orderPrice = orderPrice;
     this.menuJpaEntity = menuJpaEntity;
+    this.orderJpaEntity = orderJpaEntity;
+  }
+
+  public void setOrderJpaEntity(
+      OrderJpaEntity orderJpaEntity) {
     this.orderJpaEntity = orderJpaEntity;
   }
 }
