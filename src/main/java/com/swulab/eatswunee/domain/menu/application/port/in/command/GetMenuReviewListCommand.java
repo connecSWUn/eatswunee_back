@@ -37,4 +37,8 @@ public class GetMenuReviewListCommand {
     return reviews.stream().mapToInt(Review::getScore).average().orElseGet(()->0.0);
   }
 
+  public void mapImageToUrl(String url) {
+    this.menuImg = url;
+  }
+
 }

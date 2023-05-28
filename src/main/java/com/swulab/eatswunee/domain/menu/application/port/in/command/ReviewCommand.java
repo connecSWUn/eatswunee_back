@@ -29,5 +29,9 @@ public class ReviewCommand {
     this.reviewImg = review.getReviewImg();
     this.user = review.getUser();
   }
+
+  public void mapImageToUrl(String url) {
+    this.reviewImg = url;
+  }
 }
 

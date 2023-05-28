@@ -16,4 +16,8 @@ public class User {
     this.name = name;
     this.profileUrl = profileUrl;
   }
+
+  public void mapImageToUrl(String url) {
+    this.profileUrl = url;
+  }
 }
