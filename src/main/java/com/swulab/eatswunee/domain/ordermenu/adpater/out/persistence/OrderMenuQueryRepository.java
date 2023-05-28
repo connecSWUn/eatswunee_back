@@ -7,6 +7,7 @@ import static com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.
 import static com.swulab.eatswunee.domain.restaurant.adapter.out.persistence.jpa.model.QRestaurantJpaEntity.restaurantJpaEntity;
 
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.swulab.eatswunee.domain.order.domain.model.OrderStatus;
 import com.swulab.eatswunee.domain.ordermenu.application.port.out.command.FindRestaurantOrderMenuCommand;
@@ -29,8 +30,8 @@ public class OrderMenuQueryRepository {
         .join(orderMenuJpaEntity.menuJpaEntity, menuJpaEntity)
         .join(menuJpaEntity.restaurantJpaEntity, restaurantJpaEntity)
         .where(
-            orderMenuJpaEntity.orderJpaEntity.orderId.eq(orderId),
-            orderMenuJpaEntity.orderJpaEntity.orderStatus.eq(OrderStatus.ONGOING)
+            eqOrderId(orderId),
+            eqOrderStatus(OrderStatus.ONGOING)
         )
         .transform(
             groupBy(orderMenuJpaEntity.menuJpaEntity.restaurantJpaEntity).list(
@@ -48,4 +49,12 @@ public class OrderMenuQueryRepository {
   }
 
 
+  private BooleanExpression eqOrderId(Long orderId) {
+    return orderId != null ? orderMenuJpaEntity.orderJpaEntity.orderId.eq(orderId) : null;
+  }
+
+  private BooleanExpression eqOrderStatus(OrderStatus orderStatus) {
+    return orderStatus != null ? orderMenuJpaEntity.orderJpaEntity.orderStatus.eq(
+        OrderStatus.ONGOING) : null;
+  }
 }
