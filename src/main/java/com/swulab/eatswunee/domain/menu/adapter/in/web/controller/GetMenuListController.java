@@ -23,8 +23,6 @@ public class GetMenuListController {
   public ResponseEntity getMenuList(@PathVariable Long restaurantId) {
 
     GetMenuListCommand command = getMenuListUseCase.getMenuList(restaurantId);
-
-    getImageUrlUseCase.getImageUrl(command.getMenuCommandList().get(0).getMenuImg());
     command.getMenuCommandList().forEach(menu -> menu.mapNameToUrl(getImageUrlUseCase.getImageUrl("menu_image/" + menu.getMenuImg())));
 
     GetMenuListResponse response = new GetMenuListResponse(command);
