@@ -15,7 +15,10 @@ public enum ErrorCode {
   USER_NOT_FOUND("존재하지 않는 사용자", 404, -404, "주어진 사용자가 존재하지 않습니다."),
 
   // 메뉴
-  MENU_NOT_FOUND("존재하지 않는 메뉴", 404, -404, "주어진 메뉴가 존재하지 않습니다.");
+  MENU_NOT_FOUND("존재하지 않는 메뉴", 404, -404, "주어진 메뉴가 존재하지 않습니다."),
+
+  // 주문
+  ORDER_NOT_FOUND("존재하지 않는 주문", 404, -404, "주어진 주문이 존재하지 않습니다.");
 
 
 //  private final String type;
