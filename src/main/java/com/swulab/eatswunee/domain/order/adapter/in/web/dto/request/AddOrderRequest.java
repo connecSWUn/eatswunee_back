@@ -1,6 +1,6 @@
 package com.swulab.eatswunee.domain.order.adapter.in.web.dto.request;
 
-import com.swulab.eatswunee.domain.order.application.port.in.command.OrderMenuInCommand;
+import com.swulab.eatswunee.domain.order.application.port.in.command.AddOrderCommand;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -30,9 +30,9 @@ public class AddOrderRequest {
     }
   }
 
-  public List<OrderMenuInCommand> toCommands() {
+  public List<AddOrderCommand> toCommands() {
     return this.orderMenus.stream().map(
-        orderMenuRequest -> new OrderMenuInCommand(orderMenuRequest.menuId, orderMenuRequest.getMenuCnt())
+        orderMenuRequest -> new AddOrderCommand(orderMenuRequest.menuId, orderMenuRequest.getMenuCnt())
     ).toList();
   }
 
