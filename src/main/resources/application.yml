@@ -4,8 +4,10 @@ spring:
     group:
       local:
         - localdb
+        - s3
       dev:
         - devdb
+        - s3
   pid:
     file: /home/ubuntu/swulab/eatswunee/eatswunee.pid
 
