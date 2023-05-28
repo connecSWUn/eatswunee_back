@@ -14,12 +14,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "orders")
@@ -32,6 +34,9 @@ public class OrderJpaEntity {
 
   private int orderNum;
 
+  @CreationTimestamp
+  private LocalDateTime orderCreatedAt;
+
   @Enumerated(EnumType.STRING)
   private OrderStatus orderStatus;
 
@@ -43,12 +48,13 @@ public class OrderJpaEntity {
   private List<OrderMenuJpaEntity> orderMenuJpaEntities = new ArrayList<>();
 
   @Builder
-  public OrderJpaEntity(Long orderId, int orderNum,
+  public OrderJpaEntity(Long orderId, int orderNum, LocalDateTime orderCreatedAt,
       OrderStatus orderStatus,
       UserJpaEntity userJpaEntity,
       List<OrderMenuJpaEntity> orderMenuJpaEntities) {
     this.orderId = orderId;
     this.orderNum = orderNum;
+    this.orderCreatedAt = orderCreatedAt;
     this.orderStatus = orderStatus;
     this.userJpaEntity = userJpaEntity;
     this.orderMenuJpaEntities = orderMenuJpaEntities;

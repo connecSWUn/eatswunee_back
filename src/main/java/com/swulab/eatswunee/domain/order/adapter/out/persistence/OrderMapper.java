@@ -16,6 +16,7 @@ public class OrderMapper {
     return Order.builder()
         .orderId(orderJpaEntity.getOrderId())
         .orderNum(orderJpaEntity.getOrderNum())
+        .orderCreatedAt(orderJpaEntity.getOrderCreatedAt())
         .orderStatus(orderJpaEntity.getOrderStatus())
         .user(userMapper.mapToDomainEntity(orderJpaEntity.getUserJpaEntity()))
         .build();
@@ -25,6 +26,7 @@ public class OrderMapper {
     return OrderJpaEntity.builder()
         .orderId(order.getOrderId())
         .orderNum(order.getOrderNum())
+        .orderCreatedAt(order.getOrderCreatedAt())
         .orderStatus(order.getOrderStatus())
         .userJpaEntity(userMapper.mapToJpaEntity(order.getUser()))
         .build();
