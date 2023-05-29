@@ -4,7 +4,6 @@ import com.swulab.eatswunee.domain.user.application.port.out.FindUserPort;
 import com.swulab.eatswunee.domain.user.domain.model.User;
 import java.util.Collections;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.util.CustomObjectInputStream;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,20 +25,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     User user = findUserPort.findUserByLoginId(username);
 
-
     return createUserDetails(user);
   }
 
   private UserDetails createUserDetails(User user) {
-    System.out.println("slslslslsll");
-    System.out.println(user.getUserId());
-    System.out.println(user.getName());
-    System.out.println(user.getLoginId());
 
     GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getRole().name());
-
-    System.out.println(grantedAuthority.getAuthority());
-
 
     return org.springframework.security.core.userdetails.User
         .builder()

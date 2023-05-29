@@ -2,8 +2,6 @@ package com.swulab.eatswunee.global.common.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -11,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
-import org.springframework.web.filter.GenericFilterBean;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 // 클라이언트 요청시 jwt 인증을 하기 위한 필터. UsernamePasswordAuthenticationFilter 이전에 실행된다.
@@ -21,14 +18,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
   private final JwtTokenProvider jwtTokenProvider;
 
-
-
-
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
       FilterChain filterChain) throws ServletException, IOException {
 
-    System.out.println("제바 ㄹ");
     // 요청에서 토큰 받아오기
     String token = resolveToken(request);
 
@@ -37,7 +30,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       Authentication authentication = jwtTokenProvider.getAuthentication(token);
       //SecurityContext 에 저장
       SecurityContextHolder.getContext().setAuthentication(authentication);
-      System.out.println("제바 ㄹ");
     }
     // chain에 걸기
     filterChain.doFilter(request, response);
@@ -47,7 +39,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
   // Request Header 에서 토큰 정보 추출
   private String resolveToken(HttpServletRequest request) {
     String bearerToken = request.getHeader("Authorization");
-    System.out.println(bearerToken);
     if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
       return bearerToken.substring(7);
     }

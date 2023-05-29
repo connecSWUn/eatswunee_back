@@ -21,17 +21,11 @@ public class UserLoginService implements UserLoginUseCase {
     // id, pw 기반으로 Authentication 객체 생성, 이때 객체의 authenticated 값은 false
     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
         memberId, password);
-    System.out.println("=============================");
-    System.out.println(memberId);
-    System.out.println(password);
-    System.out.println("=============================");
 
     // 검증이 이루어지는 부분(사용자 비밀번호 체크)
     Authentication authenticate = authenticationManagerBuilder.getObject()
         .authenticate(authenticationToken);
 
-    System.out.println(authenticate.getName());
-    System.out.println("=============================");
 
     // 인증 정보를 기반으로 JWT 토큰 생성
     TokenInfo tokenInfo = jwtTokenProvider.generateToken(authenticate);
