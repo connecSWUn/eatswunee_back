@@ -22,7 +22,6 @@ public class SecurityConfig {
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    System.out.println("SecurityFilterChain");
     return http
         .csrf().disable()
         .cors()
@@ -34,7 +33,7 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         )
         .authorizeHttpRequests((requests) -> requests
-            .requestMatchers("/", "/login/**", "/signup/**").permitAll()
+            .requestMatchers("/", "/**","/login/**", "/signup/**").permitAll()
             .anyRequest().authenticated()
         )
         .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
