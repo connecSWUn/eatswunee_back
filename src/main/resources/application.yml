@@ -5,6 +5,7 @@ spring:
       local:
         - localdb
         - s3
+        - jwt-local
       dev:
         - devdb
         - s3
