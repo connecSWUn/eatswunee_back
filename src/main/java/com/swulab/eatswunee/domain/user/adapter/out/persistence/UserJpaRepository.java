@@ -8,4 +8,6 @@ public interface UserJpaRepository extends JpaRepository<UserJpaEntity, Long> {
 
   @Override
   Optional<UserJpaEntity> findById(Long userId);
+
+  UserJpaEntity findByLoginId(String loginId);
 }

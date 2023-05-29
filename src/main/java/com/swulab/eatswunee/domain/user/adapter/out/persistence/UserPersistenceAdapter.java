@@ -23,4 +23,11 @@ public class UserPersistenceAdapter implements FindUserPort {
     return userMapper.mapToDomainEntity(userJpaEntity);
   }
 
+  @Override
+  public User findUserByLoginId(String loginId) {
+
+    UserJpaEntity userJpaEntity = userJpaRepository.findByLoginId(loginId);
+    return userMapper.mapToDomainEntity(userJpaEntity);
+  }
+
 }
