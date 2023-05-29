@@ -5,6 +5,8 @@ import com.swulab.eatswunee.domain.user.application.port.in.command.UserSignUpCo
 import com.swulab.eatswunee.domain.user.application.port.out.FindUserPort;
 import com.swulab.eatswunee.domain.user.application.port.out.SaveUserPort;
 import com.swulab.eatswunee.domain.user.domain.model.User;
+import com.swulab.eatswunee.domain.user.exception.UserAlreadyExistsException;
+import com.swulab.eatswunee.global.error.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,10 @@ public class UseSignUpService implements UserSignUpUseCase {
 
     //TODO Optional로 변환
 //    User findUser = findUserPort.findUserByLoginId(command.getLoginId());
+    if (findUserPort.isExistsByLoginId(command.getLoginId())) {
+      // 예외처리
+      throw new UserAlreadyExistsException(ErrorCode.USER_ALREADY_EXISTS, "이미 존재하는 회원입니다.");
+    }
 
     User user = User.builder()
         .name(command.getNickname())

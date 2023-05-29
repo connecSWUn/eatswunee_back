@@ -32,6 +32,11 @@ public class UserPersistenceAdapter implements FindUserPort, SaveUserPort {
   }
 
   @Override
+  public boolean isExistsByLoginId(String loginId) {
+    return userJpaRepository.existsByLoginId(loginId);
+  }
+
+  @Override
   public Long saveUser(User user) {
     return userJpaRepository.save(userMapper.mapToJpaEntity(user)).getUserId();
   }

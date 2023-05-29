@@ -8,4 +8,6 @@ public interface FindUserPort {
 
   User findUserByLoginId(String loginId);
 
+  boolean isExistsByLoginId(String loginId);
+
 }
