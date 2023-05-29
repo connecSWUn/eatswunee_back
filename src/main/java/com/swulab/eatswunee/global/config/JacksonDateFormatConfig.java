@@ -25,6 +25,7 @@ public class JacksonDateFormatConfig {
 
     return jacksonObjectMapperBuilder -> {
 
+
       jacksonObjectMapperBuilder.timeZone(TimeZone.getTimeZone("Asia/Seoul"));
 
       jacksonObjectMapperBuilder.serializers(new LocalDateSerializer(DateTimeFormatter.ofPattern(localDate)));
