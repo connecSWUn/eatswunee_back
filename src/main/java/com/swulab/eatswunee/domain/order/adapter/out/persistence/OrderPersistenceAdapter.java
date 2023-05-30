@@ -7,6 +7,7 @@ import com.swulab.eatswunee.domain.order.application.port.out.SaveOrderPort;
 import com.swulab.eatswunee.domain.order.domain.model.Order;
 import com.swulab.eatswunee.domain.order.exception.OrderNotFoundException;
 import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.OrderMenuMapper;
+import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.OrderQueryRepository;
 import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.OrderMenuJpaRepository;
 import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.model.OrderMenuJpaEntity;
 import com.swulab.eatswunee.global.error.ErrorCode;
@@ -16,12 +17,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class OrderPersistenceAdapter implements SaveOrderPort, FindOrderPort {
+public class OrderPersistenceAdapter implements SaveOrderPort, FindOrderPort
+    {
 
   private final OrderJpaRepository orderJpaRepository;
   private final OrderMapper orderMapper;
   private final OrderMenuMapper orderMenuMapper;
   private final OrderMenuJpaRepository orderMenuJpaRepository;
+  private final OrderQueryRepository orderQueryRepository;
 
 
   @Override
@@ -56,4 +59,13 @@ public class OrderPersistenceAdapter implements SaveOrderPort, FindOrderPort {
             "아이디가 " + orderId + "인 주문이 존재하지 않습니다."));
     return orderMapper.mapToDomainEntity(orderJpaEntity);
   }
+
+  @Override
+  public List<Order> findAllByUserId(Long userId) {
+    List<OrderJpaEntity> orderJpaEntityList = orderQueryRepository.findAllOrderByUserId(userId);
+
+    return orderJpaEntityList.stream()
+        .map(orderMapper::mapToDomainEntity).toList();
+  }
+
 }

@@ -9,6 +9,7 @@ import static com.swulab.eatswunee.domain.restaurant.adapter.out.persistence.jpa
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.swulab.eatswunee.domain.order.adapter.in.web.controller.coammnd.UserOrderMenuCommand;
 import com.swulab.eatswunee.domain.order.domain.model.OrderStatus;
 import com.swulab.eatswunee.domain.ordermenu.application.port.out.command.FindRestaurantOrderMenuCommand;
 import java.util.List;
@@ -50,6 +51,32 @@ public class OrderMenuQueryRepository {
         );
   }
 
+  public List<UserOrderMenuCommand> findUserOrderMenuList(Long orderId) {
+    List<UserOrderMenuCommand> fetch = jpaQueryFactory
+        .select(
+            Projections.constructor(UserOrderMenuCommand.class,
+
+                orderMenuJpaEntity.orderMenuId,
+                orderMenuJpaEntity.menuJpaEntity.menuId,
+                orderMenuJpaEntity.menuJpaEntity.name.as("menuName"),
+                orderMenuJpaEntity.menuJpaEntity.restaurantJpaEntity.name.as("restaurantName"),
+                orderMenuJpaEntity.menuJpaEntity.price.as("menuPrice"),
+                orderMenuJpaEntity.menuCnt
+
+            )
+        )
+        .from(orderMenuJpaEntity)
+        .join(orderMenuJpaEntity.menuJpaEntity, menuJpaEntity)
+        .join(menuJpaEntity.restaurantJpaEntity, restaurantJpaEntity)
+        .where(
+            eqOrderId(orderId),
+            eqOrderStatus(OrderStatus.COMPLETE)
+        ).fetch();
+
+
+    return fetch;
+  }
+
 
   private BooleanExpression eqOrderId(Long orderId) {
     log.info("[findOrderMenu] orderId : {}", orderId);
@@ -58,7 +85,6 @@ public class OrderMenuQueryRepository {
 
   private BooleanExpression eqOrderStatus(OrderStatus orderStatus) {
     log.info("[findOrderMenu] orderStatus : {}", orderStatus);
-    return orderStatus != null ? orderMenuJpaEntity.orderJpaEntity.orderStatus.eq(
-        OrderStatus.ONGOING) : null;
+    return orderStatus != null ? orderMenuJpaEntity.orderJpaEntity.orderStatus.eq(orderStatus): null;
   }
 }
