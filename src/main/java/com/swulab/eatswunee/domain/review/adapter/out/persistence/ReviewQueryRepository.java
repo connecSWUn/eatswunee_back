@@ -1,12 +1,15 @@
 package com.swulab.eatswunee.domain.review.adapter.out.persistence;
 
+import static com.swulab.eatswunee.domain.menu.adapter.out.persistence.jpa.model.QMenuJpaEntity.menuJpaEntity;
 import static com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.model.QOrderMenuJpaEntity.orderMenuJpaEntity;
+import static com.swulab.eatswunee.domain.restaurant.adapter.out.persistence.jpa.model.QRestaurantJpaEntity.restaurantJpaEntity;
 import static com.swulab.eatswunee.domain.review.adapter.out.persistence.jpa.model.QReviewJpaEntity.reviewJpaEntity;
 import static com.swulab.eatswunee.domain.user.adapter.out.persistence.jpa.model.QUserJpaEntity.userJpaEntity;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.swulab.eatswunee.domain.review.application.port.out.command.FindUserReviewCommand;
 import com.swulab.eatswunee.domain.review.application.port.out.command.ReviewAndUserCommand;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -60,6 +63,29 @@ public class ReviewQueryRepository {
         .join(reviewJpaEntity.orderMenuEntity, orderMenuJpaEntity)
         .where(
             eqOrderMenuId(orderMenuId)
+        )
+        .fetch();
+  }
+
+  public List<FindUserReviewCommand> findUserReviewListByUserId(Long userId) {
+
+    return queryFactory
+        .select(
+            Projections.constructor(FindUserReviewCommand.class,
+            reviewJpaEntity.reviewId,
+            reviewJpaEntity.menuJpaEntity.restaurantJpaEntity.name.as("restaurantName"),
+            reviewJpaEntity.menuJpaEntity.name.as("menuName"),
+            reviewJpaEntity.reviewImg,
+            reviewJpaEntity.score.as("reviewRating"),
+            reviewJpaEntity.content.as("reviewContent"),
+            reviewJpaEntity.createdAt.as("reviewCreatedAt"))
+        )
+        .from(reviewJpaEntity)
+        .join(reviewJpaEntity.userJpaEntity, userJpaEntity)
+        .join(reviewJpaEntity.menuJpaEntity, menuJpaEntity)
+        .join(menuJpaEntity.restaurantJpaEntity, restaurantJpaEntity)
+        .where(
+            reviewJpaEntity.userJpaEntity.userId.eq(userId)
         )
         .fetch();
   }

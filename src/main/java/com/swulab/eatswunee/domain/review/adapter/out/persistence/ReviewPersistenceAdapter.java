@@ -3,6 +3,8 @@ package com.swulab.eatswunee.domain.review.adapter.out.persistence;
 import com.swulab.eatswunee.domain.review.application.port.out.FindReviewByOrderMenuIdPort;
 import com.swulab.eatswunee.domain.review.application.port.out.FindReviewListByMenuIdPort;
 import com.swulab.eatswunee.domain.review.application.port.out.FindReviewRatingByMenuIdPort;
+import com.swulab.eatswunee.domain.review.application.port.out.FindUserReviewListPort;
+import com.swulab.eatswunee.domain.review.application.port.out.command.FindUserReviewCommand;
 import com.swulab.eatswunee.domain.review.application.port.out.command.ReviewAndUserCommand;
 import com.swulab.eatswunee.domain.review.domain.model.Review;
 import java.util.List;
@@ -12,8 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class ReviewPersistenceAdapter implements FindReviewRatingByMenuIdPort,
-    FindReviewListByMenuIdPort, FindReviewByOrderMenuIdPort {
-
+    FindReviewListByMenuIdPort, FindReviewByOrderMenuIdPort, FindUserReviewListPort {
   private final ReviewQueryRepository reviewQueryRepository;
   private final ReviewMapper reviewMapper;
 
@@ -39,5 +40,10 @@ public class ReviewPersistenceAdapter implements FindReviewRatingByMenuIdPort,
     }else {
       return true;
     }
+  }
+
+  @Override
+  public List<FindUserReviewCommand> findUserReviewList(Long userId) {
+    return reviewQueryRepository.findUserReviewListByUserId(userId);
   }
 }
