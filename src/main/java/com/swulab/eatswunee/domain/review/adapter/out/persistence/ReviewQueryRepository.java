@@ -1,5 +1,6 @@
 package com.swulab.eatswunee.domain.review.adapter.out.persistence;
 
+import static com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.model.QOrderMenuJpaEntity.orderMenuJpaEntity;
 import static com.swulab.eatswunee.domain.review.adapter.out.persistence.jpa.model.QReviewJpaEntity.reviewJpaEntity;
 import static com.swulab.eatswunee.domain.user.adapter.out.persistence.jpa.model.QUserJpaEntity.userJpaEntity;
 
@@ -49,9 +50,28 @@ public class ReviewQueryRepository {
         .fetch();
   }
 
+  public List<Long> findReviewByOrderMenuId(Long orderMenuId) {
+
+    return queryFactory
+        .select(
+            reviewJpaEntity.orderMenuEntity.orderMenuId
+        )
+        .from(reviewJpaEntity)
+        .join(reviewJpaEntity.orderMenuEntity, orderMenuJpaEntity)
+        .where(
+            eqOrderMenuId(orderMenuId)
+        )
+        .fetch();
+  }
+
   private BooleanExpression eqMenuId(Long menuId) {
     log.info("[findMenuRatingByMenuId] menuId : {}", menuId);
     return menuId != null ? reviewJpaEntity.menuJpaEntity.menuId.eq(menuId) : null;
+  }
+
+  private BooleanExpression eqOrderMenuId(Long orderMenuId) {
+    log.info("[findReviewByOrderMenuId] orderMenuId : {}", orderMenuId);
+    return orderMenuId != null ? reviewJpaEntity.orderMenuEntity.orderMenuId.eq(orderMenuId) : null;
   }
 
 
