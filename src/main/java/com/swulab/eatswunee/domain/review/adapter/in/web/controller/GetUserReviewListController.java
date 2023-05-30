@@ -4,6 +4,7 @@ import com.swulab.eatswunee.domain.review.adapter.in.web.dto.response.GetUserRev
 import com.swulab.eatswunee.domain.review.application.port.in.GetUserReviewListUseCase;
 import com.swulab.eatswunee.domain.review.application.port.in.command.GetUserReviewCommand;
 import com.swulab.eatswunee.global.common.adapter.web.in.dto.SuccessResponse;
+import com.swulab.eatswunee.global.common.applicatioin.port.in.GetImageUrlUseCase;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class GetUserReviewListController {
 
   private final GetUserReviewListUseCase getUserReviewListUseCase;
+  private final GetImageUrlUseCase getImageUrlUseCase;
 
   @GetMapping("/mypage/reviews/{userId}")
   public ResponseEntity getUserReviewList(@PathVariable Long userId) {
 
-    List<GetUserReviewCommand> command = getUserReviewListUseCase.getUserReviewList(userId);
-    GetUserReviewListResponse response = new GetUserReviewListResponse(command);
+    List<GetUserReviewCommand> commands = getUserReviewListUseCase.getUserReviewList(userId);
+    commands.stream().forEach(command -> command.mapToUrl(getImageUrlUseCase.getImageUrl(command.getReviewImageUrl())));
+    GetUserReviewListResponse response = new GetUserReviewListResponse(commands);
 
     return ResponseEntity.ok(SuccessResponse.create200SuccessResponse(response));
   }

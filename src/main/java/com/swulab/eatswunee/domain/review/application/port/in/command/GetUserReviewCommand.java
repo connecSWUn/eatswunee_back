@@ -25,4 +25,8 @@ public class GetUserReviewCommand {
     this.reviewContent = command.getReviewContent();
     this.reviewCreatedAt = command.getReviewCreatedAt();
   }
+
+  public void mapToUrl(String url) {
+    this.reviewImageUrl = url;
+  }
 }
