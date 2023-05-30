@@ -1,6 +1,5 @@
 package com.swulab.eatswunee.domain.recruit.application.service;
 
-import com.swulab.eatswunee.domain.recruit.adapter.in.web.dto.request.AddRecruitRequest;
 import com.swulab.eatswunee.domain.recruit.application.port.in.AddRecruitUseCase;
 import com.swulab.eatswunee.domain.recruit.application.port.in.command.AddRecruitCommand;
 import com.swulab.eatswunee.domain.recruit.application.port.out.SaveRecruitPort;
