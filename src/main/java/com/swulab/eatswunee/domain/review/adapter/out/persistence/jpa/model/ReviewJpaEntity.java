@@ -1,6 +1,7 @@
 package com.swulab.eatswunee.domain.review.adapter.out.persistence.jpa.model;
 
 import com.swulab.eatswunee.domain.menu.adapter.out.persistence.jpa.model.MenuJpaEntity;
+import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.model.OrderMenuJpaEntity;
 import com.swulab.eatswunee.domain.user.adapter.out.persistence.jpa.model.UserJpaEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
@@ -47,6 +49,10 @@ public class ReviewJpaEntity {
   @ManyToOne
   @JoinColumn(name = "menu_id")
   private MenuJpaEntity menuJpaEntity;
+
+  @OneToOne
+  @JoinColumn(name = "order_menu_id")
+  private OrderMenuJpaEntity orderMenuEntity;
 
   @Builder
   public ReviewJpaEntity(Long reviewId, int score, String title, String content,
