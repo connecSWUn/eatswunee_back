@@ -19,7 +19,6 @@ public class OrderMenuMapper {
     return OrderMenu.builder()
         .orderMenuId(orderMenuJpaEntity.getOrderMenuId())
         .menuCnt(orderMenuJpaEntity.getMenuCnt())
-//        .orderPrice(orderMenuJpaEntity.getOrderPrice())
         .menu(menuMapper.mapToDomainEntity(orderMenuJpaEntity.getMenuJpaEntity()))
         .order(orderMapper.mapToDomainEntity(orderMenuJpaEntity.getOrderJpaEntity()))
         .build();
