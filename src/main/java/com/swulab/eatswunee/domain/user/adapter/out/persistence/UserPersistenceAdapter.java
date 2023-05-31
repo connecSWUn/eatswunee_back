@@ -1,6 +1,7 @@
 package com.swulab.eatswunee.domain.user.adapter.out.persistence;
 
 import com.swulab.eatswunee.domain.user.adapter.out.persistence.jpa.model.UserJpaEntity;
+import com.swulab.eatswunee.domain.user.application.port.out.FindCheckNicknamePort;
 import com.swulab.eatswunee.domain.user.application.port.out.FindUserPort;
 import com.swulab.eatswunee.domain.user.application.port.out.SaveUserPort;
 import com.swulab.eatswunee.domain.user.domain.model.User;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class UserPersistenceAdapter implements FindUserPort, SaveUserPort {
+public class UserPersistenceAdapter implements FindUserPort, SaveUserPort, FindCheckNicknamePort {
 
   private final UserJpaRepository userJpaRepository;
   private final UserMapper userMapper;
@@ -39,5 +40,10 @@ public class UserPersistenceAdapter implements FindUserPort, SaveUserPort {
   @Override
   public Long saveUser(User user) {
     return userJpaRepository.save(userMapper.mapToJpaEntity(user)).getUserId();
+  }
+
+  @Override
+  public Boolean findCheckNicknamePort(String nickname) {
+    return userJpaRepository.existsByName(nickname);
   }
 }

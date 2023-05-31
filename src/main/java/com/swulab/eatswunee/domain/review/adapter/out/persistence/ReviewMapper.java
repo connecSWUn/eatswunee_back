@@ -1,6 +1,7 @@
 package com.swulab.eatswunee.domain.review.adapter.out.persistence;
 
 import com.swulab.eatswunee.domain.menu.adapter.out.persistence.MenuMapper;
+import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.OrderMenuMapper;
 import com.swulab.eatswunee.domain.review.adapter.out.persistence.jpa.model.ReviewJpaEntity;
 import com.swulab.eatswunee.domain.review.application.port.out.command.ReviewAndUserCommand;
 import com.swulab.eatswunee.domain.review.domain.model.Review;
@@ -15,6 +16,7 @@ public class ReviewMapper {
 
   private final UserMapper userMapper;
   private final MenuMapper menuMapper;
+  private final OrderMenuMapper orderMenuMapper;
 
   public Review mapToDomainEntity(ReviewJpaEntity reviewJpaEntity) {
     return Review.builder()
@@ -27,6 +29,7 @@ public class ReviewMapper {
         .reviewImg(reviewJpaEntity.getReviewImg())
         .user(userMapper.mapToDomainEntity(reviewJpaEntity.getUserJpaEntity()))
         .menu(menuMapper.mapToDomainEntity(reviewJpaEntity.getMenuJpaEntity()))
+        .orderMenu(orderMenuMapper.mapToDomainEntity(reviewJpaEntity.getOrderMenuEntity()))
         .build();
   }
 
@@ -41,6 +44,7 @@ public class ReviewMapper {
         .reviewImg(review.getReviewImg())
         .userJpaEntity(userMapper.mapToJpaEntity(review.getUser()))
         .menuJpaEntity(menuMapper.mapToJpaEntity(review.getMenu()))
+        .orderMenuEntity(orderMenuMapper.mapToJpaEntity(review.getOrderMenu()))
         .build();
   }
 

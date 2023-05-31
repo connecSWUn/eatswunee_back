@@ -7,6 +7,7 @@ import com.swulab.eatswunee.domain.review.application.port.out.FindReviewListByM
 import com.swulab.eatswunee.domain.review.application.port.out.FindReviewRatingByMenuIdPort;
 import com.swulab.eatswunee.domain.review.application.port.out.FindUserReviewListPort;
 import com.swulab.eatswunee.domain.review.application.port.out.RemoveReviewPort;
+import com.swulab.eatswunee.domain.review.application.port.out.SaveReviewPort;
 import com.swulab.eatswunee.domain.review.application.port.out.command.FindUserReviewCommand;
 import com.swulab.eatswunee.domain.review.application.port.out.command.ReviewAndUserCommand;
 import com.swulab.eatswunee.domain.review.domain.model.Review;
@@ -20,7 +21,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ReviewPersistenceAdapter implements FindReviewRatingByMenuIdPort,
     FindReviewListByMenuIdPort, FindReviewByOrderMenuIdPort, FindUserReviewListPort,
-    RemoveReviewPort {
+    RemoveReviewPort, SaveReviewPort 
+    {
   private final ReviewQueryRepository reviewQueryRepository;
   private final ReviewMapper reviewMapper;
   private final ReviewJpaRepository reviewJpaRepository;
@@ -56,11 +58,17 @@ public class ReviewPersistenceAdapter implements FindReviewRatingByMenuIdPort,
 
   @Override
   public void removeReview(Long reviewId) {
-
     ReviewJpaEntity reviewJpaEntity = reviewJpaRepository.findById(reviewId)
         .orElseThrow(() -> new ReviewNotFoundException(ErrorCode.REVIEW_NOT_FOUND,
             "[reviewId] : " + reviewId + " 존재하지 않습니다."));
 
     reviewJpaRepository.delete(reviewJpaEntity);
+    }
+
+  public Long saveReview(Review review) {
+    ReviewJpaEntity reviewJpaEntity = reviewMapper.mapToJpaEntity(review);
+    ReviewJpaEntity savedReviewJpaEntity = reviewJpaRepository.save(reviewJpaEntity);
+    return savedReviewJpaEntity.getReviewId();
+
   }
 }

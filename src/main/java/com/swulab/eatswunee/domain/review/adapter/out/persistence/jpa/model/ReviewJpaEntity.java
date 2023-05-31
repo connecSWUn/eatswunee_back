@@ -58,7 +58,8 @@ public class ReviewJpaEntity {
   public ReviewJpaEntity(Long reviewId, int score, String title, String content,
       LocalDateTime createdAt, LocalDateTime editedAt, String reviewImg,
       UserJpaEntity userJpaEntity,
-      MenuJpaEntity menuJpaEntity) {
+      MenuJpaEntity menuJpaEntity,
+      OrderMenuJpaEntity orderMenuEntity) {
     this.reviewId = reviewId;
     this.score = score;
     this.title = title;
@@ -68,5 +69,6 @@ public class ReviewJpaEntity {
     this.reviewImg = reviewImg;
     this.userJpaEntity = userJpaEntity;
     this.menuJpaEntity = menuJpaEntity;
+    this.orderMenuEntity = orderMenuEntity;
   }
 }

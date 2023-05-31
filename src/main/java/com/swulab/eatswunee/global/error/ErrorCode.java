@@ -22,7 +22,10 @@ public enum ErrorCode {
   REVIEW_NOT_FOUND("존재하지 않는 리뷰", 404, -404, "주어진 리뷰가 존재하지 않습니다."),
 
   // 주문
-  ORDER_NOT_FOUND("존재하지 않는 주문", 404, -404, "주어진 주문이 존재하지 않습니다.");
+  ORDER_NOT_FOUND("존재하지 않는 주문", 404, -404, "주어진 주문이 존재하지 않습니다."),
+
+  //주문 메뉴
+  ORDER_MENU_NOT_FOUND("존재하지 않는 메뉴 주문", 404, -404, "주어진 주문 메뉴가 존재하지 않습니다.");
 
 
 //  private final String type;

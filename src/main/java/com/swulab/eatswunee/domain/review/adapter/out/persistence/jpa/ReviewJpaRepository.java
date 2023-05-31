@@ -5,4 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ReviewJpaRepository extends JpaRepository<ReviewJpaEntity, Long> {
 
+  @Override
+  <S extends ReviewJpaEntity> S save(S entity);
+
 }
