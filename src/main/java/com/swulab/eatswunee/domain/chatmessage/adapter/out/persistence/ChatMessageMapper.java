@@ -5,8 +5,10 @@ import com.swulab.eatswunee.domain.chatmessage.domain.model.ChatMessage;
 import com.swulab.eatswunee.domain.chatroom.adapter.out.persistence.ChatRoomMapper;
 import com.swulab.eatswunee.domain.user.adapter.out.persistence.UserMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
+@Component
 public class ChatMessageMapper {
 
   private final UserMapper userMapper;
