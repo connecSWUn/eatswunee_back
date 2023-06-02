@@ -1,4 +1,4 @@
-package com.swulab.eatswunee.global.common.applicatioin.port.in;
+package com.swulab.eatswunee.global.common.application.service;
 
 public interface GetImageUrlUseCase {
 
