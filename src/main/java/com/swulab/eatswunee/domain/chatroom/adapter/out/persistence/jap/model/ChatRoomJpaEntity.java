@@ -3,8 +3,6 @@ package com.swulab.eatswunee.domain.chatroom.adapter.out.persistence.jap.model;
 import com.swulab.eatswunee.domain.recruit.adapter.out.persistence.jpa.model.RecruitJpaEntity;
 import com.swulab.eatswunee.domain.user.adapter.out.persistence.jpa.model.UserJpaEntity;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

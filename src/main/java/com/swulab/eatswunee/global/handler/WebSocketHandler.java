@@ -3,7 +3,6 @@ package com.swulab.eatswunee.global.handler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.swulab.eatswunee.domain.chatmessage.application.port.out.SaveChatMessagePort;
 import com.swulab.eatswunee.domain.chatmessage.domain.model.ChatMessage;
-import com.swulab.eatswunee.domain.chatmessage.domain.model.ChatMessage.ChatMessageBuilder;
 import com.swulab.eatswunee.domain.chatroom.application.port.in.FindChatRoomPort;
 import com.swulab.eatswunee.domain.chatroom.application.service.ChatService;
 import com.swulab.eatswunee.domain.chatroom.domain.model.ChatRoom;
@@ -38,7 +37,6 @@ public class WebSocketHandler extends TextWebSocketHandler { // TextWebSocketHan
 
 
     ChatMessage chatMessage = ChatMessage.builder()
-        .chatMessageId(chatMessageBasic.getChatRoomId())
         .message(chatMessageBasic.getMessage())
         .isRead(false)
         .type(chatMessageBasic.getMessageType())

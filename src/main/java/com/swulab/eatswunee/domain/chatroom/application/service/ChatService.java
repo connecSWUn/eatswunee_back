@@ -8,8 +8,11 @@ import com.swulab.eatswunee.domain.recruit.application.port.out.FindRecruitPort;
 import com.swulab.eatswunee.domain.recruit.domain.model.Recruit;
 import com.swulab.eatswunee.domain.user.application.port.out.FindUserPort;
 import com.swulab.eatswunee.domain.user.domain.model.User;
+import jakarta.annotation.PostConstruct;
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,56 +24,48 @@ import org.springframework.web.socket.WebSocketSession;
 @Service
 public class ChatService {
   private final ObjectMapper objectMapper;
-//  private Map<Long, ChatRoom> chatRooms; // chatId를 key로 갖고 ChatRoom을 value로 갖는 Map
+  private Map<Long, ChatRoom> chatRooms; // chatId를 key로 갖고 ChatRoom을 value로 갖는 Map
   private final FindRecruitPort findRecruitPort;
   private final FindChatRoomPort findChatRoomPort;
   private final SaveChatRoomPort saveChatRoomPort;
   private final FindUserPort findUserPort;
 
+  @PostConstruct
+  private void init() {
+    chatRooms = new LinkedHashMap<>();
+  }
 
   public List<ChatRoom> findAllRoom() {
+
     List<ChatRoom> allChatRooms = findChatRoomPort.findAllChatRooms();
     return allChatRooms;
   }
 
   public ChatRoom findRoomById(Long roomId) {
     ChatRoom findChatRoom = findChatRoomPort.findChatRoomById(roomId);
-    return findChatRoom;
+    return chatRooms.get(roomId);
   }
 
-  // OK
   public ChatRoom createRoom(Long userId, Long recruitId) { // userId : 채팅 신청한 사람
 
-    // 채팅방 아이디 : userId + recruitId
-    Long chatRoomId = Long.parseLong(userId.toString() + recruitId.toString()); // 채팅방 아이디 생성
-
-    log.info("[createRoom] ChatRoomId : {}", chatRoomId);
-
+    Long chatRoomId = Long.parseLong(userId.toString() + "0" + recruitId.toString()); // 채팅방 아이디 생성
     Recruit recruit = findRecruitPort.findRecruit(recruitId); // 모집 게시글 아이디 찾기
     User user = findUserPort.findUser(userId);
 
     ChatRoom chatRoom = ChatRoom.builder() // 채팅방 만들기
         .chatRoomId(chatRoomId)
-        .recruit(recruit) // TODO 사용자도 넣어야 하나?
+        .recruit(recruit)
         .user(user)
         .build();
 
-
-
     saveChatRoomPort.saveChatRoom(chatRoom); // 채팅방 저장
 
-    // 세션도 하나 만들어야함 -> 모집 게시글 올린 사람의..
-
-    recruit.getUser().getUserId();
-//    chatRooms.put(chatRoomId, chatRoom); //Rooms 에 추가
-
+    chatRooms.put(chatRoomId, chatRoom);
     return chatRoom;
   }
 
-  // TALK 상태일 경우 실행
   public <T> void sendMessage(WebSocketSession session, T message) {
     try{
-      // 해당 메시지를 WebSocket Session 에 보냄
       session.sendMessage(new TextMessage(objectMapper.writeValueAsString(message)));
     } catch (IOException e) {
       log.error(e.getMessage(), e);
