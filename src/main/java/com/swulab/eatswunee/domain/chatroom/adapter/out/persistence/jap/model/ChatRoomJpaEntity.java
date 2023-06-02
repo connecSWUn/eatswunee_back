@@ -22,7 +22,7 @@ import org.hibernate.annotations.CreationTimestamp;
 @Getter
 public class ChatRoomJpaEntity {
 
-  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id
   private Long chatRoomId;
 
   @CreationTimestamp
