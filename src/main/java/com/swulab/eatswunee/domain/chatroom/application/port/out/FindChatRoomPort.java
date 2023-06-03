@@ -1,4 +1,4 @@
-package com.swulab.eatswunee.domain.chatroom.application.port.in;
+package com.swulab.eatswunee.domain.chatroom.application.port.out;
 
 import com.swulab.eatswunee.domain.chatroom.domain.model.ChatRoom;
 import java.util.List;

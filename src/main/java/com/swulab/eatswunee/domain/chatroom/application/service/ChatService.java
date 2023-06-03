@@ -1,8 +1,8 @@
 package com.swulab.eatswunee.domain.chatroom.application.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.swulab.eatswunee.domain.chatroom.application.port.in.FindChatRoomPort;
-import com.swulab.eatswunee.domain.chatroom.application.port.in.SaveChatRoomPort;
+import com.swulab.eatswunee.domain.chatroom.application.port.out.FindChatRoomPort;
+import com.swulab.eatswunee.domain.chatroom.application.port.out.SaveChatRoomPort;
 import com.swulab.eatswunee.domain.chatroom.domain.model.ChatRoom;
 import com.swulab.eatswunee.domain.recruit.application.port.out.FindRecruitPort;
 import com.swulab.eatswunee.domain.recruit.domain.model.Recruit;

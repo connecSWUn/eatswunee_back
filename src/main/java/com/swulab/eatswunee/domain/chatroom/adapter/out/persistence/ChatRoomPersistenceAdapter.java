@@ -2,8 +2,8 @@ package com.swulab.eatswunee.domain.chatroom.adapter.out.persistence;
 
 import com.swulab.eatswunee.domain.chatroom.adapter.out.persistence.jap.ChatRoomJpaRepository;
 import com.swulab.eatswunee.domain.chatroom.adapter.out.persistence.jap.model.ChatRoomJpaEntity;
-import com.swulab.eatswunee.domain.chatroom.application.port.in.FindChatRoomPort;
-import com.swulab.eatswunee.domain.chatroom.application.port.in.SaveChatRoomPort;
+import com.swulab.eatswunee.domain.chatroom.application.port.out.FindChatRoomPort;
+import com.swulab.eatswunee.domain.chatroom.application.port.out.SaveChatRoomPort;
 import com.swulab.eatswunee.domain.chatroom.domain.model.ChatRoom;
 import com.swulab.eatswunee.domain.chatroom.exception.NotFoundChatRoomException;
 import com.swulab.eatswunee.global.error.ErrorCode;
