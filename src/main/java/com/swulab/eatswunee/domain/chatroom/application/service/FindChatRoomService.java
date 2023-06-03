@@ -31,8 +31,7 @@ public class FindChatRoomService implements FindChatRoomUseCase {
 
   @Override
   public ChatRoom findRoomById(Long roomId) {
-    ChatRoom findChatRoom = findChatRoomPort.findChatRoomById(roomId);
 
-    return chatRooms.get(roomId);
+    return findChatRoomPort.findChatRoomById(roomId);
   }
 }
