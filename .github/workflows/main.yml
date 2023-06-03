@@ -30,17 +30,19 @@ jobs:
       with:
         java-version: '17' 
         distribution: 'temurin' 
-        
+    - name: pwdd
+      run: pwd
+      
     - name: Create file
       run: |
-        mkdir src/main/resources/firebase
-        touch src/main/resource/eatswunee/firebase/swulab-firebase-adminsdk.json
+        mkdir /home/runner/work/eatswunee_back/eatswunee_back/app/src/firebase
+        cat /home/runner/work/eatswunee_back/eatswunee_back/app/src/firebase/swulab-firebase-adminsdk.json | Base64
       shell: bash
       
     - name: Putting data
       env:
         DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
-      run: echo $DATA > src/main/resource/eatswunee/firebase/swulab-firebase-adminsdk.json
+      run: echo $DATA > /home/runner/work/eatswunee_back/eatswunee_back/app/src/firebase/swulab-firebase-adminsdk.json
       
         
     - name: Grant execute permission for gradlew
