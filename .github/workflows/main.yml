@@ -33,10 +33,13 @@ jobs:
     - name: pwdd
       run: pwd
       
+    - name: ll
+      run: ls
+      
     - name: Create file
       run: |
-        mkdir /home/runner/work/eatswunee_back/eatswunee_back/app/src/firebase
-        cat /home/runner/work/eatswunee_back/eatswunee_back/app/src/firebase/swulab-firebase-adminsdk.json | Base64
+        mkdir /home/runner/work/eatswunee_back/eatswunee_back/src/firebase
+        cat /home/runner/work/eatswunee_back/eatswunee_back/src/firebase/swulab-firebase-adminsdk.json | Base64
       shell: bash
       
     - name: Putting data
