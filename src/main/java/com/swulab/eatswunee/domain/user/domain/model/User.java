@@ -19,15 +19,18 @@ public class User {
   @Enumerated(EnumType.STRING)
   private Role role;
 
+  private String fcmToken;
+
   @Builder
   public User(Long userId, String name, String profileUrl, String password, String loginId,
-      Role role) {
+      Role role, String fcmToken) {
     this.userId = userId;
     this.name = name;
     this.profileUrl = profileUrl;
     this.password = password;
     this.loginId = loginId;
     this.role = role;
+    this.fcmToken = fcmToken;
   }
 
 

@@ -32,14 +32,17 @@ public class UserJpaEntity {
   private String loginId;
   private String password;
 
+  private String fcmToken;
+
   @Builder
   public UserJpaEntity(Long userId, String name,
-      Role role, String profileUrl, String loginId, String password) {
+      Role role, String profileUrl, String loginId, String password, String fcmToken) {
     this.userId = userId;
     this.name = name;
     this.role = role;
     this.profileUrl = profileUrl;
     this.loginId = loginId;
     this.password = password;
+    this.fcmToken = fcmToken;
   }
 }
