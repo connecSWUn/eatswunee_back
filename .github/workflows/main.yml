@@ -30,6 +30,11 @@ jobs:
       with:
         java-version: '17' 
         distribution: 'temurin' 
+    
+    - name: Copy firebase-adminsdk
+      run: |
+        mkdir src/main/resources/firebase
+        cp /home/ubuntu/swulab/swulab-firebase-adminsdk.json src/main/resources/firebase/
         
     - name: Grant execute permission for gradlew
       run: chmod +x ./gradlew
