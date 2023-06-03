@@ -2,7 +2,6 @@ package com.swulab.eatswunee.domain.chatroom.application.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.swulab.eatswunee.domain.chatroom.application.port.in.AddChatRoomUseCase;
-import com.swulab.eatswunee.domain.chatroom.application.port.out.FindChatRoomPort;
 import com.swulab.eatswunee.domain.chatroom.application.port.out.SaveChatRoomPort;
 import com.swulab.eatswunee.domain.chatroom.domain.model.ChatRoom;
 import com.swulab.eatswunee.domain.recruit.application.port.out.FindRecruitPort;
@@ -12,7 +11,6 @@ import com.swulab.eatswunee.domain.user.domain.model.User;
 import jakarta.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,24 +26,12 @@ public class ChatService implements AddChatRoomUseCase {
   private final ObjectMapper objectMapper;
   private Map<Long, ChatRoom> chatRooms; // chatId를 key로 갖고 ChatRoom을 value로 갖는 Map
   private final FindRecruitPort findRecruitPort;
-  private final FindChatRoomPort findChatRoomPort;
   private final SaveChatRoomPort saveChatRoomPort;
   private final FindUserPort findUserPort;
 
   @PostConstruct
   private void init() {
     chatRooms = new LinkedHashMap<>();
-  }
-
-  public List<ChatRoom> findAllRoom() {
-
-    List<ChatRoom> allChatRooms = findChatRoomPort.findAllChatRooms();
-    return allChatRooms;
-  }
-
-  public ChatRoom findRoomById(Long roomId) {
-    ChatRoom findChatRoom = findChatRoomPort.findChatRoomById(roomId);
-    return chatRooms.get(roomId);
   }
 
   @Override

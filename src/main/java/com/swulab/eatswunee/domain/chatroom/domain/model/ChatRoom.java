@@ -20,7 +20,7 @@ public class ChatRoom {
   private User user;
   private Recruit recruit;
 
-  private Set<WebSocketSession> sessions = new HashSet<>(); // 세션(WebSocketSession)을 관리할 집함
+  private Set<WebSocketSession> sessions = new HashSet<>(); // 세션(WebSocketSession)을 관리할 집합
 
   @Builder
   public ChatRoom(Long chatRoomId, LocalDateTime createdAt,
