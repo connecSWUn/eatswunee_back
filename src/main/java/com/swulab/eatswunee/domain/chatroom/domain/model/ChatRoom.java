@@ -2,7 +2,7 @@ package com.swulab.eatswunee.domain.chatroom.domain.model;
 
 import com.swulab.eatswunee.domain.chatmessage.domain.model.ChatMessage;
 import com.swulab.eatswunee.domain.chatmessage.domain.model.MessageType;
-import com.swulab.eatswunee.domain.chatroom.application.service.ChatService;
+import com.swulab.eatswunee.domain.chatroom.application.service.AddChatService;
 import com.swulab.eatswunee.domain.recruit.domain.model.Recruit;
 import com.swulab.eatswunee.domain.user.domain.model.User;
 import java.time.LocalDateTime;
@@ -31,22 +31,22 @@ public class ChatRoom {
     this.recruit = recruit;
   }
 
-  public void handlerActions(WebSocketSession session, ChatMessage chatMessage, ChatService chatService) {
+  public void handlerActions(WebSocketSession session, ChatMessage chatMessage, AddChatService addChatService) {
     if (chatMessage.getType().equals(MessageType.ENTER)) {
 
       // TODO: 게시글 올린 사람에게 알림 보내기
       sessions.add(session);
       chatMessage.setMessage(chatMessage.getUser().getName() + "님이 입장했습니다."); // 입장 메시지 설정
     }
-    sendMessage(chatMessage, chatService); // 메시지 보냄
+    sendMessage(chatMessage, addChatService); // 메시지 보냄
 
   }
 
   // 메시지 보냄
-  private <T> void sendMessage(T message, ChatService chatService) {
+  private <T> void sendMessage(T message, AddChatService addChatService) {
     this.sessions.forEach(webSocketSession -> System.out.println(webSocketSession.getId()));
     sessions.parallelStream()
-        .forEach(session -> chatService.sendMessage(session, message));
+        .forEach(session -> addChatService.sendMessage(session, message));
   }
 
 }

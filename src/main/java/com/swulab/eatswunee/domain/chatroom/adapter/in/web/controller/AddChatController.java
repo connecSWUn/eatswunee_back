@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
-public class ChatController {
+public class AddChatController {
 
   private final AddChatRoomUseCase addChatRoomUseCase;
 

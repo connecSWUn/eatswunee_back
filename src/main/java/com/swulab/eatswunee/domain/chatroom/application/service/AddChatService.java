@@ -21,7 +21,7 @@ import org.springframework.web.socket.WebSocketSession;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class ChatService implements AddChatRoomUseCase {
+public class AddChatService implements AddChatRoomUseCase {
 
   private final ObjectMapper objectMapper;
   private Map<Long, ChatRoom> chatRooms; // chatId를 key로 갖고 ChatRoom을 value로 갖는 Map
