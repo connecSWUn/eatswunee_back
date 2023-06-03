@@ -36,16 +36,17 @@ jobs:
     - name: ll
       run: ls
       
-    - name: Create file
-      run: |
-        mkdir /home/runner/work/eatswunee_back/eatswunee_back/src/firebase
-        cat /home/runner/work/eatswunee_back/eatswunee_back/src/firebase/swulab-firebase-adminsdk.json | Base64
+    - name: Create dir
+      run: mkdir /home/runner/work/eatswunee_back/eatswunee_back/src/main/resources/firebase
       shell: bash
+      
+    - name: Create file
+      run: touch /home/runner/work/eatswunee_back/eatswunee_back/src/main/resources/firebase/swulab-firebase-adminsdk.json
       
     - name: Putting data
       env:
         DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
-      run: echo $DATA > /home/runner/work/eatswunee_back/eatswunee_back/app/src/firebase/swulab-firebase-adminsdk.json
+      run: echo $DATA > /home/runner/work/eatswunee_back/eatswunee_back/src/main/resources/firebase/swulab-firebase-adminsdk.json
       
         
     - name: Grant execute permission for gradlew
