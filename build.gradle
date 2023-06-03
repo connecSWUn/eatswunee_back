@@ -63,6 +63,16 @@ dependencies {
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
 	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+	// websocket
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+	// fcm
+	implementation 'com.google.firebase:firebase-admin:9.1.1'
+
+	// okhttp
+	implementation "com.squareup.okhttp3:okhttp:4.10.0"
+
 }
 
 ext {

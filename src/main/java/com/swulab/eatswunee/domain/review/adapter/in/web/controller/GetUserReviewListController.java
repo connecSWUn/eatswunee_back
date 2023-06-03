@@ -4,7 +4,7 @@ import com.swulab.eatswunee.domain.review.adapter.in.web.dto.response.GetUserRev
 import com.swulab.eatswunee.domain.review.application.port.in.GetUserReviewListUseCase;
 import com.swulab.eatswunee.domain.review.application.port.in.command.GetUserReviewCommand;
 import com.swulab.eatswunee.global.common.adapter.web.in.dto.SuccessResponse;
-import com.swulab.eatswunee.global.common.applicatioin.port.in.GetImageUrlUseCase;
+import com.swulab.eatswunee.global.common.application.service.GetImageUrlUseCase;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

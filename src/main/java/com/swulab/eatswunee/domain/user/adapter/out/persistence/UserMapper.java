@@ -15,6 +15,7 @@ public class UserMapper {
         .loginId(userJpaEntity.getLoginId())
         .password(userJpaEntity.getPassword())
         .profileUrl(userJpaEntity.getProfileUrl())
+        .fcmToken(userJpaEntity.getFcmToken())
         .build();
   }
 
@@ -26,6 +27,7 @@ public class UserMapper {
         .loginId(user.getLoginId())
         .password(user.getPassword())
         .profileUrl(user.getProfileUrl())
+        .fcmToken(user.getFcmToken())
         .build();
   }
 
