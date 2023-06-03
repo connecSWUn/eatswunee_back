@@ -4,7 +4,7 @@ import com.swulab.eatswunee.domain.user.adapter.in.web.dto.response.GetUserInfoR
 import com.swulab.eatswunee.domain.user.application.port.in.command.GetUserInfoCommand;
 import com.swulab.eatswunee.domain.user.application.port.in.GetUserInfoUseCase;
 import com.swulab.eatswunee.global.common.adapter.web.in.dto.SuccessResponse;
-import com.swulab.eatswunee.global.common.applicatioin.port.in.GetImageUrlUseCase;
+import com.swulab.eatswunee.global.common.application.port.in.GetImageUrlUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

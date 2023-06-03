@@ -4,7 +4,7 @@ import com.swulab.eatswunee.domain.menu.adapter.in.web.controller.dto.response.G
 import com.swulab.eatswunee.domain.menu.application.port.in.GetMenuReviewListUseCase;
 import com.swulab.eatswunee.domain.menu.application.port.in.command.GetMenuReviewListCommand;
 import com.swulab.eatswunee.global.common.adapter.web.in.dto.SuccessResponse;
-import com.swulab.eatswunee.global.common.application.service.GetImageUrlUseCase;
+import com.swulab.eatswunee.global.common.application.port.in.GetImageUrlUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
