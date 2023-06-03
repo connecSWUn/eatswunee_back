@@ -1,6 +1,7 @@
-package com.swulab.eatswunee.domain.chatroom.adapter.in.web;
+package com.swulab.eatswunee.domain.chatroom.adapter.in.web.controller;
 
 import com.swulab.eatswunee.domain.chatroom.adapter.in.dto.response.CreateRoomResponse;
+import com.swulab.eatswunee.domain.chatroom.application.port.in.AddChatRoomUseCase;
 import com.swulab.eatswunee.domain.chatroom.application.service.ChatService;
 import com.swulab.eatswunee.domain.chatroom.domain.model.ChatRoom;
 import com.swulab.eatswunee.global.common.adapter.web.in.dto.SuccessResponse;
@@ -16,12 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 public class ChatController {
-  private final ChatService chatService;
 
-  @GetMapping("/chat/{recruitId}")
+  private final ChatService chatService;
+  private final AddChatRoomUseCase addChatRoomUseCase;
+
+  @GetMapping("/chat/create/{recruitId}")
   public ResponseEntity createRoom(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long recruitId) {
     Long userId = Long.parseLong(userDetails.getUsername());
-    ChatRoom chatRoom = chatService.createRoom(userId, recruitId);
+    ChatRoom chatRoom = addChatRoomUseCase.createRoom(userId, recruitId);
     CreateRoomResponse response = new CreateRoomResponse(chatRoom.getChatRoomId());
     return ResponseEntity.ok(SuccessResponse.create201SuccessResponse(response));
   }
