@@ -35,7 +35,7 @@ jobs:
       run: mkdir src/main/resources/firebase
         
     - name: Create file
-      run: cat src/main/resource/eatswunee/firebase/swulab-firebase-adminsdk.json | base64
+      run: touch src/main/resource/eatswunee/firebase/swulab-firebase-adminsdk.json | base64
       
     - name: Putting data
       env:
