@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class GetMenuResponse {
 
   private Long menuId;
+  private String menuImg;
   private String RestaurantName;
   private String menuName;
   private int menuPrice;
@@ -18,6 +19,7 @@ public class GetMenuResponse {
 
   public GetMenuResponse(GetMenuCommand command) {
     this.menuId = command.getMenuId();
+    this.menuImg = command.getMenuImg();
     this.RestaurantName = command.getRestaurantName();
     this.menuName = command.getMenuName();
     this.menuPrice = command.getMenuPrice();
