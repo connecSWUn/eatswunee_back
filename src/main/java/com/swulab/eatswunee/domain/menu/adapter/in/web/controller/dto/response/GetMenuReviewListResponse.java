@@ -32,7 +32,6 @@ public class GetMenuReviewListResponse {
     this.menuImg = command.getMenuImg();
     this.menuAvgRating = command.getMenuAvgRating();
     this.reviewRating = new ReviewRating(command.getReviewRating());
-    List<ReviewCommand> reviews = command.getReviews();
     this.reviews = command.getReviews().stream().map(Review::new).toList();
   }
 
@@ -61,7 +60,7 @@ public class GetMenuReviewListResponse {
 
     private Long reviewId;
     private LocalDateTime createdAt;
-    private String reveiewContent;
+    private String reviewContent;
     private int menuRating;
     private List<String> reviewImgs = new ArrayList<>();
     private Writer writer;
@@ -69,7 +68,7 @@ public class GetMenuReviewListResponse {
     public Review(ReviewCommand command) {
       this.reviewId = command.getReviewId();
       this.createdAt = command.getCreatedAt();
-      this.reveiewContent = command.getContent();
+      this.reviewContent = command.getContent();
       this.menuRating = command.getScore();
       reviewImgs.add(command.getReviewImg());
       this.writer = new Writer(command.getUser());
