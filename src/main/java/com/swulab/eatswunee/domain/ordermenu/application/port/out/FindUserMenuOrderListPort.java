@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface FindUserMenuOrderListPort {
 
-  List<UserOrderMenuCommand> findUserMenuOrderList(Long orderId);
+  List<UserOrderMenuCommand> findUserMenuOrderList(Long userId);
 
 
 }
