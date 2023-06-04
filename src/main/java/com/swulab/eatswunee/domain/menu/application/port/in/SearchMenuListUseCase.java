@@ -4,6 +4,6 @@ import com.swulab.eatswunee.domain.menu.application.port.in.command.GetMenuListC
 
 public interface SearchMenuListUseCase {
 
-  GetMenuListCommand searchMenuList(Long restaurantId, String keyword);
+  GetMenuListCommand searchMenuList(Long restaurantId, String keyword, Long userId);
 
 }

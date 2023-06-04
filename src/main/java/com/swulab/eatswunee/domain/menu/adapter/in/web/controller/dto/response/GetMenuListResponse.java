@@ -3,6 +3,7 @@ package com.swulab.eatswunee.domain.menu.adapter.in.web.controller.dto.response;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.swulab.eatswunee.domain.menu.application.port.in.command.GetMenuListCommand;
 import com.swulab.eatswunee.domain.menu.application.port.out.command.FindMenuListCommand;
+import com.swulab.eatswunee.domain.order.application.port.out.command.FindNowOrderCommand;
 import com.swulab.eatswunee.domain.restaurant.domain.model.Restaurant;
 import com.swulab.eatswunee.global.config.AvgScoreSerializer;
 import java.util.List;
@@ -14,16 +15,32 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class GetMenuListResponse {
 
-
+  private List<NowOrderCommand> orders;
   private List<RestaurantCommand> restaurants;
   private List<MenuListCommand> menus;
 
 
   public GetMenuListResponse(GetMenuListCommand command) {
+    this.orders = command.getOrderCommandList().stream().map(NowOrderCommand::new).toList();
     this.restaurants = command.getRestaurantCommandList().stream().map(RestaurantCommand::new).toList();
     this.menus = command.getMenuCommandList().stream().map(MenuListCommand::new).toList();
   }
 
+  @Getter
+  @NoArgsConstructor(access = AccessLevel.PROTECTED)
+  private class NowOrderCommand {
+    private Long orderId;
+    private int orderNum;
+    private Long restaurantId;
+    private int expectedWaitingTime;
+
+    public NowOrderCommand(FindNowOrderCommand command) {
+      this.orderId = command.getOrderId();
+      this.orderNum = command.getOrderNum();
+      this.restaurantId = command.getRestaurantId();
+      this.expectedWaitingTime = command.getExpectedWaitingTime();
+    }
+  }
   @Getter
   @NoArgsConstructor
   private class RestaurantCommand {
