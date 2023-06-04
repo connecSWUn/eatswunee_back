@@ -38,8 +38,8 @@ public class OrderMenuPersistenceAdapter implements FindOrderMenuPort ,
 
 
   @Override
-  public List<UserOrderMenuCommand> findUserMenuOrderList(Long orderId) {
+  public List<UserOrderMenuCommand> findUserMenuOrderList(Long userId) {
 
-    return orderMenuQueryRepository.findUserOrderMenuList(orderId);
+    return orderMenuQueryRepository.findUserOrderMenuList(userId);
   }
 }

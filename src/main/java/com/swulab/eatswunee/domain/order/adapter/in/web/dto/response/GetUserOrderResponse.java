@@ -1,6 +1,5 @@
 package com.swulab.eatswunee.domain.order.adapter.in.web.dto.response;
 
-import com.swulab.eatswunee.domain.order.adapter.in.web.controller.coammnd.UserOrderCommand;
 import com.swulab.eatswunee.domain.order.adapter.in.web.controller.coammnd.UserOrderMenuCommand;
 import java.util.List;
 import lombok.AccessLevel;
@@ -11,10 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class GetUserOrderResponse {
 
-  List<UserOrderCommand> orders;
+  List<UserOrderMenuCommand> orders;
 
   public GetUserOrderResponse(
-      List<UserOrderCommand> orders) {
+      List<UserOrderMenuCommand> orders) {
     this.orders = orders;
   }
 }

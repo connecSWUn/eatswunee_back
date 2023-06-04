@@ -1,6 +1,6 @@
 package com.swulab.eatswunee.domain.ordermenu.adpater.in.web.controller;
 
-import com.swulab.eatswunee.domain.order.adapter.in.web.controller.coammnd.UserOrderCommand;
+import com.swulab.eatswunee.domain.order.adapter.in.web.controller.coammnd.UserOrderMenuCommand;
 import com.swulab.eatswunee.domain.order.adapter.in.web.dto.response.GetUserOrderResponse;
 import com.swulab.eatswunee.domain.order.application.port.in.GetOrderMenuUseCase;
 import com.swulab.eatswunee.global.common.adapter.web.in.dto.SuccessResponse;
@@ -18,10 +18,10 @@ public class GetUserOrderListController {
 
   public final GetOrderMenuUseCase getOrderMenuUseCase;
 
-  @GetMapping("/mypage/orders/{userId}")
+  @GetMapping("/mypage/orders")
   public ResponseEntity getOrderMenuResponse(@AuthenticationPrincipal UserDetails userDetails) {
 
-    List<UserOrderCommand> orderMenuList = getOrderMenuUseCase.getOrderMenuList(Long.parseLong(userDetails.getUsername()));
+    List<UserOrderMenuCommand> orderMenuList = getOrderMenuUseCase.getOrderMenuList(Long.parseLong(userDetails.getUsername()));
     GetUserOrderResponse response = new GetUserOrderResponse(orderMenuList);
     return ResponseEntity.ok(SuccessResponse.create200SuccessResponse(response));
   }
