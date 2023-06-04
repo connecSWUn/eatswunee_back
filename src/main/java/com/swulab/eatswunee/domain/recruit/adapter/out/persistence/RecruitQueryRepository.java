@@ -6,9 +6,9 @@ import static com.swulab.eatswunee.domain.user.adapter.out.persistence.jpa.model
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.swulab.eatswunee.domain.recruit.adapter.out.persistence.jpa.model.QRecruitJpaEntity;
 import com.swulab.eatswunee.domain.recruit.adapter.out.persistence.jpa.model.RecruitJpaEntity;
 import com.swulab.eatswunee.domain.recruit.domain.model.Recruit;
+import com.swulab.eatswunee.domain.recruit.domain.model.RecruitStatus;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -48,7 +48,7 @@ public class RecruitQueryRepository {
         .fetchOne());
   }
 
-  public List<Recruit> findRecruitListByUserId(Long userId) {
+  public List<Recruit> findRecruitListByUserId(Long userId, RecruitStatus recruitStatus) {
 
     return queryFactory
         .select(Projections.constructor(Recruit.class,
@@ -60,7 +60,10 @@ public class RecruitQueryRepository {
             recruitJpaEntity.startTime,
             recruitJpaEntity.endTime))
         .from(recruitJpaEntity)
-        .where(recruitJpaEntity.userJpaEntity.userId.eq(userId))
+        .where(
+            eqUserId(userId),
+            eqRecruitStatus(recruitStatus)
+        )
         .orderBy(recruitJpaEntity.createdAt.asc())
         .fetch();
   }
@@ -76,4 +79,15 @@ public class RecruitQueryRepository {
     return recruitId != null ? recruitJpaEntity.recruitId.eq(recruitId) : null;
   }
 
+  private BooleanExpression eqUserId(Long userId) {
+    log.info("user id: {}", userId);
+    return userId != null ? recruitJpaEntity.userJpaEntity.userId.eq(userId) : null;
+
+  }
+
+  private BooleanExpression eqRecruitStatus(RecruitStatus recruitStatus) {
+    log.info("recruitStatus : {}", recruitStatus);
+    return recruitStatus != null ? recruitJpaEntity.status.eq(recruitStatus) : null;
+
+  }
 }
