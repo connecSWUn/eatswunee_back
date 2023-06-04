@@ -4,6 +4,6 @@ import com.swulab.eatswunee.domain.menu.application.port.in.command.GetMenuListC
 
 public interface GetMenuListUseCase {
 
-  GetMenuListCommand getMenuList(Long restaurantId);
+  GetMenuListCommand getMenuList(Long restaurantId, Long userId);
 
 }
