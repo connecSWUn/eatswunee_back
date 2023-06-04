@@ -9,6 +9,7 @@ import com.swulab.eatswunee.domain.recruit.application.port.out.FindRecruitPort;
 import com.swulab.eatswunee.domain.recruit.application.port.out.FindRecruitsPortByUserIdPort;
 import com.swulab.eatswunee.domain.recruit.application.port.out.SaveRecruitPort;
 import com.swulab.eatswunee.domain.recruit.domain.model.Recruit;
+import com.swulab.eatswunee.domain.recruit.domain.model.RecruitStatus;
 import com.swulab.eatswunee.domain.recruit.exception.RecruitNotFoundException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -62,7 +63,7 @@ public class RecruitPersistenceAdapter implements FindRecruitListPort, FindRecru
   }
 
   @Override
-  public List<Recruit> findRecruitsPortByUserId(Long userId) {
-    return recruitQueryRepository.findRecruitListByUserId(userId);
+  public List<Recruit> findRecruitsPortByUserId(Long userId, RecruitStatus recruitStatus) {
+    return recruitQueryRepository.findRecruitListByUserId(userId, recruitStatus);
   }
 }

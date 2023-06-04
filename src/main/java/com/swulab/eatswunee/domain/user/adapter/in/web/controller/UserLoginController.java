@@ -19,8 +19,7 @@ public class UserLoginController {
   @PostMapping("/login/user")
   public ResponseEntity userLogin(@RequestBody UserLoginRequest userLoginRequest) {
 
-    TokenInfo tokenInfo = userLoginUsecase.userLogin(userLoginRequest.getLoginId(),
-        userLoginRequest.getPassword());
+    TokenInfo tokenInfo = userLoginUsecase.userLogin(userLoginRequest.getLoginId(), userLoginRequest.getPassword());
 
     return ResponseEntity.ok(SuccessResponse.create200SuccessResponse(tokenInfo));
   }

@@ -2,6 +2,7 @@ package com.swulab.eatswunee.domain.user.application.service;
 
 import com.swulab.eatswunee.domain.recruit.application.port.out.FindRecruitsPortByUserIdPort;
 import com.swulab.eatswunee.domain.recruit.domain.model.Recruit;
+import com.swulab.eatswunee.domain.recruit.domain.model.RecruitStatus;
 import com.swulab.eatswunee.domain.user.application.port.in.GetWriteListUseCase;
 import com.swulab.eatswunee.domain.user.application.port.out.FindUserPort;
 import com.swulab.eatswunee.domain.user.application.port.out.command.WriteListCommand;
@@ -18,9 +19,9 @@ public class GetWriteListService implements GetWriteListUseCase {
 
 
   @Override
-  public WriteListCommand getWriteList(Long userId) {
+  public WriteListCommand getWriteList(Long userId, RecruitStatus recruitStatus) {
     User user = findUserPort.findUser(userId);
-    List<Recruit> recruitList = findRecruitsPortByUserIdPort.findRecruitsPortByUserId(userId);
+    List<Recruit> recruitList = findRecruitsPortByUserIdPort.findRecruitsPortByUserId(userId, recruitStatus);
 
     return new WriteListCommand(user.getUserId(), user.getName(), user.getProfileUrl(), recruitList);
   }

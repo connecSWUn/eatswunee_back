@@ -1,5 +1,6 @@
 package com.swulab.eatswunee.domain.user.adapter.in.web.controller;
 
+import com.swulab.eatswunee.domain.recruit.domain.model.RecruitStatus;
 import com.swulab.eatswunee.domain.user.adapter.in.web.dto.response.GetWriteListResponse;
 import com.swulab.eatswunee.domain.user.application.port.in.GetWriteListUseCase;
 import com.swulab.eatswunee.domain.user.application.port.out.command.WriteListCommand;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -17,10 +19,11 @@ public class GetWriteListController {
 
   private final GetWriteListUseCase getWriteListUseCase;
 
-  @GetMapping("/recruit/writer")
-  public ResponseEntity getWriteList(@AuthenticationPrincipal UserDetails userDetails) {
+  @GetMapping("/recruit/writer/{recruitStatus}")
+  public ResponseEntity getWriteList(@AuthenticationPrincipal UserDetails userDetails, @PathVariable
+      RecruitStatus recruitStatus) {
 
-    WriteListCommand command = getWriteListUseCase.getWriteList(Long.parseLong(userDetails.getUsername()));
+    WriteListCommand command = getWriteListUseCase.getWriteList(Long.parseLong(userDetails.getUsername()), recruitStatus);
     GetWriteListResponse response = new GetWriteListResponse(command);
 
     return ResponseEntity.ok(SuccessResponse.create200SuccessResponse(response));
