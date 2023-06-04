@@ -16,7 +16,7 @@ public class AddRecruitRequest {
   @NotEmpty
   private String title;
 
-  private String spot;
+  private String recruit_spot;
 
   private LocalTime start_time;
 
@@ -26,23 +26,18 @@ public class AddRecruitRequest {
   @NotEmpty
   private String content;
 
-  @NotNull
-  @NotEmpty
-  private Long writer_id;
 
-
-  public AddRecruitRequest(String title, String spot, LocalTime start_time,
-      LocalTime end_time, String content, Long writer_id) {
+  public AddRecruitRequest(String title, String recruit_spot, LocalTime start_time,
+      LocalTime end_time, String content) {
     this.title = title;
-    this.spot = spot;
+    this.recruit_spot = recruit_spot;
     this.start_time = start_time;
     this.end_time = end_time;
     this.content = content;
-    this.writer_id = writer_id;
   }
 
-  public AddRecruitCommand toCommand() {
-      return new AddRecruitCommand(title, spot, start_time, end_time, content, writer_id);
+  public AddRecruitCommand toCommand(Long writer_id) {
+      return new AddRecruitCommand(title, recruit_spot, start_time, end_time, content, writer_id);
   }
 
 }
