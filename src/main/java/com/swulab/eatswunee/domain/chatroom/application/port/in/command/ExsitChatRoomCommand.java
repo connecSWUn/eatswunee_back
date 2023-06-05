@@ -6,11 +6,11 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class GetChatRoomCommand {
+public class ExsitChatRoomCommand {
 
   Boolean isExistChatRoom;
 
-  public GetChatRoomCommand(Boolean isExistChatRoom) {
+  public ExsitChatRoomCommand(Boolean isExistChatRoom) {
     this.isExistChatRoom = isExistChatRoom;
   }
 }

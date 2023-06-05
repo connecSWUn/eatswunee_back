@@ -1,8 +1,8 @@
 package com.swulab.eatswunee.domain.chatroom.adapter.in.web.controller;
 
-import com.swulab.eatswunee.domain.chatroom.adapter.in.dto.response.GetChatRoomResponse;
+import com.swulab.eatswunee.domain.chatroom.adapter.in.dto.response.ExistChatRoomResponse;
 import com.swulab.eatswunee.domain.chatroom.application.port.in.ExistChatRoomUseCase;
-import com.swulab.eatswunee.domain.chatroom.application.port.in.command.GetChatRoomCommand;
+import com.swulab.eatswunee.domain.chatroom.application.port.in.command.ExsitChatRoomCommand;
 import com.swulab.eatswunee.global.common.adapter.web.in.dto.SuccessResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +21,8 @@ public class CheckChatRoomController {
   @GetMapping("/chat/exist/{recruitId}")
   public ResponseEntity getChatRoom(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long recruitId) {
 
-    GetChatRoomCommand command = existChatRoomUseCase.getChatRoom(Long.parseLong(userDetails.getUsername()), recruitId);
-    GetChatRoomResponse response = new GetChatRoomResponse(command);
+    ExsitChatRoomCommand command = existChatRoomUseCase.getChatRoom(Long.parseLong(userDetails.getUsername()), recruitId);
+    ExistChatRoomResponse response = new ExistChatRoomResponse(command);
 
     return ResponseEntity.ok(SuccessResponse.create200SuccessResponse(response));
   }

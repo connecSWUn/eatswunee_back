@@ -1,9 +1,9 @@
 package com.swulab.eatswunee.domain.chatroom.application.port.in;
 
-import com.swulab.eatswunee.domain.chatroom.application.port.in.command.GetChatRoomCommand;
+import com.swulab.eatswunee.domain.chatroom.application.port.in.command.ExsitChatRoomCommand;
 
 public interface ExistChatRoomUseCase {
 
-  GetChatRoomCommand getChatRoom(Long userId, Long recruitId);
+  ExsitChatRoomCommand getChatRoom(Long userId, Long recruitId);
 
 }
