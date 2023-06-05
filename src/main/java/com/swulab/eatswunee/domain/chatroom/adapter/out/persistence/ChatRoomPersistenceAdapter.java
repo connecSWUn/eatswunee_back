@@ -2,6 +2,7 @@ package com.swulab.eatswunee.domain.chatroom.adapter.out.persistence;
 
 import com.swulab.eatswunee.domain.chatroom.adapter.out.persistence.jap.ChatRoomJpaRepository;
 import com.swulab.eatswunee.domain.chatroom.adapter.out.persistence.jap.model.ChatRoomJpaEntity;
+import com.swulab.eatswunee.domain.chatroom.application.port.out.ExistChatRoomPort;
 import com.swulab.eatswunee.domain.chatroom.application.port.out.FindChatRoomPort;
 import com.swulab.eatswunee.domain.chatroom.application.port.out.SaveChatRoomPort;
 import com.swulab.eatswunee.domain.chatroom.domain.model.ChatRoom;
@@ -15,7 +16,8 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class ChatRoomPersistenceAdapter implements FindChatRoomPort, SaveChatRoomPort {
+public class ChatRoomPersistenceAdapter implements FindChatRoomPort, SaveChatRoomPort,
+    ExistChatRoomPort {
 
   private final ChatRoomJpaRepository chatRoomJpaRepository;
   private final ChatRoomMapper chatRoomMapper;
@@ -44,5 +46,10 @@ public class ChatRoomPersistenceAdapter implements FindChatRoomPort, SaveChatRoo
 
     ChatRoomJpaEntity save = chatRoomJpaRepository.save(chatRoomJpaEntity);
     return save.getChatRoomId();
+  }
+
+  @Override
+  public Boolean existChatRoomByChatRoomId(Long chatRoomId) {
+    return chatRoomJpaRepository.existsById(chatRoomId);
   }
 }
