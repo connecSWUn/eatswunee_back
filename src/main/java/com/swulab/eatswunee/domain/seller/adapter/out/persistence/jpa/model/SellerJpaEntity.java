@@ -19,17 +19,30 @@ import lombok.NoArgsConstructor;
 @Getter
 public class SellerJpaEntity {
 
-  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long sellerId;
+
+  private String sellerName;
+  private String sellerProfileUrl;
+  private String sellerFcmToken;
+  private String LoginId;
+  private String password;
 
   @ManyToOne
   @JoinColumn(name = "restaurant_id")
   private RestaurantJpaEntity restaurantJpaEntity;
 
   @Builder
-  public SellerJpaEntity(Long sellerId,
+  public SellerJpaEntity(Long sellerId, String sellerName, String sellerProfileUrl,
+      String sellerFcmToken, String loginId, String password,
       RestaurantJpaEntity restaurantJpaEntity) {
     this.sellerId = sellerId;
+    this.sellerName = sellerName;
+    this.sellerProfileUrl = sellerProfileUrl;
+    this.sellerFcmToken = sellerFcmToken;
+    LoginId = loginId;
+    this.password = password;
     this.restaurantJpaEntity = restaurantJpaEntity;
   }
 }

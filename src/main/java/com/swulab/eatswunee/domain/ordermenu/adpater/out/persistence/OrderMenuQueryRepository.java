@@ -13,6 +13,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.swulab.eatswunee.domain.order.adapter.in.web.controller.coammnd.UserOrderMenuCommand;
 import com.swulab.eatswunee.domain.order.domain.model.OrderStatus;
 import com.swulab.eatswunee.domain.ordermenu.application.port.out.command.FindRestaurantOrderMenuCommand;
+import com.swulab.eatswunee.domain.ordermenu.application.port.out.command.RestaurantNowOrderListCommand;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -74,6 +75,30 @@ public class OrderMenuQueryRepository {
             eqUserId(userId),
             eqOrderStatus(OrderStatus.COMPLETE)
         ).fetch();
+  }
+
+  public List<RestaurantNowOrderListCommand> findRestaurantOrder(Long restaurantId) {
+    return jpaQueryFactory
+        .selectFrom(orderMenuJpaEntity)
+        .join(orderMenuJpaEntity.orderJpaEntity, orderJpaEntity)
+        .join(orderMenuJpaEntity.menuJpaEntity, menuJpaEntity)
+        .join(menuJpaEntity.restaurantJpaEntity, restaurantJpaEntity)
+        .where(
+            orderMenuJpaEntity.menuJpaEntity.restaurantJpaEntity.restaurantId.eq(restaurantId),
+            eqOrderStatus(OrderStatus.ONGOING)
+        ).transform(
+            groupBy(orderMenuJpaEntity.orderJpaEntity).list(
+                Projections.constructor(RestaurantNowOrderListCommand.class,
+                    orderMenuJpaEntity.orderJpaEntity.orderId,
+                    orderMenuJpaEntity.orderJpaEntity.orderNum,
+                    orderMenuJpaEntity.orderJpaEntity.orderCreatedAt,
+                    list(Projections.fields(
+                        RestaurantNowOrderListCommand.RestaurantOrderMenuCommand.class,
+                        orderMenuJpaEntity.menuJpaEntity.name.as("menuName"),
+                        orderMenuJpaEntity.menuCnt))
+                )
+            )
+        );
   }
 
 
