@@ -12,26 +12,27 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class FindChatRoomService implements FindChatRoomUseCase {
+public class FindChatRoomService {
 
-  private Map<Long, ChatRoom> chatRooms; // chatId를 key로 갖고 ChatRoom을 value로 갖는 Map
-  private final FindChatRoomPort findChatRoomPort;
-
-  @PostConstruct
-  private void init() {
-    chatRooms = new LinkedHashMap<>();
-  }
-
-  @Override
-  public List<ChatRoom> findAllRoom() {
-
-    List<ChatRoom> allChatRooms = findChatRoomPort.findAllChatRooms();
-    return allChatRooms;
-  }
-
-  @Override
-  public ChatRoom findRoomById(Long roomId) {
-
-    return findChatRoomPort.findChatRoomById(roomId);
-  }
+//  private Map<Long, ChatRoom> chatRooms; // chatId를 key로 갖고 ChatRoom을 value로 갖는 Map
+//  private final FindChatRoomPort findChatRoomPort;
+//
+//  @PostConstruct
+//  private void init() {
+//    chatRooms = new LinkedHashMap<>();
+//  }
+//
+//  @Override
+//  public List<ChatRoom> findAllRoom() {
+//
+//    List<ChatRoom> allChatRooms = findChatRoomPort.findAllChatRooms();
+//    return allChatRooms;
+//  }
+//
+//  @Override
+//  public ChatRoom findRoomById(Long roomId) {
+//    findChatRoomPort.findChatRoomById(roomId);
+//
+//    return chatRooms.get(roomId);
+//  }
 }
