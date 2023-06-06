@@ -3,6 +3,7 @@ package com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence;
 import com.swulab.eatswunee.domain.order.adapter.in.web.controller.coammnd.UserOrderMenuCommand;
 import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.OrderMenuJpaRepository;
 import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.model.OrderMenuJpaEntity;
+import com.swulab.eatswunee.domain.ordermenu.application.port.out.FindCompletedOrderListPort;
 import com.swulab.eatswunee.domain.ordermenu.application.port.out.FindNowOrderListPort;
 import com.swulab.eatswunee.domain.ordermenu.application.port.out.FindOrderMenuPort;
 import com.swulab.eatswunee.domain.ordermenu.application.port.out.FindUserMenuOrderListPort;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class OrderMenuPersistenceAdapter implements FindOrderMenuPort ,
-    FindUserMenuOrderListPort, FindNowOrderListPort {
+    FindUserMenuOrderListPort, FindNowOrderListPort, FindCompletedOrderListPort {
 
   private final OrderMenuQueryRepository orderMenuQueryRepository;
   private final OrderMenuJpaRepository orderMenuJpaRepository;
@@ -48,6 +49,11 @@ public class OrderMenuPersistenceAdapter implements FindOrderMenuPort ,
   public List<RestaurantNowOrderListCommand> findNowOrderList(Long restaurantId) {
 
     return orderMenuQueryRepository.findRestaurantOrder(restaurantId);
+  }
+
+  @Override
+  public List<RestaurantNowOrderListCommand> findCompletedOrderList(Long restaurantId) {
+    return orderMenuQueryRepository.findRestaurantCompletedOrder(restaurantId);
   }
 }
 

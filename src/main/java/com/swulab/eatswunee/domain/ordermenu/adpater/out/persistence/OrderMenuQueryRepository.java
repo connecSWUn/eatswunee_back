@@ -101,6 +101,30 @@ public class OrderMenuQueryRepository {
         );
   }
 
+  public List<RestaurantNowOrderListCommand> findRestaurantCompletedOrder(Long restaurantId) {
+    return jpaQueryFactory
+        .selectFrom(orderMenuJpaEntity)
+        .join(orderMenuJpaEntity.orderJpaEntity, orderJpaEntity)
+        .join(orderMenuJpaEntity.menuJpaEntity, menuJpaEntity)
+        .join(menuJpaEntity.restaurantJpaEntity, restaurantJpaEntity)
+        .where(
+            orderMenuJpaEntity.menuJpaEntity.restaurantJpaEntity.restaurantId.eq(restaurantId),
+            eqOrderStatus(OrderStatus.COMPLETE)
+        ).transform(
+            groupBy(orderMenuJpaEntity.orderJpaEntity).list(
+                Projections.constructor(RestaurantNowOrderListCommand.class,
+                    orderMenuJpaEntity.orderJpaEntity.orderId,
+                    orderMenuJpaEntity.orderJpaEntity.orderNum,
+                    orderMenuJpaEntity.orderJpaEntity.orderCreatedAt,
+                    list(Projections.fields(
+                        RestaurantNowOrderListCommand.RestaurantOrderMenuCommand.class,
+                        orderMenuJpaEntity.menuJpaEntity.name.as("menuName"),
+                        orderMenuJpaEntity.menuCnt))
+                )
+            )
+        );
+  }
+
 
   private BooleanExpression eqOrderId(Long orderId) {
     log.info("[findOrderMenu] orderId : {}", orderId);
