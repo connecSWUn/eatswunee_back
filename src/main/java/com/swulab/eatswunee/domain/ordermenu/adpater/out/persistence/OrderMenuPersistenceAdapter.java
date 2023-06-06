@@ -3,9 +3,11 @@ package com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence;
 import com.swulab.eatswunee.domain.order.adapter.in.web.controller.coammnd.UserOrderMenuCommand;
 import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.OrderMenuJpaRepository;
 import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.model.OrderMenuJpaEntity;
+import com.swulab.eatswunee.domain.ordermenu.application.port.out.FindNowOrderListPort;
 import com.swulab.eatswunee.domain.ordermenu.application.port.out.FindOrderMenuPort;
 import com.swulab.eatswunee.domain.ordermenu.application.port.out.FindUserMenuOrderListPort;
 import com.swulab.eatswunee.domain.ordermenu.application.port.out.command.FindRestaurantOrderMenuCommand;
+import com.swulab.eatswunee.domain.ordermenu.application.port.out.command.RestaurantNowOrderListCommand;
 import com.swulab.eatswunee.domain.ordermenu.domain.model.OrderMenu;
 import com.swulab.eatswunee.domain.review.exception.OrderMenuNotFoundException;
 import com.swulab.eatswunee.global.error.ErrorCode;
@@ -16,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class OrderMenuPersistenceAdapter implements FindOrderMenuPort ,
-    FindUserMenuOrderListPort {
+    FindUserMenuOrderListPort, FindNowOrderListPort {
 
   private final OrderMenuQueryRepository orderMenuQueryRepository;
   private final OrderMenuJpaRepository orderMenuJpaRepository;
@@ -36,10 +38,17 @@ public class OrderMenuPersistenceAdapter implements FindOrderMenuPort ,
     return orderMenuMapper.mapToDomainEntity(orderMenuJpaEntity);
   }
 
-
   @Override
   public List<UserOrderMenuCommand> findUserMenuOrderList(Long userId) {
 
     return orderMenuQueryRepository.findUserOrderMenuList(userId);
   }
+
+  @Override
+  public List<RestaurantNowOrderListCommand> findNowOrderList(Long restaurantId) {
+
+    return orderMenuQueryRepository.findRestaurantOrder(restaurantId);
+  }
 }
+
+
