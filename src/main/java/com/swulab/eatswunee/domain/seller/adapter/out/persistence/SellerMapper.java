@@ -4,8 +4,10 @@ import com.swulab.eatswunee.domain.restaurant.adapter.out.persistence.Restaurant
 import com.swulab.eatswunee.domain.seller.adapter.out.persistence.jpa.model.SellerJpaEntity;
 import com.swulab.eatswunee.domain.seller.domain.model.Seller;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
+@Component
 public class SellerMapper {
 
   private final RestaurantMapper restaurantMapper;
