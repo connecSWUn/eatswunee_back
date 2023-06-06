@@ -22,6 +22,7 @@ public class ChatRoom {
 
   private Set<WebSocketSession> sessions = new HashSet<>(); // 세션(WebSocketSession)을 관리할 집합
 
+
   @Builder
   public ChatRoom(Long chatRoomId, LocalDateTime createdAt,
       User user, Recruit recruit) {
@@ -38,6 +39,9 @@ public class ChatRoom {
       sessions.add(session);
       chatMessage.setMessage(chatMessage.getUser().getName() + "님이 입장했습니다."); // 입장 메시지 설정
     }
+    System.out.println("=======================");
+    sessions.forEach(System.out::println);
+    System.out.println("=======================");
     sendMessage(chatMessage, sendMessageUseCase); // 메시지 보냄
 
   }
