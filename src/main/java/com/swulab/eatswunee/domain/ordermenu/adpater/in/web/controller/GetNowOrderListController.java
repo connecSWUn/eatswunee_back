@@ -18,7 +18,7 @@ public class GetNowOrderListController {
 
   private final GetNowOrderListUseCase getNowOrderListUseCase;
 
-  @GetMapping("/restaurant/orders/{restaurantId}")
+  @GetMapping("/restaurant/order/ongoing/{restaurantId}")
   public ResponseEntity getNowOrderList(@PathVariable Long restaurantId) {
 
     List<RestaurantNowOrderListCommand> nowOrderList = getNowOrderListUseCase.getNowOrderList(restaurantId);
