@@ -28,7 +28,10 @@ public enum ErrorCode {
   ORDER_MENU_NOT_FOUND("존재하지 않는 메뉴 주문", 404, -404, "주어진 주문 메뉴가 존재하지 않습니다."),
 
   //채팅 방
-  CHATROOM_NOT_FOUND("존재하지 않는 채팅방", 404, -404, "주어진 채팅방이 존재하지 않습니다.");
+  CHATROOM_NOT_FOUND("존재하지 않는 채팅방", 404, -404, "주어진 채팅방이 존재하지 않습니다."),
+
+  //판매자
+  SELLER_NOT_FOUND("존재하지 않는 판매자", 404, -404, "주어진 판매자가 존재하지 않습니다.");
 
 
 //  private final String type;
