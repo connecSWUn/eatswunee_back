@@ -1,5 +1,7 @@
 package com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence;
 
+import static com.querydsl.core.group.GroupBy.groupBy;
+import static com.querydsl.core.group.GroupBy.list;
 import static com.swulab.eatswunee.domain.menu.adapter.out.persistence.jpa.model.QMenuJpaEntity.menuJpaEntity;
 import static com.swulab.eatswunee.domain.order.adapter.out.persistence.jpa.model.QOrderJpaEntity.orderJpaEntity;
 import static com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.model.QOrderMenuJpaEntity.orderMenuJpaEntity;
@@ -9,6 +11,7 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.swulab.eatswunee.domain.order.adapter.out.persistence.jpa.model.OrderJpaEntity;
 import com.swulab.eatswunee.domain.order.application.port.out.command.FindNowOrderCommand;
+import com.swulab.eatswunee.domain.order.application.port.out.command.FindRestaurantOrderListCommand;
 import com.swulab.eatswunee.domain.order.domain.model.OrderStatus;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +47,27 @@ public class OrderQueryRepository {
             orderJpaEntity.orderStatus.eq(OrderStatus.ONGOING)
         )
         .fetch();
+  }
+
+  public FindRestaurantOrderListCommand findRestaurantOrderList(Long orderId) {
+    return jpaQueryFactory
+        .selectFrom(orderMenuJpaEntity)
+        .join(orderMenuJpaEntity.orderJpaEntity, orderJpaEntity)
+        .join(orderMenuJpaEntity.menuJpaEntity, menuJpaEntity)
+        .where(
+            orderMenuJpaEntity.menuJpaEntity.restaurantJpaEntity.restaurantId.eq(orderId)
+        )
+        .transform(
+            groupBy(orderMenuJpaEntity.orderJpaEntity).list(
+                Projections.constructor(FindRestaurantOrderListCommand.class,
+                    orderMenuJpaEntity.orderJpaEntity.orderId,
+                    orderMenuJpaEntity.orderJpaEntity.orderNum,
+                    list(Projections.fields(FindRestaurantOrderListCommand.FindRestaurantOrderMenuCommand.class,
+                        orderMenuJpaEntity.menuJpaEntity.name.as("menuName"),
+                        orderMenuJpaEntity.menuCnt))
+                )
+            )
+        ).get(0);
   }
 
 

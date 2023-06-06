@@ -4,8 +4,10 @@ import com.swulab.eatswunee.domain.order.adapter.out.persistence.jpa.OrderJpaRep
 import com.swulab.eatswunee.domain.order.adapter.out.persistence.jpa.model.OrderJpaEntity;
 import com.swulab.eatswunee.domain.order.application.port.out.FindNowOrderPort;
 import com.swulab.eatswunee.domain.order.application.port.out.FindOrderPort;
+import com.swulab.eatswunee.domain.order.application.port.out.FindRestaurantOrderListPort;
 import com.swulab.eatswunee.domain.order.application.port.out.SaveOrderPort;
 import com.swulab.eatswunee.domain.order.application.port.out.command.FindNowOrderCommand;
+import com.swulab.eatswunee.domain.order.application.port.out.command.FindRestaurantOrderListCommand;
 import com.swulab.eatswunee.domain.order.domain.model.Order;
 import com.swulab.eatswunee.domain.order.exception.OrderNotFoundException;
 import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.OrderMenuMapper;
@@ -19,7 +21,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class OrderPersistenceAdapter implements SaveOrderPort, FindOrderPort, FindNowOrderPort {
+public class OrderPersistenceAdapter implements SaveOrderPort, FindOrderPort, FindNowOrderPort,
+    FindRestaurantOrderListPort {
 
   private final OrderJpaRepository orderJpaRepository;
   private final OrderMapper orderMapper;
@@ -74,4 +77,9 @@ public class OrderPersistenceAdapter implements SaveOrderPort, FindOrderPort, Fi
     return orderQueryRepository.findNowOrderCommand(userId);
   }
 
+  @Override
+  public FindRestaurantOrderListCommand findRestaurantOrderList(Long orderId) {
+
+    return orderQueryRepository.findRestaurantOrderList(orderId);
+  }
 }
