@@ -29,7 +29,7 @@ public class GetRestaurantNotificationResponse {
 
     public RestaurantNotificationResponse(FindRestaurantNotificationCommand command) {
       this.order_id = command.getOrderId();
-      this.order_num = command.getOrderNum();
+      this.order_num = command.getOrderNum() - 1;
       this.order_title_menu = command.getMenuName();
       this.order_etc_menu_cnt = command.getOrderEtcMenuCnt();
       this.order_created_at = command.getOrderCreatedAt();
