@@ -1,4 +1,4 @@
-package com.swulab.eatswunee.domain.notification.adapter.port.out.persistence.jpa.model;
+package com.swulab.eatswunee.domain.notification.adapter.out.persistence.jpa.model;
 
 import com.swulab.eatswunee.domain.order.adapter.out.persistence.jpa.model.OrderJpaEntity;
 import com.swulab.eatswunee.domain.user.adapter.out.persistence.jpa.model.UserJpaEntity;
