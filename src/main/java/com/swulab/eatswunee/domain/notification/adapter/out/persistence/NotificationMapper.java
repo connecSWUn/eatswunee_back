@@ -1,6 +1,6 @@
-package com.swulab.eatswunee.domain.notification.adapter.port.out.persistence;
+package com.swulab.eatswunee.domain.notification.adapter.out.persistence;
 
-import com.swulab.eatswunee.domain.notification.adapter.port.out.persistence.jpa.model.NotificationJpaEntity;
+import com.swulab.eatswunee.domain.notification.adapter.out.persistence.jpa.model.NotificationJpaEntity;
 import com.swulab.eatswunee.domain.notification.domain.model.Notification;
 import com.swulab.eatswunee.domain.order.adapter.out.persistence.OrderMapper;
 import com.swulab.eatswunee.domain.user.adapter.out.persistence.UserMapper;
