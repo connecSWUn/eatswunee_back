@@ -7,7 +7,9 @@ import static com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.swulab.eatswunee.domain.notification.application.port.in.command.GetRevenueCommand;
 import com.swulab.eatswunee.domain.notification.application.port.out.command.FindRestaurantNotificationCommand;
+import com.swulab.eatswunee.domain.notification.application.port.out.command.FindRevenueCommand;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -49,6 +51,23 @@ public class NotificationQueryRepository {
         .select(notificationJpaEntity.orderJpaEntity.orderId)
         .fetchFirst() != null;
 
+  }
+
+  public List<FindRevenueCommand> findRevenue(Long restaurantId) {
+    return jpaQueryFactory
+        .select(Projections.constructor(FindRevenueCommand.class,
+            orderMenuJpaEntity.orderJpaEntity.orderCreatedAt,
+            orderMenuJpaEntity.menuCnt,
+            orderMenuJpaEntity.menuJpaEntity.price.as("menuPrice")
+            )
+        )
+        .from(orderMenuJpaEntity)
+        .join(orderMenuJpaEntity.orderJpaEntity, orderJpaEntity)
+        .join(orderMenuJpaEntity.menuJpaEntity, menuJpaEntity)
+        .where(
+            orderMenuJpaEntity.menuJpaEntity.restaurantJpaEntity.restaurantId.eq(restaurantId)
+        )
+        .fetch();
   }
 
 }
