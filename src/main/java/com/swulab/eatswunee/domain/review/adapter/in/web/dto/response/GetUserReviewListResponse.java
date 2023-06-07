@@ -1,6 +1,7 @@
 package com.swulab.eatswunee.domain.review.adapter.in.web.dto.response;
 
 import com.swulab.eatswunee.domain.review.application.port.in.command.GetUserReviewCommand;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AccessLevel;
@@ -26,7 +27,7 @@ public class GetUserReviewListResponse {
     private String review_image_url;
     private int menu_review_rating;
     private String review_content;
-    private LocalDateTime review_created_at;
+    private LocalDate review_created_at;
 
     public GetUserReviewResponse(GetUserReviewCommand command) {
       this.restaurant_name = command.getRestaurantName();
@@ -34,7 +35,7 @@ public class GetUserReviewListResponse {
       this.review_image_url = command.getReviewImageUrl();
       this.menu_review_rating = command.getMenuReviewRating();
       this.review_content = command.getReviewContent();
-      this.review_created_at = command.getReviewCreatedAt();
+      this.review_created_at = command.getReviewCreatedAt().toLocalDate();
     }
   }
 

@@ -15,13 +15,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class GetMenuListResponse {
 
-  private List<NowOrderCommand> orders;
+  private List<NowOrderCommand> homeOrders;
   private List<RestaurantCommand> restaurants;
   private List<MenuListCommand> menus;
 
 
   public GetMenuListResponse(GetMenuListCommand command) {
-    this.orders = command.getOrderCommandList().stream().map(NowOrderCommand::new).toList();
+    this.homeOrders = command.getOrderCommandList().stream().map(NowOrderCommand::new).toList();
     this.restaurants = command.getRestaurantCommandList().stream().map(RestaurantCommand::new).toList();
     this.menus = command.getMenuCommandList().stream().map(MenuListCommand::new).toList();
   }

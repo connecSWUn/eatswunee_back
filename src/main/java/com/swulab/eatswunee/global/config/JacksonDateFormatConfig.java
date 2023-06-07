@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class JacksonDateFormatConfig {
 
-  private static final String localDate = "yyyy.MM.dd.";
+  private static final String localDate = "yyyy.MM.dd";
   private static final String localDateTime = "yyyy.MM.dd HH:mm:ss";
   private static final String localTime = "HH:mm";
 
