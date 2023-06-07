@@ -39,20 +39,16 @@ public class NotificationQueryRepository {
 
   }
 
-//  public Boolean existNotificationByOrderId(Long orderId) {
-//
-//    return jpaQueryFactory
-//        .from(notificationJpaEntity)
-//        .where(
-//            notificationJpaEntity.orderJpaEntity.orderId.eq(orderId)
-//        )
-//        .select(notificationJpaEntity.orderJpaEntity.orderId)
-//        .fetchFirst() != null;
-//
-//  }
+  public Boolean existNotificationByOrderId(Long orderId) {
 
+    return jpaQueryFactory
+        .from(notificationJpaEntity)
+        .where(
+            notificationJpaEntity.orderJpaEntity.orderId.eq(orderId)
+        )
+        .select(notificationJpaEntity.orderJpaEntity.orderId)
+        .fetchFirst() != null;
 
-
-
+  }
 
 }

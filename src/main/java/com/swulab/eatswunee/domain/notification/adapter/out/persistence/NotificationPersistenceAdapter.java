@@ -20,9 +20,9 @@ public class NotificationPersistenceAdapter implements FindRestaurantNotificatio
     return notificationQueryRepository.findRestaurantNotification(restaurantId);
   }
 
-//  @Override
-//  public Boolean existNotificationByOrderId(Long orderId) {
-//
-//    return notificationQueryRepository.existNotificationByOrderId(orderId);
-//  }
+  @Override
+  public Boolean existNotificationByOrderId(Long orderId) {
+
+    return notificationQueryRepository.existNotificationByOrderId(orderId);
+  }
 }
