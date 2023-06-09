@@ -4,6 +4,7 @@ import com.swulab.eatswunee.domain.menu.application.port.in.command.GetMenuRevie
 import com.swulab.eatswunee.domain.menu.application.port.in.command.ReviewCommand;
 import com.swulab.eatswunee.domain.menu.application.port.in.command.ReviewRatingCommand;
 import com.swulab.eatswunee.domain.user.domain.model.User;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +60,7 @@ public class GetMenuReviewListResponse {
   private class Review {
 
     private Long reviewId;
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
     private String reviewContent;
     private int menuRating;
     private List<String> reviewImgs = new ArrayList<>();
@@ -67,7 +68,7 @@ public class GetMenuReviewListResponse {
 
     public Review(ReviewCommand command) {
       this.reviewId = command.getReviewId();
-      this.createdAt = command.getCreatedAt();
+      this.createdAt = command.getCreatedAt().toLocalDate();
       this.reviewContent = command.getContent();
       this.menuRating = command.getScore();
       reviewImgs.add(command.getReviewImg());
