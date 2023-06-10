@@ -38,6 +38,7 @@ public class WriteListCommand {
     private LocalTime postEndTime;
     private LocalDateTime postCreatedAt;
     private RecruitStatus postRecruitStatus;
+    private String postSpot;
 
     public PostCommand(Recruit recruit) {
       this.postId = recruit.getRecruitId();
@@ -46,6 +47,7 @@ public class WriteListCommand {
       this.postEndTime = recruit.getEndTime();
       this.postCreatedAt = recruit.getCreatedAt();
       this.postRecruitStatus = recruit.getStatus();
+      this.postSpot = recruit.getRestaurant();
     }
   }
 }

@@ -37,6 +37,7 @@ public class GetWriteListResponse {
     private LocalTime postEndTime;
     private LocalDateTime postCreatedAt;
     private RecruitStatus postRecruitStatus;
+    private String postSpot;
 
     public Post(PostCommand postCommand) {
       this.postId = postCommand.getPostId();
@@ -45,6 +46,7 @@ public class GetWriteListResponse {
       this.postEndTime = postCommand.getPostEndTime();
       this.postCreatedAt = postCommand.getPostCreatedAt();
       this.postRecruitStatus = postCommand.getPostRecruitStatus();
+      this.postSpot = postCommand.getPostSpot();
     }
   }
 
