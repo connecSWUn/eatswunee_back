@@ -1,10 +1,12 @@
 package com.swulab.eatswunee.domain.chatroom.adapter.out.persistence;
 
+import com.swulab.eatswunee.domain.chatroom.adapter.in.web.controller.command.UserChatRoomCommand;
 import com.swulab.eatswunee.domain.chatroom.adapter.out.persistence.jap.ChatRoomJpaRepository;
 import com.swulab.eatswunee.domain.chatroom.adapter.out.persistence.jap.model.ChatRoomJpaEntity;
 import com.swulab.eatswunee.domain.chatroom.application.port.out.ExistChatRoomPort;
 import com.swulab.eatswunee.domain.chatroom.application.port.out.FindChatMessagesPort;
 import com.swulab.eatswunee.domain.chatroom.application.port.out.FindChatRoomPort;
+import com.swulab.eatswunee.domain.chatroom.application.port.out.FindUserChatRoomPort;
 import com.swulab.eatswunee.domain.chatroom.application.port.out.SaveChatRoomPort;
 import com.swulab.eatswunee.domain.chatroom.application.port.out.command.FindChatMessageCommand;
 import com.swulab.eatswunee.domain.chatroom.domain.model.ChatRoom;
@@ -19,7 +21,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Slf4j
 public class ChatRoomPersistenceAdapter implements FindChatRoomPort, SaveChatRoomPort,
-    ExistChatRoomPort, FindChatMessagesPort {
+    ExistChatRoomPort, FindChatMessagesPort, FindUserChatRoomPort {
 
   private final ChatRoomJpaRepository chatRoomJpaRepository;
   private final ChatRoomQueryRepository chatRoomQueryRepository;
@@ -60,5 +62,10 @@ public class ChatRoomPersistenceAdapter implements FindChatRoomPort, SaveChatRoo
   public List<FindChatMessageCommand> findChatMessages(Long chatRoomId) {
 
     return chatRoomQueryRepository.findChatRoomMessages(chatRoomId);
+  }
+
+  @Override
+  public List<UserChatRoomCommand> findUserChatRoom(Long userId) {
+    return chatRoomQueryRepository.findUserChatRoom(userId);
   }
 }
