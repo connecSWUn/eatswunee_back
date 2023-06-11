@@ -12,10 +12,12 @@ public class GetUserInfoResponse {
   private Long user_id;
   private String user_profile_url;
   private String user_name;
+  private String loginId;
 
   public GetUserInfoResponse(GetUserInfoCommand command) {
     this.user_id = command.getUserId();
     this.user_profile_url = command.getUserProfileUrl();
     this.user_name = command.getUserName();
+    this.loginId = command.getLoginId();
   }
 }
