@@ -12,11 +12,13 @@ public class GetUserInfoCommand {
   private Long userId;
   private String userProfileUrl;
   private String userName;
+  private String loginId;
 
   public GetUserInfoCommand(User user) {
     this.userId = user.getUserId();
     this.userProfileUrl = user.getProfileUrl();
     this.userName = user.getName();
+    this.loginId = user.getLoginId();
   }
 
   public void mapImageToUrl(String url) {
