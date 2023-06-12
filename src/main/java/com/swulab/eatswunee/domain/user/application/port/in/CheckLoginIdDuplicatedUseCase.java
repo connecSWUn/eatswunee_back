@@ -2,8 +2,8 @@ package com.swulab.eatswunee.domain.user.application.port.in;
 
 import com.swulab.eatswunee.domain.user.application.port.in.command.CheckDuplicatedCommand;
 
-public interface CheckNicknameUseCase {
+public interface CheckLoginIdDuplicatedUseCase {
 
-  CheckDuplicatedCommand checkNickname(String nickname);
+  CheckDuplicatedCommand checkLoginId(String loginId);
 
 }

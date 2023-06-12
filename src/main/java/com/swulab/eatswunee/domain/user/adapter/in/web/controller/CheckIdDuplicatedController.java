@@ -1,7 +1,7 @@
 package com.swulab.eatswunee.domain.user.adapter.in.web.controller;
 
 import com.swulab.eatswunee.domain.user.adapter.in.web.dto.response.CheckDeuplicatedResponse;
-import com.swulab.eatswunee.domain.user.application.port.in.CheckNicknameUseCase;
+import com.swulab.eatswunee.domain.user.application.port.in.CheckLoginIdDuplicatedUseCase;
 import com.swulab.eatswunee.domain.user.application.port.in.command.CheckDuplicatedCommand;
 import com.swulab.eatswunee.global.common.adapter.web.in.dto.SuccessResponse;
 import lombok.RequiredArgsConstructor;
@@ -12,17 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class CheckNicknameController {
+public class CheckIdDuplicatedController {
 
-  private final CheckNicknameUseCase checkNicknameUseCase;
+  private final CheckLoginIdDuplicatedUseCase checkLoginIdDuplicatedUseCase;
 
-  @GetMapping("/mypage/duplicated/{nickname}")
-  public ResponseEntity checkNickname(@PathVariable String nickname) {
+  @GetMapping("/mypage/duplicated/loginId/{loginId}")
+  public ResponseEntity checkLoginId(@PathVariable String loginId) {
 
-    CheckDuplicatedCommand command = checkNicknameUseCase.checkNickname(nickname);
+    CheckDuplicatedCommand command = checkLoginIdDuplicatedUseCase.checkLoginId(loginId);
     CheckDeuplicatedResponse response = new CheckDeuplicatedResponse(command);
 
     return ResponseEntity.ok(SuccessResponse.create200SuccessResponse(response));
   }
-
 }
