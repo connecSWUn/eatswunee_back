@@ -22,6 +22,7 @@ public class UserChatRoomListResponse {
   public static class UserChatRoom {
 
     private Long chatRoom;
+    private Long recruitId;
     private String recruitTitle;
     private String senderNickname;
     private String senderProfileImgUrl;
@@ -31,6 +32,7 @@ public class UserChatRoomListResponse {
 
     public UserChatRoom(UserChatRoomCommand command) {
       this.chatRoom = command.getChatRoomId();
+      this.recruitId = Long.parseLong(chatRoom.toString().split("0")[1]);
       this.recruitTitle = command.getRecruitTitle();
       this.senderNickname = command.getSenderNickname();
       this.senderProfileImgUrl = command.getSenderProfileImgUrl();
