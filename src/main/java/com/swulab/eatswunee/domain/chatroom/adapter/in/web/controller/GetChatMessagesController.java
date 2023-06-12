@@ -18,7 +18,7 @@ public class GetChatMessagesController {
 
   private final GetChatMessagesUseCase getChatMessagesUseCase;
 
-  @GetMapping("/chat/{recruitId}")
+  @GetMapping("/chat/enter/{recruitId}")
   public ResponseEntity getChatMessagesUseCase(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long recruitId) {
 
     GetChatMessagesCommand command = getChatMessagesUseCase.getChatMessages(Long.parseLong(userDetails.getUsername()), recruitId);
