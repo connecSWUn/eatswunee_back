@@ -1,7 +1,6 @@
 package com.swulab.eatswunee.domain.chatroom.adapter.in.dto.response;
 
 import com.swulab.eatswunee.domain.chatroom.application.port.in.command.GetChatMessagesCommand;
-import com.swulab.eatswunee.domain.chatroom.application.port.in.command.GetChatMessagesCommand.ChatMessageCommand;
 import com.swulab.eatswunee.domain.recruit.domain.model.RecruitStatus;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -20,6 +19,7 @@ public class GetChatMessagesResponse {
   private LocalTime recruit_start_time;
   private LocalTime recruit_end_time;
   private LocalDateTime recruit_created_at;
+  private String sender_name;
 
   private List<ChatMessageResponse> commands;
 
@@ -31,8 +31,10 @@ public class GetChatMessagesResponse {
     this.recruit_start_time = command.getRecruitStartTime();
     this.recruit_end_time = command.getRecruitEndTime();
     this.recruit_created_at = command.getRecruitCreatedAt();
+    this.sender_name = command.getSenderName();
 
     this.commands = command.getCommandList().stream().map(ChatMessageResponse::new).toList();
+
   }
 
   @Getter

@@ -20,11 +20,12 @@ public class GetChatMessagesCommand {
   private LocalTime recruitStartTime;
   private LocalTime recruitEndTime;
   private LocalDateTime recruitCreatedAt;
+  private String senderName;
 
   List<ChatMessageCommand> commandList;
 
 
-  public GetChatMessagesCommand(Recruit recruit, List<FindChatMessageCommand> commands) {
+  public GetChatMessagesCommand(Recruit recruit, List<FindChatMessageCommand> commands, String userName) {
     this.recruitStatus = recruit.getStatus();
     this.recruitTitle = recruit.getTitle();
     this.recruitSpot = recruit.getRestaurant();
@@ -32,6 +33,11 @@ public class GetChatMessagesCommand {
     this.recruitEndTime = recruit.getStartTime();
     this.recruitCreatedAt = recruit.getCreatedAt();
     this.commandList = commands.stream().map(ChatMessageCommand::new).toList();
+
+    List<FindChatMessageCommand> senderCommands = commands.stream()
+        .filter(command -> !(command.getMessageSender().equals(userName))).toList();
+    this.senderName = commands.size()==0 ? "notFound" : senderCommands.get(0).getMessageSender();
+
   }
 
 
