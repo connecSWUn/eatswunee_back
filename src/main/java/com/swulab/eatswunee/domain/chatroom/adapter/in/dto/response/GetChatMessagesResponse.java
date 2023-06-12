@@ -21,7 +21,7 @@ public class GetChatMessagesResponse {
   private LocalDateTime recruit_created_at;
   private String sender_name;
 
-  private List<ChatMessageResponse> commands;
+  private List<ChatMessageResponse> messages;
 
 
   public GetChatMessagesResponse(GetChatMessagesCommand command) {
@@ -33,7 +33,7 @@ public class GetChatMessagesResponse {
     this.recruit_created_at = command.getRecruitCreatedAt();
     this.sender_name = command.getSenderName();
 
-    this.commands = command.getCommandList().stream().map(ChatMessageResponse::new).toList();
+    this.messages = command.getCommandList().stream().map(ChatMessageResponse::new).toList();
 
   }
 
