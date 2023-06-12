@@ -20,6 +20,8 @@ public class RecruitContentResponse {
 
   private String title;
 
+  private Boolean user_is_writer;
+
   private String spot;
   private LocalTime start_time;
   private LocalTime end_time;
@@ -28,11 +30,12 @@ public class RecruitContentResponse {
 
   private Writer writer;
 
-  public RecruitContentResponse(Recruit recruit) {
+  public RecruitContentResponse(Recruit recruit, Long userId) {
     this.post_id = recruit.getRecruitId();
     this.created_at = recruit.getCreatedAt();
     this.edited_at = recruit.getEditedAt();
     this.title = recruit.getTitle();
+    this.user_is_writer = recruit.getUser().getUserId().equals(userId);
     this.spot = recruit.getRestaurant();
     this.start_time = recruit.getStartTime();
     this.end_time = recruit.getEndTime();

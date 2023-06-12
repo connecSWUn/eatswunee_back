@@ -8,6 +8,8 @@ import com.swulab.eatswunee.global.common.adapter.web.in.dto.SuccessResponse;
 import com.swulab.eatswunee.global.common.application.port.in.GetImageUrlUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,13 +22,13 @@ public class GetRecruitContentController {
   private final GetImageUrlUseCase getImageUrlUseCase;
 
   @GetMapping("/recruit/{postId}")
-  public ResponseEntity getRecruitContent(@PathVariable String postId) {
+  public ResponseEntity getRecruitContent(@AuthenticationPrincipal UserDetails userDetails, @PathVariable String postId) {
+
     Recruit recruit = getRecruitContentUseCase.getRecruitContent(Long.parseLong(postId));
-
     recruit.getUser().mapImageToUrl(getImageUrlUseCase.getImageUrl("user_profile/" + recruit.getUser().getProfileUrl()));
+    RecruitContentResponse response = new RecruitContentResponse(recruit, Long.parseLong(userDetails.getUsername()));
 
-    return ResponseEntity.ok(
-        SuccessResponse.create200SuccessResponse(new RecruitContentResponse(recruit)));
+    return ResponseEntity.ok(SuccessResponse.create200SuccessResponse(response));
   }
 
 }
