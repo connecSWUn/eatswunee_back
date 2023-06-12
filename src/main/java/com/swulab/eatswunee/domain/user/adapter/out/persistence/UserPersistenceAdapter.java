@@ -1,6 +1,8 @@
 package com.swulab.eatswunee.domain.user.adapter.out.persistence;
 
 import com.swulab.eatswunee.domain.user.adapter.out.persistence.jpa.model.UserJpaEntity;
+import com.swulab.eatswunee.domain.user.application.port.in.command.CheckDuplicatedCommand;
+import com.swulab.eatswunee.domain.user.application.port.out.ExistLoginIdPort;
 import com.swulab.eatswunee.domain.user.application.port.out.FindCheckNicknamePort;
 import com.swulab.eatswunee.domain.user.application.port.out.FindUserPort;
 import com.swulab.eatswunee.domain.user.application.port.out.SaveUserPort;
@@ -12,7 +14,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class UserPersistenceAdapter implements FindUserPort, SaveUserPort, FindCheckNicknamePort {
+public class UserPersistenceAdapter implements FindUserPort, SaveUserPort, FindCheckNicknamePort,
+    ExistLoginIdPort {
 
   private final UserJpaRepository userJpaRepository;
   private final UserMapper userMapper;
@@ -46,4 +49,12 @@ public class UserPersistenceAdapter implements FindUserPort, SaveUserPort, FindC
   public Boolean findCheckNicknamePort(String nickname) {
     return userJpaRepository.existsByName(nickname);
   }
+
+
+  @Override
+  public CheckDuplicatedCommand existLoginId(String loginId) {
+
+    return new CheckDuplicatedCommand(userJpaRepository.existsByLoginId(loginId));
+  }
+
 }
