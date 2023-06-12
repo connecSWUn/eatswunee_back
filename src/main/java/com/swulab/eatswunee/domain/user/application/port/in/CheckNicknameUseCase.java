@@ -1,9 +1,9 @@
 package com.swulab.eatswunee.domain.user.application.port.in;
 
-import com.swulab.eatswunee.domain.user.application.port.in.command.CheckNicknameCommand;
+import com.swulab.eatswunee.domain.user.application.port.in.command.CheckDuplicatedCommand;
 
 public interface CheckNicknameUseCase {
 
-  CheckNicknameCommand checkNickname(String nickname);
+  CheckDuplicatedCommand checkNickname(String nickname);
 
 }
