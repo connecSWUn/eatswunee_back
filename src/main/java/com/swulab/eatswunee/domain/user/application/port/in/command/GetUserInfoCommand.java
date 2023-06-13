@@ -22,6 +22,6 @@ public class GetUserInfoCommand {
   }
 
   public void mapImageToUrl(String url) {
-    this.userProfileUrl = url;
+    this.userProfileUrl = "user_profile/" + url;
   }
 }
