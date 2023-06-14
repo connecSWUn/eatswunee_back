@@ -18,10 +18,12 @@ public class GetChatMessagesController {
 
   private final GetChatMessagesUseCase getChatMessagesUseCase;
 
-  @GetMapping("/chat/enter/{recruitId}")
-  public ResponseEntity getChatMessagesUseCase(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long recruitId) {
 
-    GetChatMessagesCommand command = getChatMessagesUseCase.getChatMessages(Long.parseLong(userDetails.getUsername()), recruitId);
+  @GetMapping("/chat/enter/{chatRoomId}")
+  public ResponseEntity getChatMessages2UseCase(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long chatRoomId) {
+
+    GetChatMessagesCommand command = getChatMessagesUseCase.getChatMessages(Long.parseLong(
+        userDetails.getUsername()), chatRoomId);
     GetChatMessagesResponse response = new GetChatMessagesResponse(command);
 
     return ResponseEntity.ok(SuccessResponse.create200SuccessResponse(response));
