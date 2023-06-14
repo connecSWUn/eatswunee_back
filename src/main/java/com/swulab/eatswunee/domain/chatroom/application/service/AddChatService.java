@@ -31,6 +31,11 @@ public class AddChatService implements AddChatRoomUseCase, FindChatRoomUseCase {
   @PostConstruct
   private void init() {
     chatRooms = new LinkedHashMap<>();
+    List<ChatRoom> allChatRooms = findChatRoomPort.findAllChatRooms();
+    allChatRooms.forEach(
+        chatRoom -> chatRooms.put(chatRoom.getChatRoomId(), chatRoom)
+    );
+
   }
 
   @Override
@@ -38,7 +43,7 @@ public class AddChatService implements AddChatRoomUseCase, FindChatRoomUseCase {
 
     ChatRoom chatRoom = createChatRoom(userId, recruitId);
 
-    saveChatRoomPort.saveChatRoom(chatRoom); // 채팅방 저장
+    saveChatRoomPort.saveChatRoom(chatRoom);
     chatRooms.put(chatRoom.getChatRoomId(), chatRoom);
 
     return chatRoom;
@@ -73,8 +78,6 @@ public class AddChatService implements AddChatRoomUseCase, FindChatRoomUseCase {
 
   @Override
   public ChatRoom findRoomById(Long roomId) {
-    findChatRoomPort.findChatRoomById(roomId);
-
     return chatRooms.get(roomId);
   }
 }

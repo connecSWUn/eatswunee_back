@@ -17,10 +17,10 @@ public class ChatRoom {
 
   private Long chatRoomId;
   private LocalDateTime createdAt;
-  private User user;
+  private User user; // 채팅 보낸 사람
   private Recruit recruit;
 
-  private Set<WebSocketSession> sessions = new HashSet<>(); // 세션(WebSocketSession)을 관리할 집합
+  private Set<WebSocketSession> sessions = new HashSet<>();
 
 
   @Builder
@@ -34,14 +34,10 @@ public class ChatRoom {
 
   public void handlerActions(WebSocketSession session, ChatMessage chatMessage, SendMessageUseCase sendMessageUseCase) {
     if (chatMessage.getType().equals(MessageType.ENTER)) {
-
       // TODO: 게시글 올린 사람에게 알림 보내기
       sessions.add(session);
       chatMessage.setMessage(chatMessage.getUser().getName() + "님이 입장했습니다."); // 입장 메시지 설정
     }
-    System.out.println("=======================");
-    sessions.forEach(System.out::println);
-    System.out.println("=======================");
     sendMessage(chatMessage, sendMessageUseCase); // 메시지 보냄
 
   }

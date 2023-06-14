@@ -37,7 +37,7 @@ public class ChatRoomQueryRepository {
         .fetch();
   }
 
-  public List<UserChatRoomCommand> findUserChatRoom(Long userId) {
+  public List<UserChatRoomCommand> findUserChatRoom(Long userId) { // 내가 보낸 것
 
     return jpaQueryFactory
         .select(Projections.constructor(UserChatRoomCommand.class,
@@ -53,4 +53,24 @@ public class ChatRoomQueryRepository {
         )
         .fetch();
   }
+
+  public List<UserChatRoomCommand> findRecruitChat(Long userId) {
+
+    return jpaQueryFactory
+        .select(Projections.constructor(UserChatRoomCommand.class,
+            chatRoomJpaEntity.chatRoomId,
+            chatRoomJpaEntity.recruitJpaEntity.title.as("recruitTitle"),
+            chatRoomJpaEntity.userJpaEntity.name.as("senderNickname"),
+            chatRoomJpaEntity.userJpaEntity.profileUrl.as("senderProfileImgUrl")
+        ))
+        .from(chatRoomJpaEntity)
+        .join(chatRoomJpaEntity.recruitJpaEntity, recruitJpaEntity)
+        .where(
+            chatRoomJpaEntity.chatRoomId.like(userId+"%")
+        )
+        .fetch();
+
+
+  }
+
 }
