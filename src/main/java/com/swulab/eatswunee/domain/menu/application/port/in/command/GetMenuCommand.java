@@ -33,6 +33,6 @@ public class GetMenuCommand {
   }
 
   public void setMenuImg(String menuImg) {
-    this.menuImg = "menu_image/" + menuImg;
+    this.menuImg = menuImg;
   }
 }

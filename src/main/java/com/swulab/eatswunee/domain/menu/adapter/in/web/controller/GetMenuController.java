@@ -22,7 +22,7 @@ public class GetMenuController {
   public ResponseEntity getMenu(@PathVariable Long menuId) {
 
     GetMenuCommand command = getMenuUseCase.getMenu(menuId);
-    command.setMenuImg(getImageUrlUseCase.getImageUrl(command.getMenuImg()));
+    command.setMenuImg(getImageUrlUseCase.getImageUrl("menu_image/" + command.getMenuImg()));
 
     GetMenuResponse response = new GetMenuResponse(command);
 
