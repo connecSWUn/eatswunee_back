@@ -22,7 +22,7 @@ public class GetUserInfoController {
   @GetMapping("/mypage")
   public ResponseEntity getUserInfo(@AuthenticationPrincipal UserDetails userDetails) {
 
-    GetUserInfoCommand command = getUserInfoUseCase.getUserInfo(Long.parseLong(userDetails.getUsername()));
+    GetUserInfoCommand command = getUserInfoUseCase.getUserInfo(Long.parseLong("user_profile/" + userDetails.getUsername()));
     command.mapImageToUrl(getImageUrlUseCase.getImageUrl(command.getUserProfileUrl()));
     GetUserInfoResponse response = new GetUserInfoResponse(command);
 
