@@ -20,12 +20,13 @@ public class GetChatMessagesService implements GetChatMessagesUseCase {
   private final FindUserPort findUserPort;
 
   @Override
-  public GetChatMessagesCommand getChatMessages(Long userId, Long recruitId) {
+  public GetChatMessagesCommand getChatMessages(Long userId, Long chatRoomId) {
 
     String userName = findUserPort.findUser(userId).getName();
+    String[] split = String.valueOf(chatRoomId).split("0");
 
-    List<FindChatMessageCommand> commands = findChatMessagesPort.findChatMessages(Long.parseLong(userId + "0" + recruitId));
-    Recruit recruit = findRecruitPort.findRecruit(recruitId);
+    List<FindChatMessageCommand> commands = findChatMessagesPort.findChatMessages(chatRoomId);
+    Recruit recruit = findRecruitPort.findRecruit(Long.parseLong(split[1]));
 
     return new GetChatMessagesCommand(recruit, commands, userName);
   }

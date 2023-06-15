@@ -60,7 +60,7 @@ public class ChatRoomQueryRepository {
         .select(Projections.constructor(UserChatRoomCommand.class,
             chatRoomJpaEntity.chatRoomId,
             chatRoomJpaEntity.recruitJpaEntity.title.as("recruitTitle"),
-            chatRoomJpaEntity.userJpaEntity.name.as("senderNickname"),
+            chatRoomJpaEntity.recruitJpaEntity.userJpaEntity.name.as("senderNickname"),
             chatRoomJpaEntity.userJpaEntity.profileUrl.as("senderProfileImgUrl")
         ))
         .from(chatRoomJpaEntity)
