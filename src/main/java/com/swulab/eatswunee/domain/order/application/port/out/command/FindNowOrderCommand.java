@@ -17,7 +17,11 @@ public class FindNowOrderCommand {
     this.orderId = orderId;
     this.orderNum = orderNum;
     this.restaurantId = restaurantId;
-    this.expectedWaitingTime = 0;
+    this.expectedWaitingTime = 5;
+  }
+
+  public void changeExpectedWaitingTime(int expectedWaitingTime) {
+    this.expectedWaitingTime += expectedWaitingTime;
   }
 
 }
