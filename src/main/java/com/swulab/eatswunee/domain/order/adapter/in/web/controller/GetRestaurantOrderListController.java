@@ -23,11 +23,11 @@ public class GetRestaurantOrderListController {
   @GetMapping("/restaurant/order/{orderId}")
   public ResponseEntity getRestaurantOrderList(@PathVariable Long orderId) {
 
-//    FindRestaurantOrderListCommand command = getRestaurantOrderListUseCase.getRestaurantOrderList(orderId);
-//    GetRestaurantOrderListResponse response = new GetRestaurantOrderListResponse(command);
+    FindRestaurantOrderListCommand command = getRestaurantOrderListUseCase.getRestaurantOrderList(orderId);
+    GetRestaurantOrderListResponse response = new GetRestaurantOrderListResponse(command);
 
-    List<FindRestaurantOrderListFixCommand> command = getRestaurantOrderListUseCase.getRestaurantOrderListFix(orderId);
-    GetRestaurantOrderListFixResponse response = new GetRestaurantOrderListFixResponse(command);
+//    List<FindRestaurantOrderListFixCommand> command = getRestaurantOrderListUseCase.getRestaurantOrderListFix(orderId);
+//    GetRestaurantOrderListFixResponse response = new GetRestaurantOrderListFixResponse(command);
 
     return ResponseEntity.ok(SuccessResponse.create200SuccessResponse(response));
   }
