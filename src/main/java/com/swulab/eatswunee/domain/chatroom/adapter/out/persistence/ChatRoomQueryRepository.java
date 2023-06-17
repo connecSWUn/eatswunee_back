@@ -10,6 +10,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.swulab.eatswunee.domain.chatroom.adapter.in.web.controller.command.UserChatRoomCommand;
 import com.swulab.eatswunee.domain.chatroom.application.port.out.command.FindChatMessageCommand;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -19,9 +20,9 @@ public class ChatRoomQueryRepository {
 
   private final JPAQueryFactory jpaQueryFactory;
 
-  public List<FindChatMessageCommand> findChatRoomMessages(Long chatRoomId) {
+  public Optional<List<FindChatMessageCommand>> findChatRoomMessages(Long chatRoomId) {
 
-    return jpaQueryFactory
+    return Optional.of(jpaQueryFactory
         .select(Projections.constructor(FindChatMessageCommand.class,
             chatMessageJpaEntity.createdAt.as("messageCreatedAt"),
             chatMessageJpaEntity.userJpaEntity.name.as("messageSender"),
@@ -34,7 +35,7 @@ public class ChatRoomQueryRepository {
             chatMessageJpaEntity.chatRoomJpaEntity.chatRoomId.eq(chatRoomId)
         )
         .orderBy(chatMessageJpaEntity.createdAt.asc())
-        .fetch();
+        .fetch());
   }
 
   public List<UserChatRoomCommand> findUserChatRoom(Long userId) { // 내가 보낸 것

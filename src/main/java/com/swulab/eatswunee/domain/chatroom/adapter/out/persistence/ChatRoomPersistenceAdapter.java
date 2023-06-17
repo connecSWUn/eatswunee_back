@@ -13,7 +13,9 @@ import com.swulab.eatswunee.domain.chatroom.application.port.out.command.FindCha
 import com.swulab.eatswunee.domain.chatroom.domain.model.ChatRoom;
 import com.swulab.eatswunee.domain.chatroom.exception.NotFoundChatRoomException;
 import com.swulab.eatswunee.global.error.ErrorCode;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -61,8 +63,10 @@ public class ChatRoomPersistenceAdapter implements FindChatRoomPort, SaveChatRoo
 
   @Override
   public List<FindChatMessageCommand> findChatMessages(Long chatRoomId) {
-
-    return chatRoomQueryRepository.findChatRoomMessages(chatRoomId);
+    Optional<List<FindChatMessageCommand>> optionalCommand = chatRoomQueryRepository.findChatRoomMessages(
+        chatRoomId);
+    List<FindChatMessageCommand> commands = optionalCommand.orElse(new ArrayList<>());
+    return commands;
   }
 
   @Override
