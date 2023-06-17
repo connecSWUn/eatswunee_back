@@ -73,7 +73,7 @@ public class OrderQueryRepository {
   }
 
 
-  public List<FindRestaurantOrderListFixCommand> findRestaurantOrderListFix(Long orderId) {
+  public List<FindRestaurantOrderListFixCommand> findRestaurantOrderListFix(Long restaurantId) {
     return jpaQueryFactory
         .select(Projections.constructor(FindRestaurantOrderListFixCommand.class,
             orderMenuJpaEntity.orderJpaEntity.orderId,
@@ -86,7 +86,7 @@ public class OrderQueryRepository {
         .join(orderMenuJpaEntity.orderJpaEntity, orderJpaEntity)
         .join(orderMenuJpaEntity.menuJpaEntity, menuJpaEntity)
         .where(
-            orderMenuJpaEntity.menuJpaEntity.restaurantJpaEntity.restaurantId.eq(orderId)
+            orderMenuJpaEntity.menuJpaEntity.restaurantJpaEntity.restaurantId.eq(restaurantId)
         ).fetch();
   }
 
