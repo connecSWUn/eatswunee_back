@@ -8,17 +8,21 @@ import static com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.
 import static com.swulab.eatswunee.domain.restaurant.adapter.out.persistence.jpa.model.QRestaurantJpaEntity.restaurantJpaEntity;
 
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.swulab.eatswunee.domain.order.adapter.out.persistence.jpa.model.OrderJpaEntity;
 import com.swulab.eatswunee.domain.order.application.port.out.command.FindNowOrderCommand;
 import com.swulab.eatswunee.domain.order.application.port.out.command.FindRestaurantOrderListCommand;
+import com.swulab.eatswunee.domain.order.application.port.out.command.FindRestaurantOrderListFixCommand;
 import com.swulab.eatswunee.domain.order.domain.model.OrderStatus;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class OrderQueryRepository {
 
   private final JPAQueryFactory jpaQueryFactory;
@@ -62,6 +66,7 @@ public class OrderQueryRepository {
                 Projections.constructor(FindRestaurantOrderListCommand.class,
                     orderMenuJpaEntity.orderJpaEntity.orderId,
                     orderMenuJpaEntity.orderJpaEntity.orderNum,
+                    orderMenuJpaEntity.orderJpaEntity.orderCreatedAt,
                     list(Projections.fields(FindRestaurantOrderListCommand.FindRestaurantOrderMenuCommand.class,
                         orderMenuJpaEntity.menuJpaEntity.name.as("menuName"),
                         orderMenuJpaEntity.menuCnt))
@@ -70,5 +75,28 @@ public class OrderQueryRepository {
         ).get(0);
   }
 
+
+  public List<FindRestaurantOrderListFixCommand> findRestaurantOrderListFix(Long restaurantId) {
+    return jpaQueryFactory
+        .select(Projections.constructor(FindRestaurantOrderListFixCommand.class,
+            orderMenuJpaEntity.orderJpaEntity.orderId,
+            orderMenuJpaEntity.orderJpaEntity.orderNum,
+            orderMenuJpaEntity.orderJpaEntity.orderCreatedAt,
+            orderMenuJpaEntity.menuJpaEntity.name.as("menuName"),
+            orderMenuJpaEntity.menuCnt
+            ))
+        .from(orderMenuJpaEntity)
+        .join(orderMenuJpaEntity.orderJpaEntity, orderJpaEntity)
+        .join(orderMenuJpaEntity.menuJpaEntity, menuJpaEntity)
+        .where(
+            eqOrderStatus(OrderStatus.ONGOING),
+            orderMenuJpaEntity.menuJpaEntity.restaurantJpaEntity.restaurantId.eq(restaurantId)
+        ).fetch();
+  }
+
+  private BooleanExpression eqOrderStatus(OrderStatus orderStatus) {
+    log.info("[findOrderMenu] orderStatus : {}", orderStatus);
+    return orderStatus != null ? orderMenuJpaEntity.orderJpaEntity.orderStatus.eq(orderStatus): null;
+  }
 
 }

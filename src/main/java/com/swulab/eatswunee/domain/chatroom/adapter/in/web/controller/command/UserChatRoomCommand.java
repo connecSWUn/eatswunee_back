@@ -28,7 +28,10 @@ public class UserChatRoomCommand {
   }
 
   public void getChatMessage(LastChatMessage message) {
-    this.lastChatCreatedAt = message.getLastChatCreatedAt();
-    this.lastChatMessage = message.getLastChatMessage();
+    if (message != null) {
+      this.lastChatCreatedAt = message.getLastChatCreatedAt();
+      this.lastChatMessage = message.getLastChatMessage();
+    }
+
   }
 }
