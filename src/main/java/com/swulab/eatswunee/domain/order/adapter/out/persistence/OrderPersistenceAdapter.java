@@ -8,6 +8,7 @@ import com.swulab.eatswunee.domain.order.application.port.out.FindRestaurantOrde
 import com.swulab.eatswunee.domain.order.application.port.out.SaveOrderPort;
 import com.swulab.eatswunee.domain.order.application.port.out.command.FindNowOrderCommand;
 import com.swulab.eatswunee.domain.order.application.port.out.command.FindRestaurantOrderListCommand;
+import com.swulab.eatswunee.domain.order.application.port.out.command.FindRestaurantOrderListFixCommand;
 import com.swulab.eatswunee.domain.order.domain.model.Order;
 import com.swulab.eatswunee.domain.order.exception.OrderNotFoundException;
 import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.OrderMenuMapper;
@@ -81,5 +82,10 @@ public class OrderPersistenceAdapter implements SaveOrderPort, FindOrderPort, Fi
   public FindRestaurantOrderListCommand findRestaurantOrderList(Long orderId) {
 
     return orderQueryRepository.findRestaurantOrderList(orderId);
+  }
+
+  @Override
+  public List<FindRestaurantOrderListFixCommand> findRestaurantOrderListFix(Long orderId) {
+    return orderQueryRepository.findRestaurantOrderListFix(orderId);
   }
 }

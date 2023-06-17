@@ -1,5 +1,6 @@
 package com.swulab.eatswunee.domain.order.application.port.out.command;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -11,12 +12,14 @@ public class FindRestaurantOrderListCommand {
 
   private Long orderId;
   private Integer orderNum;
+  private LocalDateTime orderCreatedAt;
   private List<FindRestaurantOrderMenuCommand> menus;
 
-  public FindRestaurantOrderListCommand(Long orderId, Integer orderNum,
+  public FindRestaurantOrderListCommand(Long orderId, Integer orderNum, LocalDateTime orderCreatedAt,
       List<FindRestaurantOrderMenuCommand> menus) {
     this.orderId = orderId;
     this.orderNum = orderNum;
+    this.orderCreatedAt = orderCreatedAt;
     this.menus = menus;
   }
 
