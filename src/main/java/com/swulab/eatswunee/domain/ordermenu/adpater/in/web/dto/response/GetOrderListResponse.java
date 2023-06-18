@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class GetOrderListResponse {
 
-  List<RestaurantNowOrderResponse> restaurant_orders;
+  List<RestaurantNowOrderResponse> orders;
 
   public GetOrderListResponse(List<RestaurantNowOrderListCommand> restaurant_orders) {
-    this.restaurant_orders = restaurant_orders.stream().map(RestaurantNowOrderResponse::new).toList();
+    this.orders = restaurant_orders.stream().map(RestaurantNowOrderResponse::new).toList();
   }
 
   @Getter
