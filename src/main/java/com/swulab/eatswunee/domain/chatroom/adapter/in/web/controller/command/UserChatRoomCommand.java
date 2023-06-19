@@ -34,4 +34,8 @@ public class UserChatRoomCommand {
     }
 
   }
+
+  public void mapToUrl(String url) {
+    this.senderProfileImgUrl = url;
+  }
 }

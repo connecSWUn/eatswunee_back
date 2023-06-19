@@ -6,10 +6,12 @@ spring:
         - localdb
         - s3
         - jwt-local
+        - port
       dev:
         - devdb
         - s3
         - jwt-dev
+        - port
   pid:
     file: /home/ubuntu/swulab/eatswunee/eatswunee.pid
 
