@@ -44,6 +44,7 @@ public class OrderJpaEntity extends BaseEntity {
   @JoinColumn(name = "user_id")
   private UserJpaEntity userJpaEntity;
 
+  @Builder.Default
   @OneToMany(mappedBy = "orderJpaEntity")
   private List<OrderMenuJpaEntity> orderMenuJpaEntities = new ArrayList<>();
 
