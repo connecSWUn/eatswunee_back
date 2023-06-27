@@ -16,7 +16,7 @@ public class ChatMessageMapper {
 
   public ChatMessage mapToDomainEntity(ChatMessageJpaEntity chatMessageJpaEntity) {
     return ChatMessage.builder()
-        .chatMessageId(chatMessageJpaEntity.getChatMessageId())
+        .chatMessageId(chatMessageJpaEntity.getId())
         .message(chatMessageJpaEntity.getMessage())
         .isRead(chatMessageJpaEntity.getIsRead())
         .createdAt(chatMessageJpaEntity.getCreatedAt())
@@ -27,7 +27,7 @@ public class ChatMessageMapper {
 
   public ChatMessageJpaEntity mapToJpaEntity(ChatMessage chatMessage) {
     return ChatMessageJpaEntity.builder()
-        .chatMessageId(chatMessage.getChatMessageId())
+        .id(chatMessage.getChatMessageId())
         .message(chatMessage.getMessage())
         .isRead(chatMessage.getIsRead())
         .createdAt(chatMessage.getCreatedAt())

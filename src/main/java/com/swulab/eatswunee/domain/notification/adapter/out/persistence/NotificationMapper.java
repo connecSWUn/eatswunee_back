@@ -16,11 +16,11 @@ public class NotificationMapper {
 
   public Notification mapToDomainEntity(NotificationJpaEntity notificationJpaEntity) {
     return Notification.builder()
-        .notificationId(notificationJpaEntity.getNotificationId())
+        .notificationId(notificationJpaEntity.getId())
         .notificationTitle(notificationJpaEntity.getNotificationTitle())
         .notificationContent(notificationJpaEntity.getNotificationContent())
         .notificationIsRead(notificationJpaEntity.getNotificationIsRead())
-        .notificationCreatedAt(notificationJpaEntity.getNotificationCreatedAt())
+        .notificationCreatedAt(notificationJpaEntity.getCreatedAt())
         .order(orderMapper.mapToDomainEntity(notificationJpaEntity.getOrderJpaEntity()))
         .receiver(userMapper.mapToDomainEntity(notificationJpaEntity.getUserJpaEntity()))
         .build();
@@ -28,11 +28,11 @@ public class NotificationMapper {
 
   public NotificationJpaEntity mapToJpaEntity(Notification notification) {
     return NotificationJpaEntity.builder()
-        .notificationId(notification.getNotificationId())
+        .id(notification.getNotificationId())
         .notificationTitle(notification.getNotificationTitle())
         .notificationContent(notification.getNotificationContent())
         .notificationIsRead(notification.getNotificationIsRead())
-        .notificationCreatedAt(notification.getNotificationCreatedAt())
+        .createdAt(notification.getNotificationCreatedAt())
         .orderJpaEntity(orderMapper.mapToJpaEntity(notification.getOrder()))
         .userJpaEntity(userMapper.mapToJpaEntity(notification.getReceiver()))
         .build();

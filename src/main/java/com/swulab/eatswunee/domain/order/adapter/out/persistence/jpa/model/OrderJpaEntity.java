@@ -3,13 +3,14 @@ package com.swulab.eatswunee.domain.order.adapter.out.persistence.jpa.model;
 import com.swulab.eatswunee.domain.order.domain.model.OrderStatus;
 import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.model.OrderMenuJpaEntity;
 import com.swulab.eatswunee.domain.user.adapter.out.persistence.jpa.model.UserJpaEntity;
+import com.swulab.eatswunee.global.common.domain.BaseEntity;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -21,21 +22,20 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "orders")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AttributeOverrides({
+    @AttributeOverride(name = "id", column = @Column(name = "order_id")),
+    @AttributeOverride(name = "createdAt", column = @Column(name = "order_created_at"))
+})
+@SuperBuilder
 @Getter
-public class OrderJpaEntity {
-
-  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long orderId;
+public class OrderJpaEntity extends BaseEntity {
 
   private int orderNum;
-
-  @CreationTimestamp
-  private LocalDateTime orderCreatedAt;
 
   @Enumerated(EnumType.STRING)
   private OrderStatus orderStatus;
@@ -47,14 +47,12 @@ public class OrderJpaEntity {
   @OneToMany(mappedBy = "orderJpaEntity")
   private List<OrderMenuJpaEntity> orderMenuJpaEntities = new ArrayList<>();
 
-  @Builder
   public OrderJpaEntity(Long orderId, int orderNum, LocalDateTime orderCreatedAt,
       OrderStatus orderStatus,
       UserJpaEntity userJpaEntity,
       List<OrderMenuJpaEntity> orderMenuJpaEntities) {
-    this.orderId = orderId;
+    super(orderId, orderCreatedAt);
     this.orderNum = orderNum;
-    this.orderCreatedAt = orderCreatedAt;
     this.orderStatus = orderStatus;
     this.userJpaEntity = userJpaEntity;
     this.orderMenuJpaEntities = orderMenuJpaEntities;

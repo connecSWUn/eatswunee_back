@@ -20,7 +20,7 @@ public class ReviewMapper {
 
   public Review mapToDomainEntity(ReviewJpaEntity reviewJpaEntity) {
     return Review.builder()
-        .reviewId(reviewJpaEntity.getReviewId())
+        .reviewId(reviewJpaEntity.getId())
         .score(reviewJpaEntity.getScore())
         .title(reviewJpaEntity.getTitle())
         .content(reviewJpaEntity.getContent())
@@ -35,7 +35,7 @@ public class ReviewMapper {
 
   public ReviewJpaEntity mapToJpaEntity(Review review) {
     return ReviewJpaEntity.builder()
-        .reviewId(review.getReviewId())
+        .id(review.getReviewId())
         .score(review.getScore())
         .title(review.getTitle())
         .content(review.getContent())
