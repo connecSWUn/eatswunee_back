@@ -24,9 +24,9 @@ public class NotificationQueryRepository {
 
     return jpaQueryFactory
         .select(Projections.constructor(FindRestaurantNotificationCommand.class,
-            orderJpaEntity.orderId,
+            orderJpaEntity.id.as("orderId"),
             orderJpaEntity.orderNum,
-            orderJpaEntity.orderCreatedAt,
+            orderJpaEntity.createdAt.as("orderCreatedAt"),
             orderMenuJpaEntity.menuJpaEntity.name.min().as("menuName"),
             orderMenuJpaEntity.menuCnt.sum().as("orderEtcMenuCnt")
             ))
@@ -36,7 +36,7 @@ public class NotificationQueryRepository {
         .where(
             menuJpaEntity.restaurantJpaEntity.restaurantId.eq(restaurantId)
         )
-        .groupBy(orderMenuJpaEntity.orderJpaEntity.orderId)
+        .groupBy(orderMenuJpaEntity.orderJpaEntity.id)
         .fetch();
 
   }
@@ -46,9 +46,9 @@ public class NotificationQueryRepository {
     return jpaQueryFactory
         .from(notificationJpaEntity)
         .where(
-            notificationJpaEntity.orderJpaEntity.orderId.eq(orderId)
+            notificationJpaEntity.orderJpaEntity.id.eq(orderId)
         )
-        .select(notificationJpaEntity.orderJpaEntity.orderId)
+        .select(notificationJpaEntity.orderJpaEntity.id.as("orderId"))
         .fetchFirst() != null;
 
   }
@@ -56,7 +56,7 @@ public class NotificationQueryRepository {
   public List<FindRevenueCommand> findRevenue(Long restaurantId) {
     return jpaQueryFactory
         .select(Projections.constructor(FindRevenueCommand.class,
-            orderMenuJpaEntity.orderJpaEntity.orderCreatedAt,
+            orderMenuJpaEntity.orderJpaEntity.createdAt.as("orderCreatedAt"),
             orderMenuJpaEntity.menuCnt,
             orderMenuJpaEntity.menuJpaEntity.price.as("menuPrice")
             )

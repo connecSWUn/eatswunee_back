@@ -22,7 +22,7 @@ public class ChatMessagePersistenceAdapter implements SaveChatMessagePort, FindL
   public Long saveChatMessage(ChatMessage chatMessage) {
     ChatMessageJpaEntity chatMessageJpaEntity = chatMessageMapper.mapToJpaEntity(chatMessage);
     ChatMessageJpaEntity savedChatMessage = chatMessageJpaRepository.save(chatMessageJpaEntity);
-    return savedChatMessage.getChatMessageId();
+    return savedChatMessage.getId();
   }
 
   @Override

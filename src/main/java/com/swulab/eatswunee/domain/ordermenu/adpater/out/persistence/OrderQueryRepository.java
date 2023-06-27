@@ -30,7 +30,7 @@ public class OrderQueryRepository {
   public List<OrderJpaEntity> findAllOrderByUserId(Long userId) {
     return jpaQueryFactory
         .selectFrom(orderJpaEntity)
-        .where(orderJpaEntity.userJpaEntity.userId.eq(userId))
+        .where(orderJpaEntity.userJpaEntity.id.eq(userId))
         .fetch();
   }
 
@@ -38,7 +38,7 @@ public class OrderQueryRepository {
   public List<FindNowOrderCommand> findNowOrderCommand(Long userId) {
     return jpaQueryFactory
         .select(Projections.constructor(FindNowOrderCommand.class,
-            orderJpaEntity.orderId,
+            orderJpaEntity.id.as("orderId"),
             orderJpaEntity.orderNum,
             orderMenuJpaEntity.menuJpaEntity.restaurantJpaEntity.restaurantId
             ))
@@ -47,7 +47,7 @@ public class OrderQueryRepository {
         .join(orderMenuJpaEntity.menuJpaEntity, menuJpaEntity)
         .join(menuJpaEntity.restaurantJpaEntity, restaurantJpaEntity)
         .where(
-            orderJpaEntity.userJpaEntity.userId.eq(userId),
+            orderJpaEntity.userJpaEntity.id.eq(userId),
             orderJpaEntity.orderStatus.eq(OrderStatus.ONGOING)
         )
         .fetch();
@@ -64,9 +64,9 @@ public class OrderQueryRepository {
         .transform(
             groupBy(orderMenuJpaEntity.orderJpaEntity).list(
                 Projections.constructor(FindRestaurantOrderListCommand.class,
-                    orderMenuJpaEntity.orderJpaEntity.orderId,
+                    orderMenuJpaEntity.orderJpaEntity.id.as("orderId"),
                     orderMenuJpaEntity.orderJpaEntity.orderNum,
-                    orderMenuJpaEntity.orderJpaEntity.orderCreatedAt,
+                    orderMenuJpaEntity.orderJpaEntity.createdAt.as("orderCreatedAt"),
                     list(Projections.fields(FindRestaurantOrderListCommand.FindRestaurantOrderMenuCommand.class,
                         orderMenuJpaEntity.menuJpaEntity.name.as("menuName"),
                         orderMenuJpaEntity.menuCnt))
@@ -79,9 +79,9 @@ public class OrderQueryRepository {
   public List<FindRestaurantOrderListFixCommand> findRestaurantOrderListFix(Long restaurantId) {
     return jpaQueryFactory
         .select(Projections.constructor(FindRestaurantOrderListFixCommand.class,
-            orderMenuJpaEntity.orderJpaEntity.orderId,
+            orderMenuJpaEntity.orderJpaEntity.id.as("orderId"),
             orderMenuJpaEntity.orderJpaEntity.orderNum,
-            orderMenuJpaEntity.orderJpaEntity.orderCreatedAt,
+            orderMenuJpaEntity.orderJpaEntity.createdAt.as("orderCreatedAt"),
             orderMenuJpaEntity.menuJpaEntity.name.as("menuName"),
             orderMenuJpaEntity.menuCnt
             ))

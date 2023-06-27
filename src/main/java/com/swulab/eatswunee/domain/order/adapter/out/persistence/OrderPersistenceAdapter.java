@@ -53,7 +53,7 @@ public class OrderPersistenceAdapter implements SaveOrderPort, FindOrderPort, Fi
 
     orderMenuJpaRepository.saveAll(orderMenuJpaEntities);
 
-    return save.getOrderId();
+    return save.getId();
   }
 
   @Override
