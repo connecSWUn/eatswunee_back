@@ -2,6 +2,7 @@ package com.swulab.eatswunee.domain.notification.adapter.out.persistence;
 
 import static com.swulab.eatswunee.domain.menu.adapter.out.persistence.jpa.model.QMenuJpaEntity.menuJpaEntity;
 import static com.swulab.eatswunee.domain.notification.adapter.out.persistence.jpa.model.QNotificationJpaEntity.notificationJpaEntity;
+import static com.swulab.eatswunee.domain.notification.adapter.out.persistence.jpa.model.QOrderNotificationJpaEntity.orderNotificationJpaEntity;
 import static com.swulab.eatswunee.domain.order.adapter.out.persistence.jpa.model.QOrderJpaEntity.orderJpaEntity;
 import static com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.model.QOrderMenuJpaEntity.orderMenuJpaEntity;
 
@@ -46,9 +47,9 @@ public class NotificationQueryRepository {
     return jpaQueryFactory
         .from(notificationJpaEntity)
         .where(
-            notificationJpaEntity.orderJpaEntity.id.eq(orderId)
+            orderNotificationJpaEntity.orderJpaEntity.id.eq(orderId)
         )
-        .select(notificationJpaEntity.orderJpaEntity.id.as("orderId"))
+        .select(orderNotificationJpaEntity.orderJpaEntity.id.as("orderId"))
         .fetchFirst() != null;
 
   }
