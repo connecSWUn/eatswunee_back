@@ -42,7 +42,7 @@ public class UserPersistenceAdapter implements FindUserPort, SaveUserPort, FindC
 
   @Override
   public Long saveUser(User user) {
-    return userJpaRepository.save(userMapper.mapToJpaEntity(user)).getUserId();
+    return userJpaRepository.save(userMapper.mapToJpaEntity(user)).getId();
   }
 
   @Override

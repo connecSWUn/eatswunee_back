@@ -26,7 +26,7 @@ public class RecruitQueryRepository {
 
     return queryFactory
         .select(Projections.constructor(Recruit.class,
-            recruitJpaEntity.recruitId,
+            recruitJpaEntity.id.as("recruitId"),
             recruitJpaEntity.title,
             recruitJpaEntity.createdAt,
             recruitJpaEntity.status,
@@ -52,7 +52,7 @@ public class RecruitQueryRepository {
 
     return queryFactory
         .select(Projections.constructor(Recruit.class,
-            recruitJpaEntity.recruitId,
+            recruitJpaEntity.id.as("recruitId"),
             recruitJpaEntity.title,
             recruitJpaEntity.createdAt,
             recruitJpaEntity.status,
@@ -76,12 +76,12 @@ public class RecruitQueryRepository {
 
   private BooleanExpression eqRecruitId(Long recruitId) {
     log.info("recruit id: {}", recruitId);
-    return recruitId != null ? recruitJpaEntity.recruitId.eq(recruitId) : null;
+    return recruitId != null ? recruitJpaEntity.id.eq(recruitId) : null;
   }
 
   private BooleanExpression eqUserId(Long userId) {
     log.info("user id: {}", userId);
-    return userId != null ? recruitJpaEntity.userJpaEntity.userId.eq(userId) : null;
+    return userId != null ? recruitJpaEntity.userJpaEntity.id.eq(userId) : null;
 
   }
 

@@ -14,7 +14,7 @@ public class RecruitMapper {
 
   public Recruit mapToDomainEntity(RecruitJpaEntity recruitJpaEntity) {
     return Recruit.builder()
-        .recruitId(recruitJpaEntity.getRecruitId())
+        .recruitId(recruitJpaEntity.getId())
         .title(recruitJpaEntity.getTitle())
         .content(recruitJpaEntity.getContent())
         .createdAt(recruitJpaEntity.getCreatedAt())
@@ -29,7 +29,7 @@ public class RecruitMapper {
 
   public RecruitJpaEntity mapToJpaEntity(Recruit recruit) {
     return RecruitJpaEntity.builder()
-        .recruitId(recruit.getRecruitId())
+        .id(recruit.getRecruitId())
         .title(recruit.getTitle())
         .content(recruit.getContent())
         .createdAt(recruit.getCreatedAt())

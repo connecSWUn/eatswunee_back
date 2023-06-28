@@ -42,7 +42,7 @@ public class RecruitPersistenceAdapter implements FindRecruitListPort, FindRecru
   @Override
   public Long saveRecruit(Recruit recruit) {
     RecruitJpaEntity recruitJpaEntity = recruitMapper.mapToJpaEntity(recruit);
-    return recruitJpaRepository.saveAndFlush(recruitJpaEntity).getRecruitId();
+    return recruitJpaRepository.saveAndFlush(recruitJpaEntity).getId();
   }
 
   @Override

@@ -23,12 +23,12 @@ public class UserQueryRepository {
 
     return queryFactory
         .select(Projections.constructor(WriteListCommand.class,
-            userJpaEntity.userId,
+            userJpaEntity.id.as("userId"),
             userJpaEntity.name.as("userName"),
             userJpaEntity.profileUrl,
             list(
                 Projections.fields(PostCommand.class,
-                    recruitJpaEntity.recruitId.as("postId"),
+                    recruitJpaEntity.id.as("postId"),
                     recruitJpaEntity.title.as("postTitle"),
                     recruitJpaEntity.startTime.as("postStartTime"),
                     recruitJpaEntity.endTime.as("postEndTime"),
@@ -38,8 +38,8 @@ public class UserQueryRepository {
         ))
         .from(recruitJpaEntity)
         .join(recruitJpaEntity.userJpaEntity, userJpaEntity)
-        .where(recruitJpaEntity.userJpaEntity.userId.eq(userId))
-        .groupBy(recruitJpaEntity.userJpaEntity.userId)
+        .where(recruitJpaEntity.userJpaEntity.id.eq(userId))
+        .groupBy(recruitJpaEntity.userJpaEntity.id)
         .fetchOne();
 
   }

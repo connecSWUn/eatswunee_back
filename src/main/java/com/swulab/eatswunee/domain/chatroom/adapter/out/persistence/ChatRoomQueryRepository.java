@@ -50,7 +50,7 @@ public class ChatRoomQueryRepository {
         .from(chatRoomJpaEntity)
         .join(chatRoomJpaEntity.recruitJpaEntity, recruitJpaEntity)
         .where(
-            recruitJpaEntity.userJpaEntity.userId.eq(userId)
+            recruitJpaEntity.userJpaEntity.id.eq(userId)
         )
         .fetch();
   }

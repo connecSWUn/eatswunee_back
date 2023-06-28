@@ -2,6 +2,9 @@ package com.swulab.eatswunee.domain.chatmessage.adapter.out.persistence.jpa.mode
 
 import com.swulab.eatswunee.domain.chatroom.adapter.out.persistence.jap.model.ChatRoomJpaEntity;
 import com.swulab.eatswunee.domain.user.adapter.out.persistence.jpa.model.UserJpaEntity;
+import com.swulab.eatswunee.global.common.domain.BaseEntity;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,26 +18,26 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "chat_message")
+@SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class ChatMessageJpaEntity {
-
-  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long chatMessageId;
+@AttributeOverrides({
+    @AttributeOverride(name = "id", column = @Column(name = "chat_message_id")),
+    @AttributeOverride(name = "createdAt", column = @Column(name = "created_at"))
+})
+public class ChatMessageJpaEntity extends BaseEntity {
 
   private String message;
 
   @Column(nullable = false)
   @ColumnDefault("false")
   private Boolean isRead;
-
-  @CreationTimestamp
-  private LocalDateTime createdAt;
 
   @ManyToOne
   @JoinColumn(name = "user_id")
@@ -44,15 +47,14 @@ public class ChatMessageJpaEntity {
   @JoinColumn(name = "chat_room_id")
   private ChatRoomJpaEntity chatRoomJpaEntity;
 
-  @Builder
+
   public ChatMessageJpaEntity(Long chatMessageId, String message, Boolean isRead,
       LocalDateTime createdAt,
       UserJpaEntity userJpaEntity,
       ChatRoomJpaEntity chatRoomJpaEntity) {
-    this.chatMessageId = chatMessageId;
+    super(chatMessageId, createdAt);
     this.message = message;
     this.isRead = isRead;
-    this.createdAt = createdAt;
     this.userJpaEntity = userJpaEntity;
     this.chatRoomJpaEntity = chatRoomJpaEntity;
   }

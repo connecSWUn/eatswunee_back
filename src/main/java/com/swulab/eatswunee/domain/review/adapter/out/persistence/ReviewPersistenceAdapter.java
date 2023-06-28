@@ -68,7 +68,7 @@ public class ReviewPersistenceAdapter implements FindReviewRatingByMenuIdPort,
   public Long saveReview(Review review) {
     ReviewJpaEntity reviewJpaEntity = reviewMapper.mapToJpaEntity(review);
     ReviewJpaEntity savedReviewJpaEntity = reviewJpaRepository.save(reviewJpaEntity);
-    return savedReviewJpaEntity.getReviewId();
+    return savedReviewJpaEntity.getId();
 
   }
 }

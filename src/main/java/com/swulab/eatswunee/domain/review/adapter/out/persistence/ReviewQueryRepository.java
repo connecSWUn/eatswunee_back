@@ -37,13 +37,13 @@ public class ReviewQueryRepository {
 
     return queryFactory
         .select(Projections.constructor(ReviewAndUserCommand.class,
-            reviewJpaEntity.reviewId,
+            reviewJpaEntity.id.as("reviewId"),
             reviewJpaEntity.score,
             reviewJpaEntity.content,
             reviewJpaEntity.createdAt,
             reviewJpaEntity.editedAt,
             reviewJpaEntity.reviewImg,
-            reviewJpaEntity.userJpaEntity.userId,
+            reviewJpaEntity.userJpaEntity.id.as("userId"),
             reviewJpaEntity.userJpaEntity.name,
             reviewJpaEntity.userJpaEntity.profileUrl
             ))
@@ -72,7 +72,7 @@ public class ReviewQueryRepository {
     return queryFactory
         .select(
             Projections.constructor(FindUserReviewCommand.class,
-            reviewJpaEntity.reviewId,
+            reviewJpaEntity.id.as("reviewId"),
             reviewJpaEntity.menuJpaEntity.restaurantJpaEntity.name.as("restaurantName"),
             reviewJpaEntity.menuJpaEntity.name.as("menuName"),
             reviewJpaEntity.reviewImg,
@@ -85,7 +85,7 @@ public class ReviewQueryRepository {
         .join(reviewJpaEntity.menuJpaEntity, menuJpaEntity)
         .join(menuJpaEntity.restaurantJpaEntity, restaurantJpaEntity)
         .where(
-            reviewJpaEntity.userJpaEntity.userId.eq(userId)
+            reviewJpaEntity.userJpaEntity.id.eq(userId)
         )
         .fetch();
   }
