@@ -17,10 +17,10 @@ public class GetRestaurantOrderListController {
 
   private final GetRestaurantOrderListUseCase getRestaurantOrderListUseCase;
 
-  @GetMapping("/restaurant/order/{orderId}")
-  public ResponseEntity getRestaurantOrderList(@PathVariable Long orderId) {
+  @GetMapping("/restaurant/order/{orderId}/{restaurantId}")
+  public ResponseEntity getRestaurantOrderList(@PathVariable Long orderId, @PathVariable Long restaurantId) {
 
-    FindRestaurantOrderListCommand command = getRestaurantOrderListUseCase.getRestaurantOrderList(orderId);
+    FindRestaurantOrderListCommand command = getRestaurantOrderListUseCase.getRestaurantOrderList(orderId, restaurantId);
     GetRestaurantOrderListResponse response = new GetRestaurantOrderListResponse(command);
 
 return ResponseEntity.ok(SuccessResponse.create200SuccessResponse(response));

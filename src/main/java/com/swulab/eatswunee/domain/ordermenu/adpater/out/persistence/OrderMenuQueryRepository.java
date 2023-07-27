@@ -115,7 +115,7 @@ public class OrderMenuQueryRepository {
                 Projections.constructor(RestaurantNowOrderListCommand.class,
                     orderMenuJpaEntity.orderJpaEntity.id.as("orderId"),
                     orderMenuJpaEntity.orderJpaEntity.orderNum,
-                    orderMenuJpaEntity.orderJpaEntity.id.as("orderCreatedAt"),
+                    orderMenuJpaEntity.orderJpaEntity.createdAt.as("orderCreatedAt"),
                     list(Projections.fields(
                         RestaurantNowOrderListCommand.RestaurantOrderMenuCommand.class,
                         orderMenuJpaEntity.menuJpaEntity.name.as("menuName"),

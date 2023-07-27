@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface GetRestaurantOrderListUseCase {
 
-  FindRestaurantOrderListCommand getRestaurantOrderList(Long orderId);
+  FindRestaurantOrderListCommand getRestaurantOrderList(Long orderId, Long restaurantId);
   List<FindRestaurantOrderListFixCommand> getRestaurantOrderListFix(Long orderId);
 
 }

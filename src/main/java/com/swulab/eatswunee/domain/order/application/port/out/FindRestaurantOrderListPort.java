@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface FindRestaurantOrderListPort {
 
-  FindRestaurantOrderListCommand findRestaurantOrderList(Long orderId);
+  FindRestaurantOrderListCommand findRestaurantOrderList(Long orderId, Long restaurantId);
 
   List<FindRestaurantOrderListFixCommand> findRestaurantOrderListFix(Long orderId);
 

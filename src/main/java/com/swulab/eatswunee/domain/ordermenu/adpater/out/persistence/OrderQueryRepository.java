@@ -53,13 +53,14 @@ public class OrderQueryRepository {
         .fetch();
   }
 
-  public FindRestaurantOrderListCommand findRestaurantOrderList(Long orderId) {
+  public FindRestaurantOrderListCommand findRestaurantOrderList(Long orderId, Long restaurantId) {
     return jpaQueryFactory
         .selectFrom(orderMenuJpaEntity)
         .join(orderMenuJpaEntity.orderJpaEntity, orderJpaEntity)
         .join(orderMenuJpaEntity.menuJpaEntity, menuJpaEntity)
         .where(
-            orderMenuJpaEntity.menuJpaEntity.restaurantJpaEntity.restaurantId.eq(orderId)
+            orderMenuJpaEntity.menuJpaEntity.restaurantJpaEntity.restaurantId.eq(restaurantId),
+            orderMenuJpaEntity.orderJpaEntity.id.eq(orderId)
         )
         .transform(
             groupBy(orderMenuJpaEntity.orderJpaEntity).list(
