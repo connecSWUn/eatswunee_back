@@ -79,9 +79,9 @@ public class OrderPersistenceAdapter implements SaveOrderPort, FindOrderPort, Fi
   }
 
   @Override
-  public FindRestaurantOrderListCommand findRestaurantOrderList(Long orderId) {
+  public FindRestaurantOrderListCommand findRestaurantOrderList(Long orderId, Long restaurantId) {
 
-    return orderQueryRepository.findRestaurantOrderList(orderId);
+    return orderQueryRepository.findRestaurantOrderList(orderId, restaurantId);
   }
 
   @Override

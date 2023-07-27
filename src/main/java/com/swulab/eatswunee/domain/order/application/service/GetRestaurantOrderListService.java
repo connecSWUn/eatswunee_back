@@ -16,9 +16,9 @@ public class GetRestaurantOrderListService implements GetRestaurantOrderListUseC
 
 
   @Override
-  public FindRestaurantOrderListCommand getRestaurantOrderList(Long orderId) {
+  public FindRestaurantOrderListCommand getRestaurantOrderList(Long orderId, Long restaurantId) {
 
-    return findRestaurantOrderListPort.findRestaurantOrderList(orderId);
+    return findRestaurantOrderListPort.findRestaurantOrderList(orderId, restaurantId);
   }
 
   @Override
