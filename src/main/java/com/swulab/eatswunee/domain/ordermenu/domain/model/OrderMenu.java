@@ -25,4 +25,8 @@ public class OrderMenu {
     this.menu = menu;
     this.order = order;
   }
+
+  public void changeOrderMenuStatusTo(OrderMenuStatus orderMenuStatus) {
+    this.orderMenuStatus = orderMenuStatus;
+  }
 }

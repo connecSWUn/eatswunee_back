@@ -7,6 +7,7 @@ import com.swulab.eatswunee.domain.ordermenu.application.port.out.FindCompletedO
 import com.swulab.eatswunee.domain.ordermenu.application.port.out.FindNowOrderListPort;
 import com.swulab.eatswunee.domain.ordermenu.application.port.out.FindOrderMenuPort;
 import com.swulab.eatswunee.domain.ordermenu.application.port.out.FindUserMenuOrderListPort;
+import com.swulab.eatswunee.domain.ordermenu.application.port.out.SaveOrderMenuPort;
 import com.swulab.eatswunee.domain.ordermenu.application.port.out.command.FindRestaurantOrderMenuCommand;
 import com.swulab.eatswunee.domain.ordermenu.application.port.out.command.RestaurantNowOrderListCommand;
 import com.swulab.eatswunee.domain.ordermenu.domain.model.OrderMenu;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class OrderMenuPersistenceAdapter implements FindOrderMenuPort ,
-    FindUserMenuOrderListPort, FindNowOrderListPort, FindCompletedOrderListPort {
+    FindUserMenuOrderListPort, FindNowOrderListPort, FindCompletedOrderListPort, SaveOrderMenuPort {
 
   private final OrderMenuQueryRepository orderMenuQueryRepository;
   private final OrderMenuJpaRepository orderMenuJpaRepository;
@@ -54,6 +55,13 @@ public class OrderMenuPersistenceAdapter implements FindOrderMenuPort ,
   @Override
   public List<RestaurantNowOrderListCommand> findCompletedOrderList(Long restaurantId) {
     return orderMenuQueryRepository.findRestaurantCompletedOrder(restaurantId);
+  }
+
+  @Override
+  public OrderMenu saveOrderMenu(OrderMenu orderMenu) {
+    OrderMenuJpaEntity orderMenuJpaEntity = orderMenuMapper.mapToJpaEntity(orderMenu);
+    OrderMenu savedOrderMenu = orderMenuMapper.mapToDomainEntity(orderMenuJpaRepository.save(orderMenuJpaEntity));
+    return savedOrderMenu;
   }
 }
 
