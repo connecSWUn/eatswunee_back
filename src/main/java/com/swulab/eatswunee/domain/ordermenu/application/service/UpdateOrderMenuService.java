@@ -6,6 +6,7 @@ import com.swulab.eatswunee.domain.ordermenu.application.port.out.FindOrderMenuP
 import com.swulab.eatswunee.domain.ordermenu.application.port.out.SaveOrderMenuPort;
 import com.swulab.eatswunee.domain.ordermenu.domain.model.OrderMenu;
 import com.swulab.eatswunee.domain.ordermenu.domain.model.OrderMenuStatus;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +18,12 @@ public class UpdateOrderMenuService implements UpdateOrderMenuStatusUseCase {
   private final SaveOrderMenuPort saveOrderMenuPort;
 
   @Override
-  public UpdateOrderMenuStatusCommand updateOrderMenuStatus(Long orderMenuId, OrderMenuStatus orderMenuStatus) {
+  public UpdateOrderMenuStatusCommand updateOrderMenuStatus(Long restaurantId, Long orderId, OrderMenuStatus orderMenuStatus) {
 
-    OrderMenu orderMenu = findOrderMenuPort.findOrderMenuPort(orderMenuId);
-    orderMenu.changeOrderMenuStatusTo(orderMenuStatus);
-    OrderMenu savedOrderMenu = saveOrderMenuPort.saveOrderMenu(orderMenu);
+    List<OrderMenu> orderMenus = findOrderMenuPort.findOrderMenus(restaurantId, orderId); // 여기서 식당도 걸러줘야함.
+    orderMenus.forEach(orderMenu -> orderMenu.changeOrderMenuStatusTo(orderMenuStatus));
+    saveOrderMenuPort.saveOrderMenus(orderMenus);
 
-    return new UpdateOrderMenuStatusCommand(savedOrderMenu.getOrderMenuId(), savedOrderMenu.getOrderMenuStatus());
-
+    return new UpdateOrderMenuStatusCommand(orderId, orderMenuStatus);
   }
 }

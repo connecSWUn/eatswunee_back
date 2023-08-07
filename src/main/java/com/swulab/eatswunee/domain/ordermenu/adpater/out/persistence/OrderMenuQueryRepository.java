@@ -12,6 +12,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.swulab.eatswunee.domain.order.adapter.in.web.controller.coammnd.UserOrderMenuCommand;
 import com.swulab.eatswunee.domain.order.domain.model.OrderStatus;
+import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.model.OrderMenuJpaEntity;
 import com.swulab.eatswunee.domain.ordermenu.application.port.out.command.FindRestaurantOrderMenuCommand;
 import com.swulab.eatswunee.domain.ordermenu.application.port.out.command.RestaurantNowOrderListCommand;
 import java.util.List;
@@ -123,6 +124,19 @@ public class OrderMenuQueryRepository {
                 )
             )
         );
+  }
+
+  public List<OrderMenuJpaEntity> findOrderMenusByOrderId(Long restaurantId, Long orderId) {
+
+    return jpaQueryFactory
+        .selectFrom(orderMenuJpaEntity)
+        .join(orderMenuJpaEntity.menuJpaEntity, menuJpaEntity)
+        .join(menuJpaEntity.restaurantJpaEntity, restaurantJpaEntity)
+        .where(
+            orderMenuJpaEntity.orderJpaEntity.id.eq(orderId),
+            restaurantJpaEntity.restaurantId.eq(restaurantId)
+        )
+        .fetch();
   }
 
 

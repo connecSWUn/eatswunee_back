@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UpdateOrderMenuStatusCommand {
 
-  private Long orderMenuId;
+  private Long orderId;
   private OrderMenuStatus orderMenuStatus;
 
-  public UpdateOrderMenuStatusCommand(Long orderMenuId,
+  public UpdateOrderMenuStatusCommand(Long orderId,
       OrderMenuStatus orderMenuStatus) {
-    this.orderMenuId = orderMenuId;
+    this.orderId = orderId;
     this.orderMenuStatus = orderMenuStatus;
   }
 }

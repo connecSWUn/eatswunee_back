@@ -41,6 +41,12 @@ public class OrderMenuPersistenceAdapter implements FindOrderMenuPort ,
   }
 
   @Override
+  public List<OrderMenu> findOrderMenus(Long restaurantId, Long orderId) {
+    List<OrderMenuJpaEntity> orderMenuJpaEntities = orderMenuQueryRepository.findOrderMenusByOrderId(restaurantId, orderId);
+    return orderMenuJpaEntities.stream().map(orderMenuMapper::mapToDomainEntity).toList();
+  }
+
+  @Override
   public List<UserOrderMenuCommand> findUserMenuOrderList(Long userId) {
 
     return orderMenuQueryRepository.findUserOrderMenuList(userId);
@@ -62,6 +68,14 @@ public class OrderMenuPersistenceAdapter implements FindOrderMenuPort ,
     OrderMenuJpaEntity orderMenuJpaEntity = orderMenuMapper.mapToJpaEntity(orderMenu);
     OrderMenu savedOrderMenu = orderMenuMapper.mapToDomainEntity(orderMenuJpaRepository.save(orderMenuJpaEntity));
     return savedOrderMenu;
+  }
+
+  @Override
+  public void saveOrderMenus(List<OrderMenu> orderMenus) {
+
+    List<OrderMenuJpaEntity> orderMenuJpaEntities = orderMenuJpaRepository.saveAll(
+        orderMenus.stream().map(orderMenuMapper::mapToJpaEntity).toList());
+
   }
 }
 

@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UpdateOrderMenuStatusResponse {
 
-  private Long order_menu_id;
+  private Long order_id;
   private OrderMenuStatus to_order_menu_status;
 
   public UpdateOrderMenuStatusResponse(UpdateOrderMenuStatusCommand command) {
-    this.order_menu_id = command.getOrderMenuId();
+    this.order_id = command.getOrderId();
     this.to_order_menu_status = command.getOrderMenuStatus();
   }
 }

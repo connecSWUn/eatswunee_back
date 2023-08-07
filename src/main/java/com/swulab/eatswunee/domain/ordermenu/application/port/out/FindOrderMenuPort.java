@@ -10,4 +10,6 @@ public interface FindOrderMenuPort {
 
   OrderMenu findOrderMenuPort(Long orderMenuId);
 
+  List<OrderMenu> findOrderMenus(Long restaurantId, Long orderId);
+
 }
