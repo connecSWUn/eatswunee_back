@@ -10,16 +10,17 @@ public class OrderMenu {
 
   private Long orderMenuId;
   private int menuCnt;
-//  private Integer orderPrice; // 주문 가격
+  private OrderMenuStatus orderMenuStatus;
 
   private Menu menu;
   private Order order;
 
   @Builder
-  public OrderMenu(Long orderMenuId, int menuCnt, Integer orderPrice,
+  public OrderMenu(Long orderMenuId, int menuCnt, OrderMenuStatus orderMenuStatus, Integer orderPrice,
       Menu menu, Order order) {
     this.orderMenuId = orderMenuId;
     this.menuCnt = menuCnt;
+    this.orderMenuStatus = orderMenuStatus;
 //    this.orderPrice = orderPrice;
     this.menu = menu;
     this.order = order;
