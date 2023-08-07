@@ -15,6 +15,7 @@ import com.swulab.eatswunee.domain.order.domain.model.OrderStatus;
 import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.model.OrderMenuJpaEntity;
 import com.swulab.eatswunee.domain.ordermenu.application.port.out.command.FindRestaurantOrderMenuCommand;
 import com.swulab.eatswunee.domain.ordermenu.application.port.out.command.RestaurantNowOrderListCommand;
+import com.swulab.eatswunee.domain.ordermenu.domain.model.OrderMenuStatus;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -86,7 +87,7 @@ public class OrderMenuQueryRepository {
         .join(menuJpaEntity.restaurantJpaEntity, restaurantJpaEntity)
         .where(
             orderMenuJpaEntity.menuJpaEntity.restaurantJpaEntity.restaurantId.eq(restaurantId),
-            eqOrderStatus(OrderStatus.ONGOING)
+            eqOrderMenuStatus(OrderMenuStatus.ONGOING)
         ).transform(
             groupBy(orderMenuJpaEntity.orderJpaEntity).list(
                 Projections.constructor(RestaurantNowOrderListCommand.class,
@@ -110,7 +111,7 @@ public class OrderMenuQueryRepository {
         .join(menuJpaEntity.restaurantJpaEntity, restaurantJpaEntity)
         .where(
             orderMenuJpaEntity.menuJpaEntity.restaurantJpaEntity.restaurantId.eq(restaurantId),
-            eqOrderStatus(OrderStatus.COMPLETE)
+            eqOrderMenuStatus(OrderMenuStatus.COMPLETED)
         ).transform(
             groupBy(orderMenuJpaEntity.orderJpaEntity).list(
                 Projections.constructor(RestaurantNowOrderListCommand.class,
@@ -154,4 +155,10 @@ public class OrderMenuQueryRepository {
     log.info("[findOrderMenu] userId : {}", userId);
     return userId != null ? orderMenuJpaEntity.orderJpaEntity.userJpaEntity.id.eq(userId) : null;
   }
+
+  private BooleanExpression eqOrderMenuStatus(OrderMenuStatus orderMenuStatus) {
+    log.info("[findOrderMenu] orderMenuStatus : {}", orderMenuStatus);
+    return orderMenuStatus != null ? orderMenuJpaEntity.orderMenuStatus.eq(orderMenuStatus) : null;
+  }
+
 }

@@ -64,13 +64,6 @@ public class OrderMenuPersistenceAdapter implements FindOrderMenuPort ,
   }
 
   @Override
-  public OrderMenu saveOrderMenu(OrderMenu orderMenu) {
-    OrderMenuJpaEntity orderMenuJpaEntity = orderMenuMapper.mapToJpaEntity(orderMenu);
-    OrderMenu savedOrderMenu = orderMenuMapper.mapToDomainEntity(orderMenuJpaRepository.save(orderMenuJpaEntity));
-    return savedOrderMenu;
-  }
-
-  @Override
   public void saveOrderMenus(List<OrderMenu> orderMenus) {
 
     List<OrderMenuJpaEntity> orderMenuJpaEntities = orderMenuJpaRepository.saveAll(
