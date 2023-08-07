@@ -1,9 +1,10 @@
 package com.swulab.eatswunee.domain.ordermenu.application.port.out;
 
 import com.swulab.eatswunee.domain.ordermenu.domain.model.OrderMenu;
+import java.util.List;
 
 public interface SaveOrderMenuPort {
 
-  OrderMenu saveOrderMenu(OrderMenu orderMenu);
+  void saveOrderMenus(List<OrderMenu> orderMenus);
 
 }

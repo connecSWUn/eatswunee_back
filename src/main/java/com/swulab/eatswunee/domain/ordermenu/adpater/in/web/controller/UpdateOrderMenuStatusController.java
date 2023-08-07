@@ -5,7 +5,6 @@ import com.swulab.eatswunee.domain.ordermenu.adpater.in.web.dto.response.UpdateO
 import com.swulab.eatswunee.domain.ordermenu.application.port.in.UpdateOrderMenuStatusUseCase;
 import com.swulab.eatswunee.domain.ordermenu.application.port.in.command.UpdateOrderMenuStatusCommand;
 import com.swulab.eatswunee.global.common.adapter.web.in.dto.SuccessResponse;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -18,10 +17,10 @@ public class UpdateOrderMenuStatusController {
 
   public final UpdateOrderMenuStatusUseCase updateOrderMenuStatusUseCase;
 
-  @PatchMapping("/orderMenu/orderMenuStatus")
+  @PatchMapping("/order/orderMenuStatus")
   public ResponseEntity updateOrderMenuStatus(@RequestBody UpdateOrderMenuStatusRequest request) {
 
-    UpdateOrderMenuStatusCommand command = updateOrderMenuStatusUseCase.updateOrderMenuStatus(request.getOrderMenuId(), request.getOrderMenuStatus());
+    UpdateOrderMenuStatusCommand command = updateOrderMenuStatusUseCase.updateOrderMenuStatus(request.getRestaurantId(), request.getOrderId(), request.getOrderMenuStatus());
     UpdateOrderMenuStatusResponse response = new UpdateOrderMenuStatusResponse(command);
 
     return ResponseEntity.ok(SuccessResponse.create200SuccessResponse(response));

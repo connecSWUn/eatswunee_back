@@ -2,19 +2,17 @@ package com.swulab.eatswunee.domain.ordermenu.adpater.in.web.dto.request;
 
 import com.swulab.eatswunee.domain.ordermenu.domain.model.OrderMenuStatus;
 import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 
 @Getter
-@Slf4j
 public class UpdateOrderMenuStatusRequest {
 
-  public Long orderMenuId;
+  public Long restaurantId;
+  public Long orderId;
   public OrderMenuStatus orderMenuStatus;
 
-  public UpdateOrderMenuStatusRequest(Long orderMenuId, OrderMenuStatus orderMenuStatus) {
-
-    this.orderMenuId = orderMenuId;
+  public UpdateOrderMenuStatusRequest(Long restaurantId, Long orderId, OrderMenuStatus orderMenuStatus) {
+    this.restaurantId = restaurantId;
+    this.orderId = orderId;
     this.orderMenuStatus = orderMenuStatus;
-
   }
 }
