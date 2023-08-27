@@ -4,4 +4,5 @@ public interface ExistNotificationByOrderIdPort {
 
   Boolean existNotificationByOrderId(Long orderId);
 
+
 }

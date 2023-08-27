@@ -21,18 +21,22 @@ public class GetRestaurantNotificationResponse {
   @NoArgsConstructor(access = AccessLevel.PROTECTED)
   private class RestaurantNotificationResponse {
 
+    private Long notification_id;
     private Long order_id;
     private int order_num;
     private String order_title_menu;
     private int order_etc_menu_cnt;
     private LocalDateTime order_created_at;
+    private Boolean is_notification_read;
 
     public RestaurantNotificationResponse(FindRestaurantNotificationCommand command) {
+      this.notification_id = command.getOrderNotificationId();
       this.order_id = command.getOrderId();
       this.order_num = command.getOrderNum() - 1;
       this.order_title_menu = command.getMenuName();
       this.order_etc_menu_cnt = command.getOrderEtcMenuCnt();
       this.order_created_at = command.getOrderCreatedAt();
+      this.is_notification_read = command.getIsRead();
     }
   }
 

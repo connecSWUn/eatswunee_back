@@ -8,7 +8,10 @@ import static com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.swulab.eatswunee.domain.notification.adapter.out.persistence.jpa.model.NotificationJpaEntity;
+import com.swulab.eatswunee.domain.notification.adapter.out.persistence.jpa.model.OrderNotificationJpaEntity;
 import com.swulab.eatswunee.domain.notification.application.port.in.command.GetRevenueCommand;
+import com.swulab.eatswunee.domain.notification.application.port.out.command.FindIdAndIsReadCommand;
 import com.swulab.eatswunee.domain.notification.application.port.out.command.FindRestaurantNotificationCommand;
 import com.swulab.eatswunee.domain.notification.application.port.out.command.FindRevenueCommand;
 import java.util.List;
@@ -45,12 +48,12 @@ public class NotificationQueryRepository {
   public Boolean existNotificationByOrderId(Long orderId) {
 
     return jpaQueryFactory
+        .select(orderNotificationJpaEntity.orderJpaEntity.id.as("orderId"))
         .from(notificationJpaEntity)
         .where(
             orderNotificationJpaEntity.orderJpaEntity.id.eq(orderId)
         )
-        .select(orderNotificationJpaEntity.orderJpaEntity.id.as("orderId"))
-        .fetchFirst() != null;
+        .fetch().isEmpty();
 
   }
 
@@ -70,5 +73,21 @@ public class NotificationQueryRepository {
         )
         .fetch();
   }
+
+  public FindIdAndIsReadCommand findOrderNotificationByOrderIdAndRestaurantId(Long orderId, Long restaurantId) {
+    return jpaQueryFactory
+        .select(Projections.constructor(FindIdAndIsReadCommand.class,
+            orderNotificationJpaEntity.id.as("notificationId"),
+            orderNotificationJpaEntity.notificationIsRead.as("isRead")
+            ))
+        .from(orderNotificationJpaEntity)
+        .where(
+            orderNotificationJpaEntity.orderJpaEntity.id.eq(orderId),
+            orderNotificationJpaEntity.restaurantJpaEntity.restaurantId.eq(restaurantId)
+        )
+        .fetchOne();
+  }
+
+
 
 }
