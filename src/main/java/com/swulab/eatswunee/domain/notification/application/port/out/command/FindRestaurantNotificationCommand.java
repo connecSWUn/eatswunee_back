@@ -9,11 +9,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class FindRestaurantNotificationCommand {
 
+  private Long orderNotificationId;
   private Long orderId;
   private int orderNum;
   private LocalDateTime orderCreatedAt;
   private String menuName;
   private int orderEtcMenuCnt;
+  private Boolean isRead;
 
   public FindRestaurantNotificationCommand(Long orderId, int orderNum,
       LocalDateTime orderCreatedAt, String menuName, int orderEtcMenuCnt) {
@@ -22,5 +24,13 @@ public class FindRestaurantNotificationCommand {
     this.orderCreatedAt = orderCreatedAt;
     this.menuName = menuName;
     this.orderEtcMenuCnt = orderEtcMenuCnt;
+  }
+
+  public void setOrderNotificationId(Long orderNotificationId) {
+    this.orderNotificationId = orderNotificationId;
+  }
+
+  public void setRead(Boolean read) {
+    isRead = read;
   }
 }
