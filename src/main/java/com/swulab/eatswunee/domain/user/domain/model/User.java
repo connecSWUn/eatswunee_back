@@ -34,8 +34,9 @@ public class User {
   }
 
 
-
-
+  public void changeProfileImage(String profileUrl) {
+    this.profileUrl = profileUrl;
+  }
   public void mapImageToUrl(String url) {
     this.profileUrl = url;
   }
