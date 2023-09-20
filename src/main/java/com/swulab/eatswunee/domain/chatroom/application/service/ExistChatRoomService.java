@@ -13,9 +13,9 @@ public class ExistChatRoomService implements ExistChatRoomUseCase {
   private final ExistChatRoomPort existChatRoomPort;
 
   @Override
-  public ExsitChatRoomCommand getChatRoom(Long userId, Long recruitId) {
+  public ExsitChatRoomCommand getChatRoom(String chatRoomId) {
 
-    Boolean isExist = existChatRoomPort.existChatRoomByChatRoomId(Long.parseLong(userId + "0" + recruitId));
+    Boolean isExist = existChatRoomPort.existChatRoomByChatRoomId(chatRoomId);
 
     return new ExsitChatRoomCommand(isExist);
   }

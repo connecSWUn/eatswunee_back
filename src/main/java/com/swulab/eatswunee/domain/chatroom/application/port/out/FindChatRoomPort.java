@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface FindChatRoomPort {
 
-  ChatRoom findChatRoomById(Long chatRoom);
+  ChatRoom findChatRoomById(String chatRoom);
 
   List<ChatRoom> findAllChatRooms();
 

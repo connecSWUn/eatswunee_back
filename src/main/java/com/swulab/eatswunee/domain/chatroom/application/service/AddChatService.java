@@ -13,6 +13,7 @@ import jakarta.annotation.PostConstruct;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AddChatService implements AddChatRoomUseCase, FindChatRoomUseCase {
 
-  private Map<Long, ChatRoom> chatRooms; // chatId를 key로 갖고 ChatRoom을 value로 갖는 Map
+  private Map<String, ChatRoom> chatRooms; // chatId를 key로 갖고 ChatRoom을 value로 갖는 Map
   private final FindRecruitPort findRecruitPort;
   private final SaveChatRoomPort saveChatRoomPort;
   private final FindUserPort findUserPort;
@@ -39,9 +40,9 @@ public class AddChatService implements AddChatRoomUseCase, FindChatRoomUseCase {
   }
 
   @Override
-  public ChatRoom createRoom(Long userId, Long recruitId) { // userId : 채팅 신청한 사람
+  public ChatRoom createRoom(Long guestId, Long recruitId) { // userId : 채팅 신청한 사람
 
-    ChatRoom chatRoom = createChatRoom(userId, recruitId);
+    ChatRoom chatRoom = createChatRoom(guestId, recruitId);
 
     saveChatRoomPort.saveChatRoom(chatRoom);
     chatRooms.put(chatRoom.getChatRoomId(), chatRoom);
@@ -57,7 +58,7 @@ public class AddChatService implements AddChatRoomUseCase, FindChatRoomUseCase {
    */
   private ChatRoom createChatRoom(Long userId, Long recruitId) {
 
-    Long chatRoomId = Long.parseLong(userId.toString() + "0" + recruitId.toString()); // 채팅방 아이디 생성
+    String chatRoomId = UUID.randomUUID().toString();
 
     Recruit recruit = findRecruitPort.findRecruit(recruitId); // 모집 게시글 아이디 찾기
     User user = findUserPort.findUser(userId);
@@ -65,7 +66,7 @@ public class AddChatService implements AddChatRoomUseCase, FindChatRoomUseCase {
     return ChatRoom.builder() // 채팅방 만들기
         .chatRoomId(chatRoomId)
         .recruit(recruit)
-        .user(user)
+        .guest(user)
         .build();
   }
 
@@ -77,7 +78,7 @@ public class AddChatService implements AddChatRoomUseCase, FindChatRoomUseCase {
   }
 
   @Override
-  public ChatRoom findRoomById(Long roomId) {
+  public ChatRoom findRoomById(String roomId) {
     return chatRooms.get(roomId);
   }
 }

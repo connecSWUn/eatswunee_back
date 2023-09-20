@@ -21,26 +21,26 @@ import org.hibernate.annotations.CreationTimestamp;
 public class ChatRoomJpaEntity {
 
   @Id
-  private Long chatRoomId;
+  private String chatRoomId;
 
   @CreationTimestamp
   private LocalDateTime createdAt;
 
   @ManyToOne
   @JoinColumn(name = "user_id")
-  private UserJpaEntity userJpaEntity;
+  private UserJpaEntity guestJpaEntity;
 
   @ManyToOne
   @JoinColumn(name = "recruit_id")
   private RecruitJpaEntity recruitJpaEntity;
 
   @Builder
-  public ChatRoomJpaEntity(Long chatRoomId, LocalDateTime createdAt,
-      UserJpaEntity userJpaEntity,
+  public ChatRoomJpaEntity(String chatRoomId, LocalDateTime createdAt,
+      UserJpaEntity guestJpaEntity,
       RecruitJpaEntity recruitJpaEntity) {
     this.chatRoomId = chatRoomId;
     this.createdAt = createdAt;
-    this.userJpaEntity = userJpaEntity;
+    this.guestJpaEntity = guestJpaEntity;
     this.recruitJpaEntity = recruitJpaEntity;
   }
 }

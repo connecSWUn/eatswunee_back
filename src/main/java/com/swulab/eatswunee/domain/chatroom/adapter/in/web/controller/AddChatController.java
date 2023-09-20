@@ -21,8 +21,8 @@ public class AddChatController {
 
   @GetMapping("/chat/create/{recruitId}")
   public ResponseEntity createRoom(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long recruitId) {
-    Long userId = Long.parseLong(userDetails.getUsername());
-    ChatRoom chatRoom = addChatRoomUseCase.createRoom(userId, recruitId);
+    Long guestId = Long.parseLong(userDetails.getUsername());
+    ChatRoom chatRoom = addChatRoomUseCase.createRoom(guestId, recruitId);
     CreateRoomResponse response = new CreateRoomResponse(chatRoom.getChatRoomId());
     return ResponseEntity.ok(SuccessResponse.create201SuccessResponse(response));
   }

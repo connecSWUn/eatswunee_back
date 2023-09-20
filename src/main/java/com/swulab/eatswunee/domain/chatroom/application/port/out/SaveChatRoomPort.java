@@ -4,6 +4,6 @@ import com.swulab.eatswunee.domain.chatroom.domain.model.ChatRoom;
 
 public interface SaveChatRoomPort {
 
-  Long saveChatRoom(ChatRoom chatRoom);
+  String saveChatRoom(ChatRoom chatRoom);
 
 }

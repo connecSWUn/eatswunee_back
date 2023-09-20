@@ -32,7 +32,7 @@ public class ChatRoomPersistenceAdapter implements FindChatRoomPort, SaveChatRoo
 
 
   @Override
-  public ChatRoom findChatRoomById(Long chatRoomId) {
+  public ChatRoom findChatRoomById(String chatRoomId) {
     ChatRoomJpaEntity chatRoomJpaEntity = chatRoomJpaRepository.findById(chatRoomId)
         .orElseThrow(() -> new NotFoundChatRoomException(
             ErrorCode.CHATROOM_NOT_FOUND, "[chatRoomId] : " + chatRoomId + "인 채팅방이 존재하지 않습니다."));
@@ -48,7 +48,7 @@ public class ChatRoomPersistenceAdapter implements FindChatRoomPort, SaveChatRoo
   }
 
   @Override
-  public Long saveChatRoom(ChatRoom chatRoom) {
+  public String saveChatRoom(ChatRoom chatRoom) {
     ChatRoomJpaEntity chatRoomJpaEntity = chatRoomMapper.mapToJpaEntity(chatRoom);
     log.info("[ChatRoomPersistenceAdapter] chatRoomId : {}", chatRoomJpaEntity.getChatRoomId());
 
@@ -57,12 +57,12 @@ public class ChatRoomPersistenceAdapter implements FindChatRoomPort, SaveChatRoo
   }
 
   @Override
-  public Boolean existChatRoomByChatRoomId(Long chatRoomId) {
+  public Boolean existChatRoomByChatRoomId(String chatRoomId) {
     return chatRoomJpaRepository.existsById(chatRoomId);
   }
 
   @Override
-  public List<FindChatMessageCommand> findChatMessages(Long chatRoomId) {
+  public List<FindChatMessageCommand> findChatMessages(String chatRoomId) {
     Optional<List<FindChatMessageCommand>> optionalCommand = chatRoomQueryRepository.findChatRoomMessages(
         chatRoomId);
     List<FindChatMessageCommand> commands = optionalCommand.orElse(new ArrayList<>());

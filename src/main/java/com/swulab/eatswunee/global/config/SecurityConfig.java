@@ -33,7 +33,8 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         )
         .authorizeHttpRequests((requests) -> requests
-            .requestMatchers("/", "/**","/login/**", "/signup/**").permitAll()
+            .requestMatchers("/", "/**","/login/**", "/signup/**",
+                "/chat/exist/**").permitAll()
             .anyRequest().authenticated()
         )
         .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),

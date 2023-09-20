@@ -16,7 +16,7 @@ public class ChatMessageQueryRepository {
   private final JPAQueryFactory jpaQueryFactory;
 
 
-  public LastChatMessage findLastChatMessage(Long chatRoomId) {
+  public LastChatMessage findLastChatMessage(String chatRoomId) {
 
     return jpaQueryFactory
         .select(Projections.constructor(LastChatMessage.class,

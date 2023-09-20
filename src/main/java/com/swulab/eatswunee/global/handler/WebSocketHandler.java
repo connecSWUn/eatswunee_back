@@ -61,8 +61,8 @@ public class WebSocketHandler extends TextWebSocketHandler { // TextWebSocketHan
 
     chatRoom.handlerActions(session, chatMessage, sendMessageService);
 
-    Long recruitId = getRecruitIdFromChatRoomId(chatMessage.getChatRoom().getChatRoomId());
-    Recruit recruit = findRecruitPort.findRecruit(recruitId);
+    ChatRoom findChatRoom = findChatRoomPort.findChatRoomById(chatMessage.getChatRoom().getChatRoomId());
+    Recruit recruit = findRecruitPort.findRecruit(findChatRoom.getRecruit().getRecruitId());
 
     Long userId = recruit.getUser().getUserId();
     User user = findUserPort.findUser(userId);
@@ -71,10 +71,10 @@ public class WebSocketHandler extends TextWebSocketHandler { // TextWebSocketHan
 
   }
 
-  private Long getRecruitIdFromChatRoomId(Long chatRoomId) {
-    String[] split = chatRoomId.toString().split("0");
-    return Long.parseLong(split[1]);
-  }
+//  private Long getRecruitIdFromChatRoomId(String chatRoomId) {
+//    String[] split = chatRoomId.toString().split("0");
+//    return chatRoomId;
+//  }
 
   /*
   handlerAction() :

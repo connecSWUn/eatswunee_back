@@ -21,7 +21,7 @@ public class UserChatRoomListResponse {
   @NoArgsConstructor(access = AccessLevel.PROTECTED)
   public static class UserChatRoom {
 
-    private Long chatRoom;
+    private String chatRoom;
     private Long recruitId;
     private String recruitTitle;
     private String senderNickname;

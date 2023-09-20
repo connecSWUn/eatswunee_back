@@ -18,7 +18,7 @@ public class ChatRoomMapper {
     return ChatRoom.builder()
         .chatRoomId(chatRoomJpaEntity.getChatRoomId())
         .createdAt(chatRoomJpaEntity.getCreatedAt())
-        .user(userMapper.mapToDomainEntity(chatRoomJpaEntity.getUserJpaEntity()))
+        .guest(userMapper.mapToDomainEntity(chatRoomJpaEntity.getGuestJpaEntity()))
         .recruit(recruitMapper.mapToDomainEntity(chatRoomJpaEntity.getRecruitJpaEntity()))
         .build();
   }
@@ -27,7 +27,7 @@ public class ChatRoomMapper {
     return ChatRoomJpaEntity.builder()
         .chatRoomId(chatRoom.getChatRoomId())
         .createdAt(chatRoom.getCreatedAt())
-        .userJpaEntity(userMapper.mapToJpaEntity(chatRoom.getUser()))
+        .guestJpaEntity(userMapper.mapToJpaEntity(chatRoom.getGuest()))
         .recruitJpaEntity(recruitMapper.mapToJpaEntity(chatRoom.getRecruit()))
         .build();
   }

@@ -15,20 +15,20 @@ import org.springframework.web.socket.WebSocketSession;
 @Getter
 public class ChatRoom {
 
-  private Long chatRoomId;
+  private String chatRoomId;
   private LocalDateTime createdAt;
-  private User user; // 채팅 보낸 사람
+  private User guest; // 채팅방 입장한 사람
   private Recruit recruit;
 
   private Set<WebSocketSession> sessions = new HashSet<>();
 
 
   @Builder
-  public ChatRoom(Long chatRoomId, LocalDateTime createdAt,
-      User user, Recruit recruit) {
+  public ChatRoom(String chatRoomId, LocalDateTime createdAt,
+      User guest, Recruit recruit) {
     this.chatRoomId = chatRoomId;
     this.createdAt = createdAt;
-    this.user = user;
+    this.guest = guest;
     this.recruit = recruit;
   }
 

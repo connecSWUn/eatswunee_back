@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CreateRoomResponse {
 
-  private Long chat_room_id;
+  private String chat_room_id;
 
-  public CreateRoomResponse(Long chat_room_id) {
+  public CreateRoomResponse(String chat_room_id) {
     this.chat_room_id = chat_room_id;
   }
 }

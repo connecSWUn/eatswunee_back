@@ -7,6 +7,6 @@ public interface FindChatRoomUseCase {
 
   List<ChatRoom> findAllRoom();
 
-  ChatRoom findRoomById(Long roomId);
+  ChatRoom findRoomById(String roomId);
 
 }
