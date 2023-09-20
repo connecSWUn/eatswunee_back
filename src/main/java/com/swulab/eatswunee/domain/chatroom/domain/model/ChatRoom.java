@@ -17,7 +17,7 @@ public class ChatRoom {
 
   private String chatRoomId;
   private LocalDateTime createdAt;
-  private User user; // 채팅 보낸 사람
+  private User guest; // 채팅방 입장한 사람
   private Recruit recruit;
 
   private Set<WebSocketSession> sessions = new HashSet<>();
@@ -25,10 +25,10 @@ public class ChatRoom {
 
   @Builder
   public ChatRoom(String chatRoomId, LocalDateTime createdAt,
-      User user, Recruit recruit) {
+      User guest, Recruit recruit) {
     this.chatRoomId = chatRoomId;
     this.createdAt = createdAt;
-    this.user = user;
+    this.guest = guest;
     this.recruit = recruit;
   }
 

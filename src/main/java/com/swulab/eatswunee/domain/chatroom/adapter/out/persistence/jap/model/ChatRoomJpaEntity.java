@@ -28,7 +28,7 @@ public class ChatRoomJpaEntity {
 
   @ManyToOne
   @JoinColumn(name = "user_id")
-  private UserJpaEntity userJpaEntity;
+  private UserJpaEntity guestJpaEntity;
 
   @ManyToOne
   @JoinColumn(name = "recruit_id")
@@ -36,11 +36,11 @@ public class ChatRoomJpaEntity {
 
   @Builder
   public ChatRoomJpaEntity(String chatRoomId, LocalDateTime createdAt,
-      UserJpaEntity userJpaEntity,
+      UserJpaEntity guestJpaEntity,
       RecruitJpaEntity recruitJpaEntity) {
     this.chatRoomId = chatRoomId;
     this.createdAt = createdAt;
-    this.userJpaEntity = userJpaEntity;
+    this.guestJpaEntity = guestJpaEntity;
     this.recruitJpaEntity = recruitJpaEntity;
   }
 }
