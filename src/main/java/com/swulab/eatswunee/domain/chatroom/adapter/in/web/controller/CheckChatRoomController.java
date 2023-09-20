@@ -19,7 +19,7 @@ public class CheckChatRoomController {
   private final ExistChatRoomUseCase existChatRoomUseCase;
 
   @GetMapping("/chat/exist/{chatRoomId}")
-  public ResponseEntity getChatRoom(@AuthenticationPrincipal UserDetails userDetails, @PathVariable String chatRoomId) {
+  public ResponseEntity getChatRoom(@PathVariable("chatRoomId") String chatRoomId) {
 
     ExsitChatRoomCommand command = existChatRoomUseCase.getChatRoom(chatRoomId);
     ExistChatRoomResponse response = new ExistChatRoomResponse(command);
