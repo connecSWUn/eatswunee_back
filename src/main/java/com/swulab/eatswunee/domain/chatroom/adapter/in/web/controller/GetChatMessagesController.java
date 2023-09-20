@@ -20,7 +20,7 @@ public class GetChatMessagesController {
 
 
   @GetMapping("/chat/enter/{chatRoomId}")
-  public ResponseEntity getChatMessages2UseCase(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long chatRoomId) {
+  public ResponseEntity getChatMessages2UseCase(@AuthenticationPrincipal UserDetails userDetails, @PathVariable String chatRoomId) {
 
     GetChatMessagesCommand command = getChatMessagesUseCase.getChatMessages(Long.parseLong(
         userDetails.getUsername()), chatRoomId);

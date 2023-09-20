@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserChatRoomCommand {
 
-  private Long chatRoomId;
+  private String chatRoomId;
   private String recruitTitle;
   private String senderNickname;
   private String senderProfileImgUrl;
@@ -19,7 +19,7 @@ public class UserChatRoomCommand {
   private String lastChatMessage;
 
 
-  public UserChatRoomCommand(Long chatRoomId, String recruitTitle, String senderNickname,
+  public UserChatRoomCommand(String chatRoomId, String recruitTitle, String senderNickname,
       String senderProfileImgUrl) {
     this.chatRoomId = chatRoomId;
     this.recruitTitle = recruitTitle;

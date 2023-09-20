@@ -21,7 +21,7 @@ import org.hibernate.annotations.CreationTimestamp;
 public class ChatRoomJpaEntity {
 
   @Id
-  private Long chatRoomId;
+  private String chatRoomId;
 
   @CreationTimestamp
   private LocalDateTime createdAt;
@@ -35,7 +35,7 @@ public class ChatRoomJpaEntity {
   private RecruitJpaEntity recruitJpaEntity;
 
   @Builder
-  public ChatRoomJpaEntity(Long chatRoomId, LocalDateTime createdAt,
+  public ChatRoomJpaEntity(String chatRoomId, LocalDateTime createdAt,
       UserJpaEntity userJpaEntity,
       RecruitJpaEntity recruitJpaEntity) {
     this.chatRoomId = chatRoomId;

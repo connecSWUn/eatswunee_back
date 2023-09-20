@@ -26,7 +26,7 @@ public class ChatMessagePersistenceAdapter implements SaveChatMessagePort, FindL
   }
 
   @Override
-  public LastChatMessage findLastChatMessage(Long chatRoomId) {
+  public LastChatMessage findLastChatMessage(String chatRoomId) {
     return chatMessageQueryRepository.findLastChatMessage(chatRoomId);
   }
 }

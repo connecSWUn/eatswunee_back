@@ -20,7 +20,7 @@ public class ChatRoomQueryRepository {
 
   private final JPAQueryFactory jpaQueryFactory;
 
-  public Optional<List<FindChatMessageCommand>> findChatRoomMessages(Long chatRoomId) {
+  public Optional<List<FindChatMessageCommand>> findChatRoomMessages(String chatRoomId) {
 
     return Optional.of(jpaQueryFactory
         .select(Projections.constructor(FindChatMessageCommand.class,

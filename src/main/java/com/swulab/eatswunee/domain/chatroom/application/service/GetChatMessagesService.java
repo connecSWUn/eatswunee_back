@@ -20,7 +20,7 @@ public class GetChatMessagesService implements GetChatMessagesUseCase {
   private final FindUserPort findUserPort;
 
   @Override
-  public GetChatMessagesCommand getChatMessages(Long userId, Long chatRoomId) {
+  public GetChatMessagesCommand getChatMessages(Long userId, String chatRoomId) {
 
     String userName = findUserPort.findUser(userId).getName();
     String[] split = String.valueOf(chatRoomId).split("0");

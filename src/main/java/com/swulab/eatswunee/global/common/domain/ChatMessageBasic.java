@@ -11,12 +11,12 @@ import lombok.Setter;
 public class ChatMessageBasic {
 
   private MessageType messageType;
-  private Long chatRoomId;
+  private String chatRoomId;
   private Long senderId;
   private String message;
 
   public ChatMessageBasic(
-      MessageType messageType, Long chatRoomId, Long senderId, String message) {
+      MessageType messageType, String chatRoomId, Long senderId, String message) {
     this.messageType = messageType;
     this.chatRoomId = chatRoomId;
     this.senderId = senderId;

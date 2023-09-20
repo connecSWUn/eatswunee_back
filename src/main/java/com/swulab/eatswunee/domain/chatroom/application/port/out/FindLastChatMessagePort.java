@@ -4,6 +4,6 @@ import com.swulab.eatswunee.domain.chatroom.application.port.out.command.LastCha
 
 public interface FindLastChatMessagePort {
 
-  LastChatMessage findLastChatMessage(Long chatRoomId);
+  LastChatMessage findLastChatMessage(String chatRoomId);
 
 }
