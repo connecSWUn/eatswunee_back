@@ -40,9 +40,9 @@ public class AddChatService implements AddChatRoomUseCase, FindChatRoomUseCase {
   }
 
   @Override
-  public ChatRoom createRoom(Long userId, Long recruitId) { // userId : 채팅 신청한 사람
+  public ChatRoom createRoom(Long guestId, Long recruitId) { // userId : 채팅 신청한 사람
 
-    ChatRoom chatRoom = createChatRoom(userId, recruitId);
+    ChatRoom chatRoom = createChatRoom(guestId, recruitId);
 
     saveChatRoomPort.saveChatRoom(chatRoom);
     chatRooms.put(chatRoom.getChatRoomId(), chatRoom);
@@ -66,7 +66,7 @@ public class AddChatService implements AddChatRoomUseCase, FindChatRoomUseCase {
     return ChatRoom.builder() // 채팅방 만들기
         .chatRoomId(chatRoomId)
         .recruit(recruit)
-        .user(user)
+        .guest(user)
         .build();
   }
 

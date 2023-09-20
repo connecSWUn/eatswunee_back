@@ -44,8 +44,8 @@ public class ChatRoomQueryRepository {
         .select(Projections.constructor(UserChatRoomCommand.class,
             chatRoomJpaEntity.chatRoomId,
             chatRoomJpaEntity.recruitJpaEntity.title.as("recruitTitle"),
-            chatRoomJpaEntity.userJpaEntity.name.as("senderNickname"),
-            chatRoomJpaEntity.userJpaEntity.profileUrl.as("senderProfileImgUrl")
+            chatRoomJpaEntity.guestJpaEntity.name.as("senderNickname"),
+            chatRoomJpaEntity.guestJpaEntity.profileUrl.as("senderProfileImgUrl")
         ))
         .from(chatRoomJpaEntity)
         .join(chatRoomJpaEntity.recruitJpaEntity, recruitJpaEntity)
@@ -62,7 +62,7 @@ public class ChatRoomQueryRepository {
             chatRoomJpaEntity.chatRoomId,
             chatRoomJpaEntity.recruitJpaEntity.title.as("recruitTitle"),
             chatRoomJpaEntity.recruitJpaEntity.userJpaEntity.name.as("senderNickname"),
-            chatRoomJpaEntity.userJpaEntity.profileUrl.as("senderProfileImgUrl")
+            chatRoomJpaEntity.guestJpaEntity.profileUrl.as("senderProfileImgUrl")
         ))
         .from(chatRoomJpaEntity)
         .join(chatRoomJpaEntity.recruitJpaEntity, recruitJpaEntity)
