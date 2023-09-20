@@ -4,6 +4,6 @@ import com.swulab.eatswunee.domain.chatroom.application.port.in.command.GetChatM
 
 public interface GetChatMessagesUseCase {
 
-  GetChatMessagesCommand getChatMessages(Long userId, String chatRoomId);
+  GetChatMessagesCommand getChatMessages(Long guestId, String chatRoomId);
 
 }
