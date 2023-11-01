@@ -36,7 +36,7 @@ public class GetRestaurantNotificationResponse {
       this.order_title_menu = command.getMenuName();
       this.order_etc_menu_cnt = command.getOrderEtcMenuCnt();
       this.order_created_at = command.getOrderCreatedAt();
-      this.is_notification_read = command.getIsRead();
+      this.is_notification_read = true;
     }
   }
 
