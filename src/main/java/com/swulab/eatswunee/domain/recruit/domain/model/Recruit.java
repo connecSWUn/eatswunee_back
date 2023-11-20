@@ -58,4 +58,11 @@ public class Recruit {
     setStatus(status);
   }
 
+  public void changeRecruitContent(String content) {
+    setContent(content);
+  }
+
+  private void setContent(String content) {
+    this.content = content;
+  }
 }
