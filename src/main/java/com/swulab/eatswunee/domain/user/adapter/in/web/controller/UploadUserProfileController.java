@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -23,13 +24,22 @@ public class UploadUserProfileController {
   private final AddImageUseCase addImageUseCase;
   private final UpdateUserUseCase updateUserUseCase;
 
-  @PostMapping(value="/user/profile",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-  public ResponseEntity UploadUserProfile(@AuthenticationPrincipal UserDetails userDetails, @RequestParam(value="image") MultipartFile file) {
+  @PostMapping(value = "/user/profile/{is_default}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+  public ResponseEntity UploadUserProfile(@AuthenticationPrincipal UserDetails userDetails,
+                                          @RequestParam(value = "image") MultipartFile file,
+                                          @PathVariable(value = "is_default") Boolean isDefault) {
 
     long userId = Long.parseLong(userDetails.getUsername());
 
-    String fileName = addImageUseCase.uploadImage(file);
+    String fileName;
+    if (!isDefault) {
+      fileName = addImageUseCase.uploadImage(file);
+    } else {
+      fileName = "user_default_profile.png";
+    }
+
     log.info("{}", fileName);
+
     updateUserUseCase.updateUserProfileUrl(userId, fileName);
 
     return ResponseEntity.ok(SuccessResponse.create201SuccessResponse());
