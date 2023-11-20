@@ -2,6 +2,7 @@ package com.swulab.eatswunee.domain.chatroom.adapter.in.web.controller;
 
 import com.swulab.eatswunee.domain.chatroom.adapter.in.dto.response.GetChatMessagesResponse;
 import com.swulab.eatswunee.domain.chatroom.application.port.in.GetChatMessagesUseCase;
+import com.swulab.eatswunee.domain.chatroom.application.port.in.GetUserChatRoomListUseCase;
 import com.swulab.eatswunee.domain.chatroom.application.port.in.command.GetChatMessagesCommand;
 import com.swulab.eatswunee.global.common.adapter.web.in.dto.SuccessResponse;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GetChatMessagesController {
 
   private final GetChatMessagesUseCase getChatMessagesUseCase;
+  private final GetUserChatRoomListUseCase getUserChatRoomListUseCase;
 
 
   @GetMapping("/chat/enter/{chatRoomId}")
@@ -24,8 +26,9 @@ public class GetChatMessagesController {
 
     long guestId = Long.parseLong(userDetails.getUsername());
 
+
     GetChatMessagesCommand command = getChatMessagesUseCase.getChatMessages(guestId, chatRoomId);
-    GetChatMessagesResponse response = new GetChatMessagesResponse(command);
+    GetChatMessagesResponse response = new GetChatMessagesResponse(command, getUserChatRoomListUseCase.getUserChatRoomList(guestId).size());
 
     return ResponseEntity.ok(SuccessResponse.create200SuccessResponse(response));
   }
