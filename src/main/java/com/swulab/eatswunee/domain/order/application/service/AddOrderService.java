@@ -4,6 +4,7 @@ import com.swulab.eatswunee.domain.menu.application.port.out.FindMenuPort;
 import com.swulab.eatswunee.domain.menu.domain.model.Menu;
 import com.swulab.eatswunee.domain.order.application.port.in.AddOrderUseCase;
 import com.swulab.eatswunee.domain.order.application.port.in.command.AddOrderCommand;
+import com.swulab.eatswunee.domain.order.application.port.out.GetOrderNumPort;
 import com.swulab.eatswunee.domain.order.application.port.out.SaveOrderPort;
 import com.swulab.eatswunee.domain.order.domain.model.Order;
 import com.swulab.eatswunee.domain.order.domain.model.OrderStatus;
@@ -18,39 +19,43 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AddOrderService implements AddOrderUseCase {
 
-  private final SaveOrderPort saveOrderPort;
-  private final FindUserPort findUserPort;
-  private final FindMenuPort findMenuPort;
-  private int orderNum = 1;
+    private final GetOrderNumPort orderNumPort;
 
-  @Override
-  public Long addOrder(Long userId, List<AddOrderCommand> commands) {
+    private final SaveOrderPort saveOrderPort;
+    private final FindUserPort findUserPort;
+    private final FindMenuPort findMenuPort;
 
-    User user = findUserPort.findUser(userId);
 
-    Order order = Order.builder()
-        .orderNum(orderNum++)
-        .orderStatus(OrderStatus.ONGOING)
-        .user(user)
-        .build();
+    @Override
+    public Long addOrder(Long userId, List<AddOrderCommand> commands) {
 
-    List<OrderMenu> orderMenus = commands.stream()
-        .map(
-            command -> {
+        User user = findUserPort.findUser(userId);
 
-              Menu menu = findMenuPort.findMenu(command.getMenuId());
+        Integer orderNum = orderNumPort.getOrderNum();
 
-              return OrderMenu.builder()
-                  .menuCnt(command.getMenuCnt())
-                  .orderPrice(menu.getPrice())
-                  .order(order)
-                  .menu(menu)
-                  .build();
-            }
-        ).toList();
+        Order order = Order.builder()
+                .orderNum(orderNum)
+                .orderStatus(OrderStatus.ONGOING)
+                .user(user)
+                .build();
 
-    order.updateOrderMenus(orderMenus);
+        List<OrderMenu> orderMenus = commands.stream()
+                .map(
+                        command -> {
 
-    return saveOrderPort.saveOrder(order);
-  }
+                            Menu menu = findMenuPort.findMenu(command.getMenuId());
+
+                            return OrderMenu.builder()
+                                    .menuCnt(command.getMenuCnt())
+                                    .orderPrice(menu.getPrice())
+                                    .order(order)
+                                    .menu(menu)
+                                    .build();
+                        }
+                ).toList();
+
+        order.updateOrderMenus(orderMenus);
+
+        return saveOrderPort.saveOrder(order);
+    }
 }
