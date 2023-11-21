@@ -1,6 +1,7 @@
 package com.swulab.eatswunee.global.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.firebase.messaging.Notification;
 import com.swulab.eatswunee.domain.chatmessage.application.port.out.SaveChatMessagePort;
 import com.swulab.eatswunee.domain.chatmessage.application.service.SendMessageService;
 import com.swulab.eatswunee.domain.chatmessage.domain.model.ChatMessage;
@@ -11,6 +12,7 @@ import com.swulab.eatswunee.domain.recruit.application.port.out.FindRecruitPort;
 import com.swulab.eatswunee.domain.recruit.domain.model.Recruit;
 import com.swulab.eatswunee.domain.user.application.port.out.FindUserPort;
 import com.swulab.eatswunee.domain.user.domain.model.User;
+import com.swulab.eatswunee.global.common.application.port.in.FcmNotificationUseCase;
 import com.swulab.eatswunee.global.common.application.service.FirebaseCloudMessageService;
 import com.swulab.eatswunee.global.common.domain.ChatMessageBasic;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +35,10 @@ public class WebSocketHandler extends TextWebSocketHandler { // TextWebSocketHan
   private final SaveChatMessagePort saveChatMessagePort;
   private final FindRecruitPort findRecruitPort;
 
+
+
   private final FirebaseCloudMessageService firebaseCloudMessageService;
+  private final FcmNotificationUseCase fcmNotificationUseCase;
 
 
   @Override
@@ -44,14 +49,8 @@ public class WebSocketHandler extends TextWebSocketHandler { // TextWebSocketHan
 
     ChatMessageBasic chatMessageBasic = objectMapper.readValue(payload, ChatMessageBasic.class);
 
+    ChatMessage chatMessage = createChatMessage(chatMessageBasic);
 
-    ChatMessage chatMessage = ChatMessage.builder()
-        .message(chatMessageBasic.getMessage())
-        .isRead(false)
-        .type(chatMessageBasic.getMessageType())
-        .user(findUserPort.findUser(chatMessageBasic.getSenderId()))
-        .chatRoom(findChatRoomPort.findChatRoomById(chatMessageBasic.getChatRoomId()))
-        .build();
 
     saveChatMessagePort.saveChatMessage(chatMessage);
 
@@ -68,7 +67,26 @@ public class WebSocketHandler extends TextWebSocketHandler { // TextWebSocketHan
     User user = findUserPort.findUser(userId);
 
     firebaseCloudMessageService.sendMessageTo(user.getFcmToken(), chatMessage.getUser().getName(), chatMessage.getMessage());
+    fcmNotificationUseCase.sendNotification(createChatNotification(user, chatMessage), userId);
 
+  }
+
+  private ChatMessage createChatMessage(ChatMessageBasic chatMessageBasic) {
+    ChatMessage chatMessage = ChatMessage.builder()
+        .message(chatMessageBasic.getMessage())
+        .isRead(false)
+        .type(chatMessageBasic.getMessageType())
+        .user(findUserPort.findUser(chatMessageBasic.getSenderId()))
+        .chatRoom(findChatRoomPort.findChatRoomById(chatMessageBasic.getChatRoomId()))
+        .build();
+    return chatMessage;
+  }
+
+  private Notification createChatNotification(User user, ChatMessage chatMessage) {
+    return Notification.builder()
+            .setTitle(user.getName())
+            .setBody(chatMessage.getMessage())
+            .setImage("").build();
   }
 
 //  private Long getRecruitIdFromChatRoomId(String chatRoomId) {

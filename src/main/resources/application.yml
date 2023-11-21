@@ -6,10 +6,12 @@ spring:
         - localdb
         - s3
         - jwt-local
+        - fcm-loc
       dev:
         - devdb
         - s3
         - jwt-dev
+        - fcm-dev
   pid:
     file: /home/ubuntu/swulab/eatswunee/eatswunee.pid
 
