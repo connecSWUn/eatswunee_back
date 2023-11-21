@@ -30,32 +30,36 @@ public class AddOrderService implements AddOrderUseCase {
     public Long addOrder(Long userId, List<AddOrderCommand> commands) {
 
         User user = findUserPort.findUser(userId);
-
         Integer orderNum = orderNumPort.getOrderNum();
 
-        Order order = Order.builder()
+        Order order = createOrder(user, orderNum);
+        List<OrderMenu> orderMenus = getOrderMenus(commands, order);
+        order.updateOrderMenus(orderMenus);
+
+        return saveOrderPort.saveOrder(order);
+    }
+
+    private Order createOrder(User user, Integer orderNum) {
+        return Order.builder()
                 .orderNum(orderNum)
                 .orderStatus(OrderStatus.ONGOING)
                 .user(user)
                 .build();
+    }
 
-        List<OrderMenu> orderMenus = commands.stream()
-                .map(
-                        command -> {
+    private List<OrderMenu> getOrderMenus(List<AddOrderCommand> commands, Order order) {
+        return commands.stream()
+                .map(command -> {
+                    Menu menu = findMenuPort.findMenu(command.getMenuId());
+                    return createOrderMenu(order, command, menu);}).toList();
+    }
 
-                            Menu menu = findMenuPort.findMenu(command.getMenuId());
-
-                            return OrderMenu.builder()
-                                    .menuCnt(command.getMenuCnt())
-                                    .orderPrice(menu.getPrice())
-                                    .order(order)
-                                    .menu(menu)
-                                    .build();
-                        }
-                ).toList();
-
-        order.updateOrderMenus(orderMenus);
-
-        return saveOrderPort.saveOrder(order);
+    private OrderMenu createOrderMenu(Order order, AddOrderCommand command, Menu menu) {
+        return OrderMenu.builder()
+                .menuCnt(command.getMenuCnt())
+                .orderPrice(menu.getPrice())
+                .order(order)
+                .menu(menu)
+                .build();
     }
 }
