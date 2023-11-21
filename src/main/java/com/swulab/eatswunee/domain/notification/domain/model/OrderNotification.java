@@ -12,14 +12,13 @@ import lombok.NoArgsConstructor;
 public class OrderNotification extends Notification {
 
   private Order order;
-
   private Restaurant restaurant;
 
   public OrderNotification(Long notificationId, String notificationContent,
       Boolean notificationIsRead, LocalDateTime notificationCreatedAt,
-      String notificationType, Order order, Restaurant restaurant) {
+      String notificationType, Order order, Restaurant restaurant, NotificationCategory notificationCategory) {
     super(notificationId, notificationContent, notificationIsRead, notificationCreatedAt,
-        notificationType);
+        notificationType, notificationCategory);
     this.order = order;
     this.restaurant = restaurant;
   }

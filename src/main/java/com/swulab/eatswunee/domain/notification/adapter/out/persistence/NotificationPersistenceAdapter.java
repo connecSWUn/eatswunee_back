@@ -1,6 +1,5 @@
 package com.swulab.eatswunee.domain.notification.adapter.out.persistence;
 
-import com.swulab.eatswunee.domain.notification.application.port.in.command.GetRevenueCommand;
 import com.swulab.eatswunee.domain.notification.application.port.out.ExistNotificationByOrderIdPort;
 import com.swulab.eatswunee.domain.notification.application.port.out.FindOrderNotificationPort;
 import com.swulab.eatswunee.domain.notification.application.port.out.FindRestaurantNotificationPort;
@@ -8,7 +7,6 @@ import com.swulab.eatswunee.domain.notification.application.port.out.command.Fin
 import com.swulab.eatswunee.domain.notification.application.port.out.command.FindRestaurantNotificationCommand;
 import com.swulab.eatswunee.domain.notification.application.port.out.FindRevenuePort;
 import com.swulab.eatswunee.domain.notification.application.port.out.command.FindRevenueCommand;
-import com.swulab.eatswunee.domain.notification.domain.model.OrderNotification;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
