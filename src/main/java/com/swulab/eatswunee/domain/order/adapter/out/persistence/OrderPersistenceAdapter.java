@@ -96,10 +96,8 @@ public class OrderPersistenceAdapter implements SaveOrderPort, FindOrderPort, Fi
 
   @Override
   public Integer getOrderNum() {
-    Optional<OrderNumJpaEntity> orderNumJpaEntity = orderNumJpaEntityRepository.findById(1L);
-    OrderNumJpaEntity orderNumJpaEntity1 = orderNumJpaEntity.get();
-    Integer orderNum = orderNumJpaEntity1.getOrderNum();
-    orderNumJpaEntity1.setOrderNum(orderNum++);
+    List<OrderNumJpaEntity> all = orderNumJpaEntityRepository.findAll();
+    Integer orderNum = 1;
     return orderNum;
   }
 }

@@ -11,4 +11,6 @@ public interface FindRestaurantPort {
 
   Restaurant findRestaurant(Long restaurantId);
 
+  Restaurant findRestaurantByMenuId(Long menuId);
+
 }

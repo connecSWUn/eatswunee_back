@@ -18,6 +18,7 @@ public class RestaurantPersistenceAdapter implements ExistRestaurantPort, FindRe
 
   private final RestaurantJpaRepository restaurantJpaRepository;
   private final RestaurantMapper restaurantMapper;
+  private final RestaurantQueryRepository restaurantQueryRepository;
 
 
   @Override
@@ -35,6 +36,12 @@ public class RestaurantPersistenceAdapter implements ExistRestaurantPort, FindRe
     RestaurantJpaEntity restaurantJpaEntity = restaurantJpaRepository.findById(restaurantId)
         .orElseThrow(() -> new RestaurantNotFoundException(
             ErrorCode.RESTAURANT_NOT_FOUND.getDetail() + restaurantId));
+    return restaurantMapper.mapToDomainEntity(restaurantJpaEntity);
+  }
+
+  @Override
+  public Restaurant findRestaurantByMenuId(Long menuId) {
+    RestaurantJpaEntity restaurantJpaEntity = restaurantQueryRepository.findRestaurantByMenuId(menuId);
     return restaurantMapper.mapToDomainEntity(restaurantJpaEntity);
   }
 }

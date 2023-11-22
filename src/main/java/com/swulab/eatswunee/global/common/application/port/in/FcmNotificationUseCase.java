@@ -6,4 +6,6 @@ public interface FcmNotificationUseCase {
 
     void sendNotification(Notification notification, Long userId);
 
+    void sendNotificationRestaurant(Notification notification, Long restaurantId);
+
 }

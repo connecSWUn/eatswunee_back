@@ -10,11 +10,14 @@ public class Restaurant {
   private String name;
   private RestaurantSpot restaurantSpot;
 
+  private String deviceToken;
+
   @Builder
   public Restaurant(Long restaurantId, String name,
-      RestaurantSpot restaurantSpot) {
+      RestaurantSpot restaurantSpot, String deviceToken) {
     this.restaurantId = restaurantId;
     this.name = name;
     this.restaurantSpot = restaurantSpot;
+    this.deviceToken = deviceToken;
   }
 }

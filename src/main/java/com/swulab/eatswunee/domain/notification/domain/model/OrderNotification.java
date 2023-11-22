@@ -4,8 +4,10 @@ import com.swulab.eatswunee.domain.order.domain.model.Order;
 import com.swulab.eatswunee.domain.restaurant.domain.model.Restaurant;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
