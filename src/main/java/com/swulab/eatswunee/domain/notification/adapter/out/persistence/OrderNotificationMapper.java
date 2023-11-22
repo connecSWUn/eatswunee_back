@@ -28,7 +28,7 @@ public class OrderNotificationMapper {
 
     public OrderNotificationJpaEntity mapToJpaEntity(OrderNotification notification) {
         return new OrderNotificationJpaEntity(notification.getNotificationId(),
-                "주문", "", false, null,
+                "주문", "", true, null,
                 orderMapper.mapToJpaEntity(notification.getOrder()),
                 restaurantMapper.mapToJpaEntity(notification.getRestaurant()));
     }

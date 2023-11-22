@@ -88,6 +88,6 @@ public class AddOrderService implements AddOrderUseCase {
     }
 
     private OrderNotification orderNotification(Order order, Restaurant restaurant) {
-        return new OrderNotification(null, "", false, null, "", order, restaurant, REQUEST_ORDER);
+        return new OrderNotification(null, "", true, null, "", order, restaurant, REQUEST_ORDER);
     }
 }
