@@ -22,6 +22,7 @@ public class GetUserChatRoomListService implements GetUserChatRoomListUseCase {
   private final FindRecruitsPortByUserIdPort findRecruitsPortByUserIdPort;
   private final FindRecruitChatRoomPort findRecruitChatRoomPort;
 
+
   @Override
   public List<UserChatRoomCommand> getUserChatRoomList(Long userId) {
     List<UserChatRoomCommand> commands = new ArrayList<>();
@@ -42,5 +43,10 @@ public class GetUserChatRoomListService implements GetUserChatRoomListUseCase {
     );
 
     return commands;
+  }
+
+  @Override
+  public Integer getUserChatRoomListByRecruitId(Long recruitId) {
+    return findRecruitChatRoomPort.findRecruitChatRoomByRecruitId(recruitId);
   }
 }

@@ -30,7 +30,9 @@ public class RecruitContentResponse {
 
   private Writer writer;
 
-  public RecruitContentResponse(Recruit recruit, Long userId) {
+  private Integer chat_room_number;
+
+  public RecruitContentResponse(Recruit recruit, Long userId, Integer chat_room_number) {
     this.post_id = recruit.getRecruitId();
     this.created_at = recruit.getCreatedAt();
     this.edited_at = recruit.getEditedAt();
@@ -42,6 +44,7 @@ public class RecruitContentResponse {
     this.recruit_status = recruit.getStatus();
     this.content = recruit.getContent();
     this.writer = new Writer(recruit.getUser());
+    this.chat_room_number = chat_room_number;
   }
 
   @Getter
