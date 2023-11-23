@@ -23,8 +23,6 @@ public class GetChatMessagesResponse {
 
   private List<ChatMessageResponse> messages;
 
-  private Integer chat_room_number;
-
   public GetChatMessagesResponse(GetChatMessagesCommand command, Integer chat_room_number) {
     this.recruitStatus = command.getRecruitStatus();
     this.recruit_title = command.getRecruitTitle();
@@ -35,8 +33,6 @@ public class GetChatMessagesResponse {
     this.sender_name = command.getSenderName();
 
     this.messages = command.getCommandList().stream().map(ChatMessageResponse::new).toList();
-    this.chat_room_number = chat_room_number;
-
   }
 
   @Getter

@@ -8,7 +8,9 @@ import static com.swulab.eatswunee.domain.user.adapter.out.persistence.jpa.model
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.swulab.eatswunee.domain.chatroom.adapter.in.web.controller.command.UserChatRoomCommand;
+import com.swulab.eatswunee.domain.chatroom.adapter.out.persistence.jap.model.ChatRoomJpaEntity;
 import com.swulab.eatswunee.domain.chatroom.application.port.out.command.FindChatMessageCommand;
+import com.swulab.eatswunee.domain.chatroom.domain.model.ChatRoom;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -57,21 +59,36 @@ public class ChatRoomQueryRepository {
 
   public List<UserChatRoomCommand> findRecruitChat(Long userId) {
 
-    return jpaQueryFactory
-        .select(Projections.constructor(UserChatRoomCommand.class,
-            chatRoomJpaEntity.chatRoomId,
-            chatRoomJpaEntity.recruitJpaEntity.title.as("recruitTitle"),
-            chatRoomJpaEntity.recruitJpaEntity.userJpaEntity.name.as("senderNickname"),
-            chatRoomJpaEntity.guestJpaEntity.profileUrl.as("senderProfileImgUrl")
-        ))
-        .from(chatRoomJpaEntity)
-        .join(chatRoomJpaEntity.recruitJpaEntity, recruitJpaEntity)
-        .where(
-            chatRoomJpaEntity.chatRoomId.like(userId+"%")
-        )
-        .fetch();
+      return jpaQueryFactory
+              .select(Projections.constructor(UserChatRoomCommand.class,
+                      chatRoomJpaEntity.chatRoomId,
+                      chatRoomJpaEntity.recruitJpaEntity.title.as("recruitTitle"),
+                      chatRoomJpaEntity.recruitJpaEntity.userJpaEntity.name.as("senderNickname"),
+                      chatRoomJpaEntity.guestJpaEntity.profileUrl.as("senderProfileImgUrl")
+              ))
+              .from(chatRoomJpaEntity)
+              .join(chatRoomJpaEntity.recruitJpaEntity, recruitJpaEntity)
+              .where(
+                      chatRoomJpaEntity.chatRoomId.like(userId + "%")
+
+              )
+              .fetch();
 
 
   }
+
+    public List<ChatRoomJpaEntity> findRecruitChat1(Long recruitId) {
+
+        return jpaQueryFactory
+                .select(chatRoomJpaEntity)
+                .from(chatRoomJpaEntity)
+                .join(chatRoomJpaEntity.recruitJpaEntity, recruitJpaEntity)
+                .where(
+                        chatRoomJpaEntity.recruitJpaEntity.id.eq(recruitId)
+                )
+                .fetch();
+
+
+    }
 
 }

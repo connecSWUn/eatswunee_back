@@ -7,4 +7,6 @@ public interface FindRecruitChatRoomPort {
 
   List<UserChatRoomCommand> findRecruitChatRoom(Long recruitId);
 
+  Integer findRecruitChatRoomByRecruitId(Long recruitId);
+
 }
