@@ -45,4 +45,7 @@ src/main/resources/import.sql
 
 .jqwik-database
 
+swulab-firebase-adminsdk.jsonapplication-fcm-dev.yml
+application-fcm-loc.yml
+application-fcm-dev.yml
 swulab-firebase-adminsdk.json

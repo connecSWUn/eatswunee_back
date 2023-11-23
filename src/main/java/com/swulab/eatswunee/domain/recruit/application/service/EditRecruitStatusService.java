@@ -23,4 +23,12 @@ public class EditRecruitStatusService implements EditRecruitStatusUseCase {
     saveRecruitPort.saveRecruit(recruit);
     return recruit.getStatus();
   }
+
+  @Override
+  public String editRecruitContent(Long recruitId, String recruitStatus) {
+    Recruit recruit = findRecruitPort.findRecruit(recruitId);
+    recruit.changeRecruitContent(recruitStatus);
+
+    return recruit.getContent();
+  }
 }

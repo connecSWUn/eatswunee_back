@@ -14,9 +14,9 @@ public class ChatNotification extends Notification {
 
   public ChatNotification(Long notificationId, String notificationContent,
       Boolean notificationIsRead, LocalDateTime notificationCreatedAt,
-      String notificationType, ChatRoom chatRoom) {
+      String notificationType, ChatRoom chatRoom, NotificationCategory notificationCategory) {
     super(notificationId, notificationContent, notificationIsRead, notificationCreatedAt,
-        notificationType);
+        notificationType, notificationCategory);
     this.chatRoom = chatRoom;
   }
 }

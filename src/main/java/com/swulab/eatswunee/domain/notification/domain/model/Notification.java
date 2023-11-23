@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -15,16 +16,19 @@ public class Notification {
   private Boolean notificationIsRead;
   private LocalDateTime notificationCreatedAt;
   private String notificationType;
+  private NotificationCategory notificationCategory;
 
 
   @Builder
   public Notification(Long notificationId,
       String notificationContent, Boolean notificationIsRead,
-      LocalDateTime notificationCreatedAt, String notificationType) {
+      LocalDateTime notificationCreatedAt, String notificationType,
+                      NotificationCategory notificationCategory) {
     this.notificationId = notificationId;
     this.notificationContent = notificationContent;
     this.notificationIsRead = notificationIsRead;
     this.notificationCreatedAt = notificationCreatedAt;
     this.notificationType = notificationType;
+    this.notificationCategory = notificationCategory;
   }
 }

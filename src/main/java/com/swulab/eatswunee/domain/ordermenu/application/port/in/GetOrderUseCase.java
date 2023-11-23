@@ -6,4 +6,6 @@ public interface GetOrderUseCase {
 
   GetOrderMenuCommand getOrder(Long orderId);
 
+  Long getUserIdOfOrder(Long orderId);
+
 }

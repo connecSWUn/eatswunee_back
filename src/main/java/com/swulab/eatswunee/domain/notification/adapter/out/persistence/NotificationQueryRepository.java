@@ -74,7 +74,7 @@ public class NotificationQueryRepository {
         .fetch();
   }
 
-  public FindIdAndIsReadCommand findOrderNotificationByOrderIdAndRestaurantId(Long orderId, Long restaurantId) {
+  public List<FindIdAndIsReadCommand> findOrderNotificationByOrderIdAndRestaurantId(Long orderId, Long restaurantId) {
     return jpaQueryFactory
         .select(Projections.constructor(FindIdAndIsReadCommand.class,
             orderNotificationJpaEntity.id.as("notificationId"),
@@ -85,7 +85,7 @@ public class NotificationQueryRepository {
             orderNotificationJpaEntity.orderJpaEntity.id.eq(orderId),
             orderNotificationJpaEntity.restaurantJpaEntity.restaurantId.eq(restaurantId)
         )
-        .fetchOne();
+        .fetch();
   }
 
 

@@ -1,10 +1,13 @@
 package com.swulab.eatswunee.domain.order.adapter.out.persistence;
 
 import com.swulab.eatswunee.domain.order.adapter.out.persistence.jpa.OrderJpaRepository;
+import com.swulab.eatswunee.domain.order.adapter.out.persistence.jpa.OrderNumJpaEntityRepository;
 import com.swulab.eatswunee.domain.order.adapter.out.persistence.jpa.model.OrderJpaEntity;
+import com.swulab.eatswunee.domain.order.adapter.out.persistence.jpa.model.OrderNumJpaEntity;
 import com.swulab.eatswunee.domain.order.application.port.out.FindNowOrderPort;
 import com.swulab.eatswunee.domain.order.application.port.out.FindOrderPort;
 import com.swulab.eatswunee.domain.order.application.port.out.FindRestaurantOrderListPort;
+import com.swulab.eatswunee.domain.order.application.port.out.GetOrderNumPort;
 import com.swulab.eatswunee.domain.order.application.port.out.SaveOrderPort;
 import com.swulab.eatswunee.domain.order.application.port.out.command.FindNowOrderCommand;
 import com.swulab.eatswunee.domain.order.application.port.out.command.FindRestaurantOrderListCommand;
@@ -17,19 +20,21 @@ import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.OrderMe
 import com.swulab.eatswunee.domain.ordermenu.adpater.out.persistence.jpa.model.OrderMenuJpaEntity;
 import com.swulab.eatswunee.global.error.ErrorCode;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
 public class OrderPersistenceAdapter implements SaveOrderPort, FindOrderPort, FindNowOrderPort,
-    FindRestaurantOrderListPort {
+    FindRestaurantOrderListPort, GetOrderNumPort {
 
   private final OrderJpaRepository orderJpaRepository;
   private final OrderMapper orderMapper;
   private final OrderMenuMapper orderMenuMapper;
   private final OrderMenuJpaRepository orderMenuJpaRepository;
   private final OrderQueryRepository orderQueryRepository;
+  private final OrderNumJpaEntityRepository orderNumJpaEntityRepository;
 
 
   @Override
@@ -87,5 +92,12 @@ public class OrderPersistenceAdapter implements SaveOrderPort, FindOrderPort, Fi
   @Override
   public List<FindRestaurantOrderListFixCommand> findRestaurantOrderListFix(Long orderId) {
     return orderQueryRepository.findRestaurantOrderListFix(orderId);
+  }
+
+  @Override
+  public Integer getOrderNum() {
+    List<OrderNumJpaEntity> all = orderNumJpaEntityRepository.findAll();
+    Integer orderNum = 1;
+    return orderNum;
   }
 }

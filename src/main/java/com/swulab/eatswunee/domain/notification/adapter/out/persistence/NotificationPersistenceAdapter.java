@@ -1,6 +1,8 @@
 package com.swulab.eatswunee.domain.notification.adapter.out.persistence;
 
-import com.swulab.eatswunee.domain.notification.application.port.in.command.GetRevenueCommand;
+import com.swulab.eatswunee.domain.notification.adapter.out.persistence.jpa.OrderNotificationJpaRepository;
+import com.swulab.eatswunee.domain.notification.adapter.out.persistence.jpa.model.OrderNotificationJpaEntity;
+import com.swulab.eatswunee.domain.notification.application.port.in.SaveOrderNotificationPort;
 import com.swulab.eatswunee.domain.notification.application.port.out.ExistNotificationByOrderIdPort;
 import com.swulab.eatswunee.domain.notification.application.port.out.FindOrderNotificationPort;
 import com.swulab.eatswunee.domain.notification.application.port.out.FindRestaurantNotificationPort;
@@ -16,9 +18,12 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class NotificationPersistenceAdapter implements FindRestaurantNotificationPort,
-    ExistNotificationByOrderIdPort, FindRevenuePort, FindOrderNotificationPort {
+    ExistNotificationByOrderIdPort, FindRevenuePort, FindOrderNotificationPort, SaveOrderNotificationPort {
 
   private final NotificationQueryRepository notificationQueryRepository;
+  private final OrderNotificationJpaRepository notificationJpaRepository;
+
+  private final OrderNotificationMapper orderNotificationMapper;
 
   @Override
   public List<FindRestaurantNotificationCommand> findRestaurantNotification(Long restaurantId) {
@@ -40,7 +45,18 @@ public class NotificationPersistenceAdapter implements FindRestaurantNotificatio
   @Override
   public FindIdAndIsReadCommand findOrderNotificationByOrderIdAndRestaurantId(Long orderId,
       Long restaurantId) {
+    notificationQueryRepository.findOrderNotificationByOrderIdAndRestaurantId(orderId, restaurantId).stream().forEach(
+            entity -> System.out.println(entity.getNotificationId())
+    );
+    return notificationQueryRepository.findOrderNotificationByOrderIdAndRestaurantId(orderId, restaurantId).get(0);
+  }
 
-    return notificationQueryRepository.findOrderNotificationByOrderIdAndRestaurantId(orderId, restaurantId);
+  @Override
+  public void saveAll(List<OrderNotification> orderNotifications) {
+
+    List<OrderNotificationJpaEntity> orderNotificationJpaEntities = orderNotifications.stream()
+            .map(orderNotificationMapper::mapToJpaEntity)
+            .toList();
+    notificationJpaRepository.saveAll(orderNotificationJpaEntities);
   }
 }

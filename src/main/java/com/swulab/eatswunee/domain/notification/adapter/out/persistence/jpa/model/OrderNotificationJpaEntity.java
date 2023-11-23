@@ -10,6 +10,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -18,6 +19,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SuperBuilder
 @Table(name = "notification_order")
+@Getter
 public class OrderNotificationJpaEntity extends NotificationJpaEntity {
 
   @ManyToOne
@@ -29,11 +31,13 @@ public class OrderNotificationJpaEntity extends NotificationJpaEntity {
   private RestaurantJpaEntity restaurantJpaEntity;
 
   public OrderNotificationJpaEntity(Long notificationId, String notificationTitle,
-      String notificationContent, Boolean notificationIsRead,
-      LocalDateTime notificationCreatedAt,
-      OrderJpaEntity orderJpaEntity) {
+                                    String notificationContent, Boolean notificationIsRead,
+                                    LocalDateTime notificationCreatedAt,
+                                    OrderJpaEntity orderJpaEntity, RestaurantJpaEntity restaurantJpaEntity) {
+
     super(notificationId, notificationTitle, notificationContent, notificationIsRead,
-        notificationCreatedAt);
+            notificationCreatedAt);
     this.orderJpaEntity = orderJpaEntity;
+    this.restaurantJpaEntity = restaurantJpaEntity;
   }
 }

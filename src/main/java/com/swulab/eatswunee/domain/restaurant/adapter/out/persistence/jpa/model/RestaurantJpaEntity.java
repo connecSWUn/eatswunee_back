@@ -27,11 +27,14 @@ public class RestaurantJpaEntity {
   @Enumerated(EnumType.STRING)
   private RestaurantSpot restaurantSpot;
 
+  private String deviceToken;
+
   @Builder
   public RestaurantJpaEntity(Long restaurantId, String name,
-      RestaurantSpot restaurantSpot) {
+      RestaurantSpot restaurantSpot, String deviceToken) {
     this.restaurantId = restaurantId;
     this.name = name;
     this.restaurantSpot = restaurantSpot;
+    this.deviceToken = deviceToken;
   }
 }

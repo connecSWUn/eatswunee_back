@@ -28,6 +28,12 @@ public class GetOrderService implements GetOrderUseCase {
     return new GetOrderMenuCommand(order.getOrderNum(), order.getOrderCreatedAt(), orderMenuCommands);
   }
 
+  @Override
+  public Long getUserIdOfOrder(Long orderId) {
+    Order order = findOrderPort.findOrder(orderId);
+    return order.getUser().getUserId();
+  }
+
   /**
    * orderId를 사용해 OrderMenuCommand 리스트를 생성하는 함수
    * @param orderId 주문 아이디

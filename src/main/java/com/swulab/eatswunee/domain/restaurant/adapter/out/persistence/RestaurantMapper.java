@@ -13,6 +13,7 @@ public class RestaurantMapper {
         .restaurantId(restaurantJpaEntity.getRestaurantId())
         .name(restaurantJpaEntity.getName())
         .restaurantSpot(restaurantJpaEntity.getRestaurantSpot())
+            .deviceToken(restaurantJpaEntity.getDeviceToken())
         .build();
   }
 
@@ -21,6 +22,7 @@ public class RestaurantMapper {
         .restaurantId(restaurant.getRestaurantId())
         .name(restaurant.getName())
         .restaurantSpot(restaurant.getRestaurantSpot())
+            .deviceToken(restaurant.getDeviceToken())
         .build();
   }
 }

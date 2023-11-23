@@ -9,22 +9,24 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class NotificationMapper {
 
-  public Notification mapToDomainEntity(NotificationJpaEntity notificationJpaEntity) {
-    return Notification.builder()
-        .notificationId(notificationJpaEntity.getId())
-        .notificationContent(notificationJpaEntity.getNotificationContent())
-        .notificationIsRead(notificationJpaEntity.getNotificationIsRead())
-        .notificationCreatedAt(notificationJpaEntity.getCreatedAt())
-        .build();
-  }
+    public Notification mapToDomainEntity(NotificationJpaEntity notificationJpaEntity) {
+        return Notification.builder()
+                .notificationId(notificationJpaEntity.getId())
+                .notificationContent(notificationJpaEntity.getNotificationContent())
+                .notificationIsRead(notificationJpaEntity.getNotificationIsRead())
+                .notificationCreatedAt(notificationJpaEntity.getCreatedAt())
+                .notificationCategory(notificationJpaEntity.getNotificationCategory())
+                .build();
+    }
 
-  public NotificationJpaEntity mapToJpaEntity(Notification notification) {
-    return NotificationJpaEntity.builder()
-        .id(notification.getNotificationId())
-        .notificationContent(notification.getNotificationContent())
-        .notificationIsRead(notification.getNotificationIsRead())
-        .createdAt(notification.getNotificationCreatedAt())
-        .build();
-  }
+    public NotificationJpaEntity mapToJpaEntity(Notification notification) {
+        return NotificationJpaEntity.builder()
+                .id(notification.getNotificationId())
+                .notificationContent(notification.getNotificationContent())
+                .notificationIsRead(notification.getNotificationIsRead())
+                .createdAt(notification.getNotificationCreatedAt())
+                .notificationCategory(notification.getNotificationCategory())
+                .build();
+    }
 
 }
