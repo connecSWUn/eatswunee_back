@@ -33,12 +33,23 @@ public class ChatRoom {
   }
 
   public void handlerActions(WebSocketSession session, ChatMessage chatMessage, SendMessageUseCase sendMessageUseCase) {
-    if (chatMessage.getType().equals(MessageType.ENTER)) {
-      // TODO: 게시글 올린 사람에게 알림 보내기
-      sessions.add(session);
-      chatMessage.setMessage(chatMessage.getUser().getName() + "님이 입장했습니다."); // 입장 메시지 설정
+    try {
+
+      if (chatMessage.getType().equals(MessageType.ENTER)) {
+        // TODO: 게시글 올린 사람에게 알림 보내기
+        sessions.add(session);
+        chatMessage.setMessage(chatMessage.getUser().getName() + "님이 입장했습니다."); // 입장 메시지 설정
+      }
+      sendMessage(chatMessage, sendMessageUseCase); // 메시지 보냄
+
+    } catch (Exception ex){
+      ex.printStackTrace();
+      synchronized( sessions ) {
+        sessions.remove(session);
+      }
+      System.out.println("세션이 삭제되었습니다.");
     }
-    sendMessage(chatMessage, sendMessageUseCase); // 메시지 보냄
+
 
   }
 
@@ -47,6 +58,10 @@ public class ChatRoom {
     this.sessions.forEach(webSocketSession -> System.out.println(webSocketSession.getId()));
     sessions.parallelStream()
         .forEach(session -> sendMessageUseCase.sendMessage(session, message));
+  }
+
+  public void removeSession(WebSocketSession webSocketSession) {
+    sessions.remove(webSocketSession);
   }
 
 }
