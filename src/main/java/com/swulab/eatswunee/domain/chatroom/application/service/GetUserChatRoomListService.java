@@ -49,4 +49,10 @@ public class GetUserChatRoomListService implements GetUserChatRoomListUseCase {
   public Integer getUserChatRoomListByRecruitId(Long recruitId) {
     return findRecruitChatRoomPort.findRecruitChatRoomByRecruitId(recruitId);
   }
+
+  @Override
+  public Integer getUserChatRoomNumber(Long recruitId, Long userId) {
+
+    return findUserChatRoomPort.findChatRoomSizeRelatedRecruit(userId, recruitId);
+  }
 }

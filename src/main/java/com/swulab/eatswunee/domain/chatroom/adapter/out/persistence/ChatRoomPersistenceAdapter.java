@@ -75,6 +75,13 @@ public class ChatRoomPersistenceAdapter implements FindChatRoomPort, SaveChatRoo
   }
 
   @Override
+  public Integer findChatRoomSizeRelatedRecruit(Long userId, Long recruitId) {
+
+
+    return chatRoomQueryRepository.findChatRoomSize(userId, recruitId);
+  }
+
+  @Override
   public List<UserChatRoomCommand> findRecruitChatRoom(Long recruitId) {
     return chatRoomQueryRepository.findRecruitChat(recruitId);
   }
