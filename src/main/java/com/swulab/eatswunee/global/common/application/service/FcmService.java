@@ -42,6 +42,8 @@ public class FcmService implements FcmNotificationUseCase {
                     .putAllData(new LinkedHashMap<>())
                     .build();
 
+            System.out.println(message);
+
             try {
                 firebaseMessaging.send(message);
                 return "알림을 성공적으로 전송했습니다. targetUserId=" + user.getUserId();
