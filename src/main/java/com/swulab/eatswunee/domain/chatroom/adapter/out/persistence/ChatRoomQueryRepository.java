@@ -11,6 +11,7 @@ import com.swulab.eatswunee.domain.chatroom.adapter.in.web.controller.command.Us
 import com.swulab.eatswunee.domain.chatroom.adapter.out.persistence.jap.model.ChatRoomJpaEntity;
 import com.swulab.eatswunee.domain.chatroom.application.port.out.command.FindChatMessageCommand;
 import com.swulab.eatswunee.domain.chatroom.domain.model.ChatRoom;
+import jakarta.persistence.criteria.CriteriaBuilder.In;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -89,6 +90,18 @@ public class ChatRoomQueryRepository {
                 .fetch();
 
 
+    }
+
+    public Integer findChatRoomSize(Long userId, Long recruitId) {
+
+        return jpaQueryFactory
+                .select(chatRoomJpaEntity)
+                .from(chatRoomJpaEntity)
+                .join(chatRoomJpaEntity.recruitJpaEntity, recruitJpaEntity)
+                .where(
+                        chatRoomJpaEntity.recruitJpaEntity.id.eq(recruitId)
+                )
+                .fetch().size();
     }
 
 }

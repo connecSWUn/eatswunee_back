@@ -33,7 +33,7 @@ public class GetRecruitContentController {
 
     Recruit recruit = getRecruitContentUseCase.getRecruitContent(Long.parseLong(postId));
     recruit.getUser().mapImageToUrl(getImageUrlUseCase.getImageUrl("user_profile/" + recruit.getUser().getProfileUrl()));
-    Integer size = getUserChatRoomListUseCase.getUserChatRoomListByRecruitId(Long.parseLong(postId));
+    Integer size = getUserChatRoomListUseCase.getUserChatRoomNumber(recruit.getRecruitId(), userId);
     RecruitContentResponse response = new RecruitContentResponse(recruit, Long.parseLong(userDetails.getUsername()), size);
 
     return ResponseEntity.ok(SuccessResponse.create200SuccessResponse(response));

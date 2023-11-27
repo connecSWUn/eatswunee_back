@@ -9,4 +9,6 @@ public interface GetUserChatRoomListUseCase {
 
   Integer getUserChatRoomListByRecruitId(Long recuritId);
 
+  Integer getUserChatRoomNumber(Long recruitId, Long userId);
+
 }

@@ -7,4 +7,6 @@ public interface FindUserChatRoomPort {
 
   List<UserChatRoomCommand> findUserChatRoom(Long userId);
 
+  Integer findChatRoomSizeRelatedRecruit(Long userId, Long recruitId);
+
 }
