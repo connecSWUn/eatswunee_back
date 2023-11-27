@@ -18,6 +18,7 @@ import com.swulab.eatswunee.global.common.domain.ChatMessageBasic;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -37,9 +38,10 @@ public class WebSocketHandler extends TextWebSocketHandler { // TextWebSocketHan
 
 
 
-  private final FirebaseCloudMessageService firebaseCloudMessageService;
+//  private final FirebaseCloudMessageService firebaseCloudMessageService;
   private final FcmNotificationUseCase fcmNotificationUseCase;
 
+  public ChatRoom chatRoom;
 
   @Override
   protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
@@ -55,7 +57,7 @@ public class WebSocketHandler extends TextWebSocketHandler { // TextWebSocketHan
     saveChatMessagePort.saveChatMessage(chatMessage);
 
     // 요청에 들어있는 roomId를 사용해서, 해당 채팅방을 찾아  handlerAction() 이라는 메서드를 실행
-    ChatRoom chatRoom = findChatRoomUseCase.findRoomById(chatMessage.getChatRoom().getChatRoomId());
+    chatRoom = findChatRoomUseCase.findRoomById(chatMessage.getChatRoom().getChatRoomId());
 
 
     chatRoom.handlerActions(session, chatMessage, sendMessageService);
@@ -66,7 +68,7 @@ public class WebSocketHandler extends TextWebSocketHandler { // TextWebSocketHan
     Long userId = recruit.getUser().getUserId();
     User user = findUserPort.findUser(userId);
 
-    firebaseCloudMessageService.sendMessageTo(user.getFcmToken(), chatMessage.getUser().getName(), chatMessage.getMessage());
+//    firebaseCloudMessageService.sendMessageTo(user.getFcmToken(), chatMessage.getUser().getName(), chatMessage.getMessage());
     fcmNotificationUseCase.sendNotification(createChatNotification(user, chatMessage), userId);
 
   }
@@ -89,6 +91,13 @@ public class WebSocketHandler extends TextWebSocketHandler { // TextWebSocketHan
             .setImage("").build();
   }
 
+  @Override
+  public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+    chatRoom.removeSession(session);
+    System.out.println(" close session = " + session);
+    super.afterConnectionClosed(session, status);
+  }
+
 //  private Long getRecruitIdFromChatRoomId(String chatRoomId) {
 //    String[] split = chatRoomId.toString().split("0");
 //    return chatRoomId;
@@ -100,4 +109,6 @@ public class WebSocketHandler extends TextWebSocketHandler { // TextWebSocketHan
   아니면 이미 채팅에 참여해있는 상태인지를 판별하여,
   만약 채팅방에 처음 참여하는거라면 session을 연결해줌과 동시에 메시지를 보낼것이고 아니라면 메시지를 해당 채팅방으로 보내게 될 것이다.
    */
+
+
 }

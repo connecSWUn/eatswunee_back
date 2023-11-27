@@ -20,4 +20,6 @@ public class WebSocketConfig implements WebSocketConfigurer {
     // handler 등록, 웹 소켓과 연결할 주소 설정
     registry.addHandler(webSocketHandler, "/ws/chat").setAllowedOrigins("*");
   }
+
+
 }
