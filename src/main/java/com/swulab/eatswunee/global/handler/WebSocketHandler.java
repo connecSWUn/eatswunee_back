@@ -38,7 +38,7 @@ public class WebSocketHandler extends TextWebSocketHandler { // TextWebSocketHan
 
 
 
-  private final FirebaseCloudMessageService firebaseCloudMessageService;
+//  private final FirebaseCloudMessageService firebaseCloudMessageService;
   private final FcmNotificationUseCase fcmNotificationUseCase;
 
   public ChatRoom chatRoom;
@@ -68,7 +68,7 @@ public class WebSocketHandler extends TextWebSocketHandler { // TextWebSocketHan
     Long userId = recruit.getUser().getUserId();
     User user = findUserPort.findUser(userId);
 
-    firebaseCloudMessageService.sendMessageTo(user.getFcmToken(), chatMessage.getUser().getName(), chatMessage.getMessage());
+//    firebaseCloudMessageService.sendMessageTo(user.getFcmToken(), chatMessage.getUser().getName(), chatMessage.getMessage());
     fcmNotificationUseCase.sendNotification(createChatNotification(user, chatMessage), userId);
 
   }
