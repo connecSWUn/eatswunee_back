@@ -5,8 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.common.net.HttpHeaders;
 import com.swulab.eatswunee.global.common.domain.FcmMessage;
+import java.io.File;
+import java.io.FileInputStream;
 import lombok.RequiredArgsConstructor;
 import okhttp3.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +22,8 @@ public class FirebaseCloudMessageService {
 
   private final String API_URL = "https://fcm.googleapis.com/v1/projects/swulab-80285/messages:send";
   private final ObjectMapper objectMapper;
+  @Value("${spring.application.fcm.admin-sdk}")
+  public String firebaseConfigPath;
 
   // targetToken에 해당하는 디바이스로 FCM push 전송 요청(targetToken은 front에서 받는다)
   public void sendMessageTo(String targetToken, String title, String body) throws IOException {
@@ -62,10 +67,9 @@ public class FirebaseCloudMessageService {
 
   // AccessToken 발급 : AccessToken -> fcm push 요청시 사용(header에 설정하여 인증을 사용)
   private String getAccessToken() throws IOException {
-    String firebaseConfigPath = "/firebase/swulab-firebase-adminsdk.json";
 
     GoogleCredentials googleCredentials = GoogleCredentials // 구글 Api를 사용하기 위해서 Oauth2를 이용해 인증한 대상을 나타내는 객체
-        .fromStream(new ClassPathResource(firebaseConfigPath).getInputStream())
+        .fromStream(new FileInputStream(firebaseConfigPath))
         .createScoped(List.of("https://www.googleapis.com/auth/cloud-platform"));
 
     googleCredentials.refreshIfExpired(); // accessToken 생성
