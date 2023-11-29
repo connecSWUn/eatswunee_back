@@ -58,7 +58,7 @@ public class AddChatService implements AddChatRoomUseCase, FindChatRoomUseCase {
    */
   private ChatRoom createChatRoom(Long userId, Long recruitId) {
 
-    String chatRoomId = UUID.randomUUID().toString();
+    String chatRoomId = "" + userId + "0" + recruitId;
 
     Recruit recruit = findRecruitPort.findRecruit(recruitId); // 모집 게시글 아이디 찾기
     User user = findUserPort.findUser(userId);
