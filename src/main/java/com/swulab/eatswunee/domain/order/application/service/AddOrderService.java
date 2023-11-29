@@ -14,6 +14,7 @@ import com.swulab.eatswunee.domain.order.application.port.out.SaveOrderPort;
 import com.swulab.eatswunee.domain.order.domain.model.Order;
 import com.swulab.eatswunee.domain.order.domain.model.OrderStatus;
 import com.swulab.eatswunee.domain.ordermenu.domain.model.OrderMenu;
+import com.swulab.eatswunee.domain.ordermenu.domain.model.OrderMenuStatus;
 import com.swulab.eatswunee.domain.restaurant.application.port.out.FindRestaurantPort;
 import com.swulab.eatswunee.domain.restaurant.domain.model.Restaurant;
 import com.swulab.eatswunee.domain.user.application.port.out.FindUserPort;
@@ -82,6 +83,7 @@ public class AddOrderService implements AddOrderUseCase {
         return OrderMenu.builder()
                 .menuCnt(command.getMenuCnt())
                 .orderPrice(menu.getPrice())
+                .orderMenuStatus(OrderMenuStatus.ONGOING)
                 .order(order)
                 .menu(menu)
                 .build();
